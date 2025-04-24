@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "client/dev"
+		},
+		{
+			"path": "MirServer/Mir200"
+		}
+	],
+	"settings": {}
+}

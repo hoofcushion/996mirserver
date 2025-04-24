@@ -1,0 +1,34 @@
+{
+	"files.encoding": "utf8",
+	"Lua.runtime.version": "Lua 5.4",
+	"Lua.runtime.fileEncoding": "utf8",
+	"Lua.runtime.path": [
+		"?.lua"
+	],
+	"Lua.completion.requireSeparator": "/",
+	"Lua.diagnostics.disable": [
+		"discard-returns",
+		"missing-parameter",
+		"redundant-parameter",
+		"lowercase-global"
+	],
+	"Lua.workspace.ignoreDir": [
+		".vscode",
+		"GUIExport",
+		"GUIValue",
+		"anim",
+		"data_config",
+		"fonts",
+		"game_config",
+		"mp3",
+		"res",
+		"scene"
+	],
+	"Lua.diagnostics.globals": [
+		"cc",
+		"SL",
+		"GUI",
+		"ssr",
+		"SLDefine"
+	],
+}

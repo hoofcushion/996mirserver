@@ -1,0 +1,4 @@
+[submodule "SQLSERVER"]
+	path = SQLSERVER
+	url = https://github.com/hoofcushion/litesql.git
+	ignore = dirty
