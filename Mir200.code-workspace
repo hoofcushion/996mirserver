@@ -1,11 +1,17 @@
 {
 	"folders": [
 		{
+			"name": "Mir200",
+			"path": "MirServer/Mir200"
+		},
+		{
+			"name": "dev",
 			"path": "client/dev"
 		},
 		{
-			"path": "MirServer/Mir200"
+			"name": "Doc",
+			"path": "Doc"
 		}
 	],
-	"settings": {}
+	"settings": {},
 }

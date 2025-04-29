@@ -1,685 +1,680 @@
 ---@meta metavalue
----@alias metavalue
----| "SCREEN_WIDTH"                    # int      屏幕宽
----| "SCREEN_HEIGHT"                   # int      屏幕高
----| "NOTCH_PHONE_INFO"                # boolean, table
----| "PLATFORM_ANDROID"                # boolean  安卓平台
----| "PLATFORM_IOS"                    # boolean  iOS平台
----| "PLATFORM_WINDOWS"                # boolean  Windows平台
----| "PLATFORM_MOBILE"                 # boolean  手机平台
----| "PLATFORM_OHOS"                   # boolean  鸿蒙平台
----| "WINPLAYMODE"                     # boolean  PC操作模式
----| "IS_PC_PLAY_MODE"                 # boolean  是否PC操作模式
----| "CURRENT_OPERMODE"                # int      操作模式
----| "GAME_ID"                         # string   游戏ID
----| "CHANNEL_ID"                      # string   渠道ID
----| "PACKAGE_NAME"                    # string   APK包名
----| "VERSION_NAME"                    # string   APK版本名
----| "VERSION_CODE"                    # string   APK版本号
----| "LOCAL_RES_VERSION"               # string   原始
----| "REMOTE_RES_VERSION"              # string   热更客户端版本号
----| "REMOTE_GM_RES_VERSION"           # string   GM资源版本号
----| "DEVICE_UNIQUE_ID"                # string   PC唯一设备ID
----| "PROMOTE_ID"                      # string   推广员ID
----| "FPS"                             # int      游戏帧率
----| "NET_TYPE"                        # int      网络类型
----| "BATTERY"                         # int      手机电量
----| "GAME_DATA"                       # table    获取cfg_game_data配置
----| "IS_SDK_LOGIN"                    # boolean  是否是SDK登录
----| "996BOX_LOGIN"                    # boolean  是否是996盒子登录
----| "996_CLOUD_DEVICE"                # boolean  是否是996云真机
----| "IS_SHOW_MAUNAL_SERVICE"          # boolen   是否开启996客服服务
----| "PC_NP_STATUS"                    # boolen   PC端NP反外挂开启状态
----| "PC_NP_ISOWN"                     # boolen   PC端检测是否自己的NP
----| "SPINE_VERSION"                   # string   当前spine动画版本
----| "SERVER_OPTION"                   # boolean  服务器开关
----| "SERVER_ID"                       # string   服务器ID
----| "SERVER_NAME"                     # string   服务器名字
----| "MAIN_SERVER_ID"                  # string   主服务器ID
----| "RES_VERSION"                     # string   资源版本
----| "UID"                             # string   账号ID
----| "LOGIN_DATA"                      # table    登录角色信息
----| "RESTORE_ROLES"                   # table    可恢复角色信息
----| "SERVER_VALUE"                    # string   服务端下发的变量值
----| "CURRENT_TALK_NPC_ID"             # int      获取当前对话NPC的ID
----| "CURRENT_TALK_NPC_TYPEINDEX"      # int      获取当前对话NPC的Index
----| "CURRENT_TALK_NPC_LAYER"          # widget   获取当前打开的NPC面板
----| "M2_FORBID_SAY"                   # boolean  M2是否禁止说话
----| "MAP_ID"                          # string   地图ID
----| "MAP_NAME"                        # string   地图名字
----| "MAP_DATA_ID"                     # string   地图数据ID
----| "MINIMAP_ID"                      # string   小地图ID
----| "IN_SAFE_AREA"                    # boolean  是否是安全区域
----| "MAP_FORBID_LEVEL_AND_JOB"        # boolean  是否禁止职业和等级
----| "MAP_FORBID_SAY"                  # boolean  是否禁止说话
----| "MAP_SHOW_HPPER"                  # boolean  是否血量显示百分比
----| "MAP_FORBID_LOOK"                 # boolean  是否禁止查看
----| "MAP_FORBID_LAUNCH_SKILL"         # boolean  是否禁止释放某技能
----| "MINIMAP_ABLE"                    # boolean  小地图资源是否有效
----| "MAP_DATA_LOADED"                 # boolean  地图map文件是否加载
----| "MAP_ROWS"                        # int      地图横向格子数
----| "MAP_COLS"                        # int      地图纵向格子数
----| "MINIMAP_FILE"                    # string   获取小地图文件路径
----| "MAP_SIZE_WIDTH_PIXEL"            # int      地图获取宽度像素
----| "MAP_SIZE_HEIGHT_PIXEL"           # string   地图获取高度像素
----| "MAP_IS_OBSTACLE"                 # boolean  获取地图格子是否是阻挡
----| "MAP_PATH_SIZE"                   # int      地图计算起点到终点X或者Y
----| "MAP_PATH_POINTS"                 # table    地图计算路径坐标
----| "MAP_CURRENT_PATH_INDEX"          # int      地图获取当前路径坐标index
----| "MAP_PLAYER_POS"                  # table    地图获取人物坐标
----| "MAP_GET_MONSTERS"                # table    地图获取怪物列表位置等信息
----| "MAP_GET_PORTALS"                 # table    地图获取传送点列表位置等信息
----| "FIND_IN_VIEW_PLAYER_LIST"        # table    获取视野内玩家列表
----| "FIND_IN_VIEW_MONSTER_LIST"       # table    获取视野内怪物列表
----| "FIND_IN_VIEW_NPC_LIST"           # table    获取视野内NPC列表
----| "IN_SIEGE_AREA"                   # boolean  是否在攻城区域
----| "PET_ALIVE"                       # boolean  是否有存活的宝宝
----| "PET_LOCK_ID"                     # string   宠物锁定的目标ID
----| "USEHERO"                         # boolean  是否开启英雄
----| "HERO_IS_ALIVE"                   # boolean  是否召唤英雄
----| "HERO_IS_ACTIVE"                  # boolean  是否激活英雄
----| "HERO_ID"                         # int      英雄ID
----| "HERO_STATES_SYS_VALUES"          # table    英雄状态系统能设置的列表
----| "HERO_ACTIVES_STATES"             # table    英雄激活的状态列表
----| "HERO_STATE"                      # int      获取英雄状态
----| "HERO_GUARDSTATE"                 # boolean  获取英雄守护状态
----| "HERO_GUARD_ISCLICK"              # boolean  是否点击守护按钮
----| "MONEY"                           # string   获取货币数量
----| "MONEY_ASSOCIATED"                # string   获取货币数量
----| "STD_ITEMS"                       # table    获取所有道具信息
----| "ITEM_DATA"                       # table    根据道具index获取道具信息
----| "ITEM_COUNT"                      # int      根据道具index或者名字获取道具数量
----| "ITEM_NAME"                       # string   根据道具index获取道具名字
----| "ITEM_INDEX_BY_NAME"              # int      根据道具名字获取道具index
----| "ITEM_NAME_COLOR"                 # string   获取道具名字颜色
----| "ITEM_NAME_COLOR_VALUE"           # string   道具名字颜色
----| "ITEM_NAME_COLORID"               # string   道具名字颜色ID
----| "ITEM_PROMPT_DATA"                # table    道具表prompt解析后数据
----| "ITEM_CUSTOM_ATTR"                # table    获取物品变量数据
----| "ITEM_IS_BIND"                    # boolean  物品是否绑定
----| "ITEM_DATA_BY_MAKEINDEX"          # table    根据MakeIndex获取背包数据
----| "EQUIP_DATA_BY_MAKEINDEX"         # table    根据MakeIndex获取装备数据
----| "STORAGE_DATA_BY_MAKEINDEX"       # table    根据MakeIndex获取仓库数据
----| "QUICKUSE_DATA_BY_MAKEINDEX"      # table    根据MakeIndex获取快捷栏数据
----| "LOOKPLAYER_DATA_BY_MAKEINDEX"    # table    根据MakeIndex获取查看他人装备数据
----| "BAG_DATA"                        # table    获取背包所有物品数据
----| "H.BAG_DATA"                      # table    获取英雄背包所有物品数据
----| "QUICKUSE_DATA"                   # table    获取快捷使用数据
----| "CHECK_USE_ITEM_BUFF"             # boolean, int
----| "ITEM_CAN_AUTOUSE"                # boolean  物品能否自动使用
----| "SKILLBOOK_CAN_USE"               # boolean  技能书能否使用
----| "ITEM_BELONG_BY_MAKEINDEX"        # int      根据MakeIndex获取物品归属
----| "BAG_MAKEINDEX_BY_POS"            # int      获取背包物品唯一ID
----| "ITEM_ARTICLE_ENUM"               # table    物品规则类型枚举
----| "ITEM_SCALE"                      # int      道具框默认缩放
----| "BATTLE_IS_AFK"                   # boolean  是否自动挂机中
----| "BATTLE_AFK_BEGIN"                # void     开始自动挂机
----| "BATTLE_AFK_END"                  # void     结束自动挂机
----| "BATTLE_IS_AUTO_MOVE"             # boolean  是否自动寻路中
----| "BATTLE_MOVE_BEGIN"               # void     开始自动寻路
----| "BATTLE_MOVE_END"                 # void     结束自动寻路
----| "BATTLE_IS_AUTO_PICK"             # boolean  是否自动捡物中
----| "BATTLE_PICK_BEGIN"               # void     开始自动捡物
----| "BATTLE_PICK_END"                 # void     结束自动捡物
----| "MAIN_ACTOR_ID"                   # string   主玩家actorID
----| "ACTOR_IS_PLAYER"                 # boolean  是否是玩家
----| "ACTOR_IS_NETPLAYER"              # boolean  是否是网络玩家
----| "ACTOR_IS_MONSTER"                # boolean  是否是怪物
----| "ACTOR_IS_NPC"                    # boolean  是否是NPC
----| "ACTOR_IS_HERO"                   # boolean  是否是英雄
----| "ACTOR_IS_HUMAN"                  # boolean  是否是人形怪
----| "ACTOR_NAME"                      # string   获取actor
----| "ACTOR_HP"                        # int      获取
----| "ACTOR_MAXHP"                     # int      获取actor
----| "ACTOR_MP"                        # int      获取actor
----| "ACTOR_MAXMP"                     # int      获取actor
----| "ACTOR_LEVEL"                     # int      获取actor等级
----| "ACTOR_JOB_ID"                    # int      获取actor职业
----| "ACTOR_SEX"                       # int      获取actor性别
----| "ACTOR_IS_DIE"                    # boolean  actor是否死亡
----| "ACTOR_OWNER_ID"                  # string   获取actor归属ID
----| "ACTOR_OWNER_NAME"                # string   获取actor归属名字
----| "ACTOR_BIGICON_ID"                # int      获取怪物大图标ID
----| "SELECT_TARGET_ID"                # int      选中的目标actorID或者怪物归属者
----| "TARGET_ATTACK_ENABLE"            # boolean  检查该目标是否可以攻击
----| "ACTOR_TEAM_STATE"                # int      获取actor组队状态
----| "ACTOR_GUILD_ID"                  # string   获取actor行会ID
----| "ACTOR_GUILD_NAME"                # string   获取actor行会名字
----| "ACTOR_TYPE_INDEX"                # int      获取actor的typeIndex
----| "ACTOR_DIR"                       # int      获取actor方向
----| "ACTOR_MAP_X"                     # int      获取actor地图坐标X
----| "ACTOR_MAP_Y"                     # int      获取actor地图坐标Y
----| "ACTOR_POSITION_X"                # int      获取actor世界坐标X
----| "ACTOR_POSITION_Y"                # int      获取actor世界坐标Y
----| "ACTOR_MASTER_ID"                 # int      获取actor主人ID
----| "ACTOR_HAVE_MASTER"               # boolean  获取actor是否有主人
----| "ACTOR_FACTION"                   # int      获取actor阵营ID
----| "ACTOR_IN_SAFE_ZONE"              # boolean  获取actor是否在安全区
----| "ACTOR_APPR_ID"                   # boolean  获取actor的外观ID
----| "ACTOR_WEAPON_ID"                 # boolean  获取actor的武器ID
----| "ACTOR_LEFT_WEAPON_ID"            # boolean  获取actor的左手武器ID
----| "ACTOR_SHIELD_ID"                 # boolean  获取actor的盾牌ID
----| "ACTOR_WINGS_ID"                  # boolean  获取actor的翅膀ID
----| "ACTOR_HAIR_ID"                   # boolean  获取actor的发型ID
----| "ACTOR_MOUNT_NODE"                # widget   获取actor挂接点
----| "ACTOR_CAN_LOCK_BY_HERO"          # boolean  检查英雄选中的目标是否能锁定
----| "ACTOR_PKLV"                      # int      获取actor红名灰名
----| "ACTOR_SERVER_ID"                 # int      获取actor区服ID
----| "ACTOR_IS_IN_STALL"               # boolean  actor是否在摆摊
----| "ACTOR_STALL_NAME"                # string   获取actor摆摊名
----| "ACTOR_IS_OFFLINE"                # string   获取actor是否是离线状态玩家
----| "ACTOR_IS_MYSTERY_MAN"            # boolean  actor是否是神秘人
----| "ACTOR_IS_HUSHEN"                 # boolean  获取actor是否拥有护身
----| "ACTOR_IS_MAINPLAYER"             # boolean  actor是否是主玩家
----| "ACTOR_IS_HORSEBACK_RADING"       # boolean  actor是否是骑马状态
----| "ACTOR_NATION_ID"                 # int      获取actor国家ID
----| "ACTOR_HORSE_MASTER_ID"           # int      获取actor坐骑的主驾ID
----| "ACTOR_HORSE_COPILOT_ID"          # int      获取actor坐骑的副驾ID
----| "ACTOR_IS_HORSE_COPILOT"          # boolean  actor是否是坐骑的副驾
----| "ACTOR_IS_DOUBLE_HORSE"           # boolean  actor是否是双人坐骑
----| "ACTOR_IS_BODY_HORSE"             # boolean  actor是否是连体坐骑
----| "ACTOR_MOVE_EFFECT"               # int      获取actor的足迹特效ID
----| "ACTOR_DEAR_ID"                   # int      获取actor的夫妻ID
----| "ACTOR_MENTOR_ID"                 # int      获取actor的师徒ID
----| "ACTOR_NEAR_SHOW"                 # boolean  获取actor是否在附近显示
----| "ACTOR_IS_MOVE"                   # boolean  获取actor是否在移动状态
----| "ACTOR_STOME_MODE"                # boolean  获取actor
----| "ACTOR_RACE_SERVER"               # int      获取actor
----| "ACTOR_RACE_IMG"                  # int      获取actor
----| "ACTOR_HIDE_NAME"                 # boolean  获取actor
----| "ACTOR_HIDE_HP_BAR"               # boolean  获取actor
----| "ACTOR_NATION_ENEMY_PK"           # boolean  获取actor
----| "ACTOR_GM_DATA"                   # table    获取actor的GM自定义数据
----| "ACTOR_IS_NETPLAYER"              # boolean  actor是否网络玩家
----| "ACTOR_IS_ESCORT"                 # boolean  actor是否镖车
----| "ACTOR_IS_COLLECTION"             # boolean  actor是否采集物
----| "ACTOR_IS_DEFENDER"               # boolean  actor是否守卫
----| "ACTOR_IS_PICKUPSPRITE"           # boolean  actor是否捡物小精灵
----| "ACTOR_IS_PET"                    # boolean  actor是否宝宝
----| "ACTOR_IS_GATE"                   # boolean  actor是否沙巴克大门
----| "ACTOR_IS_WALL"                   # boolean  actor是否沙巴克城墙
----| "ACTOR_IS_DEATH"                  # boolean  actor是否死亡
----| "ACTOR_IS_BORN"                   # boolean  actor是否出生
----| "ACTOR_IS_CAVE"                   # boolean  actor是否钻回洞穴
----| "ACTOR_BUFF_DATA"                 # table    actor身上所有buff数据
----| "ACTOR_HAS_ONE_BUFF"              # boolean  actor是否有某个buff
----| "ACTOR_BUFF_DATA_BY_ID"           # table    获取actor身上某个buff数据
----| "PKMODE"                          # int      获取当前PK模式
----| "PKMODE_CAN_USE"                  # boolean  该PK模式是否可以切换
----| "PET_PKMODE"                      # int      获取宠物PK模式
----| "PET_ALIVE"                       # boolean  是否有存活的宝宝
----| "PET_LOCK_ID"                     # string   宠物锁定的目标ID
----| "KFSTATE"                         # boolean  是否处于跨服
----| "SERVER_TIME"                     # int      当前服务器时间
----| "X"                               # int      人物当前坐标X
----| "Y"                               # int      人物当前坐标Y
----| "BUBBLETIPS_INFO"                 # table    根据气泡index获取气泡数据
----| "BONUSPOINT"                      # int      转生属性点
----| "IS_PICK_STATE"                   # boolean  是否是自动拾取状态
----| "PC_POS_Y"                        # int      PC端Y轴适配
----| "MENU_LAYERS_BY_GROUNP"           # int      通过
----| "DARK_STATE"                      # int      黑夜当前状态
----| "UIMODEL_HAIR_OFFSET"             # table    内观头发偏移配置
----| "UIMODEL_EQUIP_OFFSET"            # table    内观装备偏移配置
----| "TOUCH_STATE"                     # boolean  屏幕点击状态
----| "BEST_RING_WIN_ISOPEN"            # boolean  首饰盒界面是否打开
----| "BEST_RING_OPENSTATE"             # boolean  首饰盒开启状态
----| "CHECK_FUNCBTN_SHOW"              # boolean  检查当前类别功能菜单的某种按钮是否显示
----| "MOUSE_MOVE_POS"                  # table    鼠标移动位置
----| "CHECK_MINIMAP_OPEN"              # boolean  小地图界面是否打开
----| "TRADINGBANK_OPENSTATUS"          # boolean  交易行开启状态
----| "OPEN_SERVER_TIME"                # int      开服时间戳
----| "OPEN_SERVER_DAY"                 # int      开服天数
----| "MERGE_SERVER_COUNT"              # int      合服次数
----| "MERGE_SERVER_TIME"               # int      合服时间戳
----| "MERGE_SERVER_DAY"                # int      合服天数
----| "BUFF_CONFIG"                     # table    获取buffID的配置表数据
----| "SHOW_STATUS_PERMIT"              # boolean  允许在附近显示状态
----| "GAMEPAD_MOVE_PARAM"              # int,     int
----| "TARGET_MAPPOS_DIR"               # int      获取目标地图坐标到初始地图坐标的方向
----| "CHECK_REDPOINT_ID"               # boolean  检测红点表对应id是否满足条件
----| "CTRL_PRESSED"                    # boolean  PC端
----| "PC_NP_STATUS"                    # boolean  PC端
----| "SELECT_SHIFT_ATTACK_ID"          # int      获取PC持续攻击目标
----| "IS_PICKABLE_DROPITEM"            # boolean  掉落物是否可拾取
----| "AUTOUSE_MAKEINDEX_BY_POS"        # int      获取已添加的自动使用弹窗物品唯一ID
----| "CHECK_IN_GUIDE"                  # boolean  是否在引导中
----| "PICK_ACTORID_BY_POS"             # actorID  PC
----| "TARGET_ID"                       # string   功能菜单选中目标ID
----| "TARGET_NAME"                     # string   功能菜单选中目标名字
----| "CHAT_EMOJI"                      # table    获取聊天表情包
----| "CHAT_INPUT_CACHE"                # table    获取聊天输入历史记录缓存
----| "CHAT_SHOW_ITEMS"                 # table    获取聊天显示的道具
----| "CHAT_CHANNEL_ISRECEIVE"          # boolean  当前频道是否接受聊天信息
----| "DROP_TYPE_ISRECEIVE"             # boolean  是否接收该分类掉落信息
----| "CHATANDTIPS_USE_FONT"            # string   聊天
----| "CUR_CHAT_CHANNEL"                # int      获取当前聊天频道
----| "CHAT_TARGETS"                    # table    获取聊天目标
----| "CHAT_CUR_CDTIME"                 # int      获取当前聊天CD时间
----| "IS_CLOSE_FAKEDROP"               # boolean  是否关闭假掉落
----| "CHAT_MSGTYPE_ENUM"               # table    聊天消息类型列表
----| "CHAT_CHANNEL_ENUM"               # table    聊天频道列表
----| "TEAM_NEAR"                       # table    附近队伍列表
----| "TEAM_MEMBER_LIST"                # table    队伍成员列表
----| "TEAM_COUNT"                      # int      当前队伍人数
----| "TEAM_MAC_COUNT"                  # int      队伍最大人数
----| "TEAM_IS_MEMBER"                  # boolean  是否是队伍成员
----| "TEAM_STATUS_PERMIT"              # boolean  允许组队状态
----| "TEAM_APPLY"                      # table    入队申请列表
----| "DOCKTYPE_NENUM"                  # table    func
----| "MAIL_LIST"                       # table    邮件列表
----| "MAIL_BY_ID"                      # string   根据邮件ID获取邮件
----| "MAIL_HAVE_DEL_ITEM"              # boolean  是否有邮件可以删除
----| "MAIL_CURRENT_ID"                 # int      当前邮件ID
----| "AUCTION_BIDPRICE_MIN"            # int      默认最低竞拍价
----| "AUCTION_BIDPRICE_MAX"            # int      默认最高竞拍价
----| "AUCTION_BUYPRICE_MIN"            # int      默认最低一口价
----| "AUCTION_BUYPRICE_MAX"            # int      默认最高一口价
----| "AUCTION_DEFAULT_SHELF"           # int      默认货架数量
----| "AUCTION_PUT_LIST_CNT"            # int      上架列表数量
----| "AUCTION_MONEY"                   # int      拍卖行货币
----| "AUCTION_CAN_BID"                 # boolean  是否可竞价
----| "AUCTION_CAN_BUY"                 # boolean  是否可一口价
----| "AUCTION_HAVE_MY_BIDDING"         # boolean  是否有我的竞拍物品
----| "AUCTION_ITEM_STATE"              # int,     string
----| "AUCTION_MY_SHOW_LIST"            # table    获取拍卖行我的展示可寄售道具
----| "FRIEND_MAX_COUNT"                # int      最大好友人数
----| "FRIEND_INFO_BY_UID"              # table    根据userID获取好友信息
----| "FRIEND_INFO_BY_NAME"             # table    根据userName获取好友信息
----| "SOCIAL_IS_FRIEND"                # boolean  是否是好友
----| "SOCIAL_IS_BLICKLIST"             # boolean  是否在黑名单
----| "FRIEND_LIST"                     # table    获取好友列表
----| "FRIEND_BLACKLIST"                # table    获取黑名单数据
----| "FRIEND_APPLYLIST"                # table    好友申请列表
----| "ADD_STATUS_PERMIT"               # boolean  允许添加状态
----| "GUILD_MEMBER_LIST"               # table    行会成员列表
----| "GUILD_APPLY_LIST"                # table    行会申请列表
----| "GUILD_ALLY_APPLY_LIST"           # table    行会结盟申请列表
----| "GUILD_WORLD_LIST"                # table    获取世界行会列表
----| "GUILD_WORLD_TOTAL_PAGES"         # int      获取世界行会列表总页数
----| "GUILD_CREATE"                    # table    获取创建公会消耗信息
----| "GUILD_INFO"                      # table    我的行会信息
----| "GUILD_OFFICIAL"                  # string   获取行会职位名称
----| "GUILD_MEMBER_INFO"               # table    通过uid获取行会成员信息
----| "TRADE_DATA"                      # table    要交易的玩家信息
----| "TRADE_MY_LOCK_STATUS"            # boolean  交易自己锁定状态
----| "TRADE_OTHER_LOCK_STATUS"         # boolean  交易对方锁定状态
----| "DEAL_STATUS_PERMIT"              # boolean  允许交易状态
----| "RANK_DATA_BY_TYPE"               # table    根据页签index获取排行榜数据
----| "MISSION_ITEM_ORDER"              # int      根据任务类型
----| "MISSION_ITEM_BY_ID"              # table    根据任务类型
----| "SKILL_INFO_FILTER"               # table    筛选技能数据
----| "SKILL_NAME"                      # string   获取技能名字
----| "SKILL_ICON_PATH"                 # string   获取技能图标
----| "SKILL_RECT_ICON_PATH"            # string   获取矩形技能图标
----| "SKILL_IS_ONOFF_SKILL"            # boolean  是否是开关型技能
----| "SKILL_IS_ON_SKILL"               # boolean  技能是否开启
----| "LEARNED_SKILLS"                  # table    获取已学技能
----| "SKILL_IS_ACTIVE"                 # boolean  是否是主动技能
----| "SKILL_DATA"                      # table    获取技能数据
----| "SKILL_TRAIN_DATA"                # table    获取技能的等级熟练度数据
----| "SKILL_CONFIG"                    # table    获取技能配置
----| "SKILL_KEY"                       # int      获取技能快捷键
----| "SKILL_LEVEL"                     # int      获取技能等级
----| "MAX_BAG"                         # int      背包最大格子数量
----| "H_MAX_BAG"                       # int      英雄背包最大格子数量
----| "N_MAX_BAG"                       # int      仓库最大格子数量
----| "BAG_PAGE_CUR"                    # int      当前选中的背包页签
----| "BAG_IS_FULL"                     # boolean  背包是否满
----| "BAG_REMAIN_COUNT"                # int      背包剩余格子数
----| "BAG_USED_COUNT"                  # int      背包已使用格子数
----| "BAG_CHECK_NEED_SPACE"            # boolean  检测物品背包是否有富余格子数存放
----| "SETTING_ENABLED"                 # int      设置是否生效
----| "SETTING_VALUE"                   # table    获取设置的数据
----| "SETTING_CONFIG"                  # table    获取设置的配置
----| "SETTING_PICK_VALUE"              # table    获取物品拾取设置
----| "SETTING_PICK_CONFIG"             # table    可以拣的物品配置
----| "SETTING_IS_ITEM_PICK_CAN_SET"    # table    物品是否可以设置
----| "SETTING_PICK_GROUP_VALUE"        # table    拾取组的数据
----| "MAPSCALE_PER"                    # int      通过值获取地图缩放对应百分比
----| "MAPSCALE_VALUE"                  # int      通过百分比获取地图缩放值
----| "EQUIPMAP_BY_STDMODE"             # table    装备Map
----| "EX_SHOWLAST_MAP"                 # table    除装备Map
----| "EQUIP_POS_BY_STDMODE"            # int      通过stdmode获取装备位
----| "EQUIP_POSLIST_BY_STDMODE"        # table    通过stdmode获取装备位列表
----| "TIP_POSLIST_BY_STDMODE"          # table    通过stdmode获取TIPS装备位列表
----| "IS_SAMESEX_EQUIP"                # boolen   是否是该玩家性别装备
----| "CUSTOM_DESC"                     # string   cfg_custpro_caption表
----| "CUSTOM_ICON"                     # table    cfg_custpro_caption表
----| "ATTR_CONFIG"                     # table    cfg_att_score表
----| "ATTR_CONFIGS"                    # table    cfg_att_score表
----| "SUIT_CONFIG"                     # string   cfg_suit表
----| "SUITEX_CONFIG"                   # string   cfg_suitex表
----| "ITEMFROMUI_ENUM"                 # table    物品来自UI
----| "ITEMTYPE_ENUM"                   # table    物品类型
----| "ITEMTYPE"                        # int      根据道具数据获取物品类型
----| "CUST_ABIL_MAP"                   # table    自定义属性ID映射Map
----| "RECHARGE_PRODUCTS"               # table    充值商品信息列表
----| "RECHARGE_PRODUCT_BY_ID"          # table    通过商品Id获取商品信息
----| "IS_SDK_PAY"                      # boolean  是否接入第三方SDK
----| "ONSELL_DATA_BY_MAKEINDEX"        # table    获取购买摊位的对应物品信息
----| "MYSELL_DATA_BY_MAKEINDEX"        # table    获取我的摊位的对应物品信息
----| "SELL_SHOW_NAME"                  # string   获取购买摊位名字
----| "ONSELL_DATA"                     # table    获取购买摊位物品信息
----| "MYSELL_DATA"                     # table    获取我的摊位物品信息
----| "HAVE_GOLDBOX_OPENTIME"           # boolean  是否还有重摇
----| "COMPOUND_OPEN_ID"                # int      获取合成打开的ID
----| "COMPOUND_CONFIG_BY_INDEX"        # table    通过id获取合成对应配置
----| "COMPOUND_PAGE_BY_ID"             # int      通过id获取合成页签组合id
----| "COMPOUND_LIST_DATA"              # table    获取合成数据
----| "COMPOUND_LIST_DATA_BY_INDEX"     # table    通过id获取合成数据
----| "COMPOUND_CHECK_LIST_IS_SHOW"     # boolean  检测该合成页签是否显示
----| "COMPOUND_CHECK_LIST_RED_POINT"   # boolean  检测合成红点
----| "COMPOUND_PAGE_NAME"              # string   获取合成页签名字
----| "COMPOUND_SHOW_CONDITION"         # boolean  判断合成条件是否显示红点
----| "COMPOUND_RED_POINT_BY_ID"        # boolean  获取合成红点状态
----| "COMPOUND_CHECK_OK"               # boolean  检查是否可以合成
----| "IS_NEW_BOUNS"                    # boolean  是否启用新版属性加点
----| "NEW_BOUNS_CONFIG"                # table    获取新版属性加点配置数据
----| "NEW_BOUNS_ADD_DATA"              # table    获取新版属性已加点数据
----| "PURCHASE_FILTER_LIST"            # table    世界求购菜单列表
----| "PURCHASE_MENU_CONFIG_BY_ID"      # table    对应ID
----| "PURCHASE_ITEM_LIST_BY_TYPE"      # table    分类物品列表
----| "PURCHASE_CURRENCIES"             # table    求购货币列表
----| "USER_ID"                         # string   玩家ID
----| "USER_NAME"                       # string   玩家名字
----| "JOB"                             # int      玩家职业
----| "LEVEL"                           # int      玩家等级
----| "RELEVEL"                         # int      玩家转生等级
----| "JOB_NAME"                        # string   职业名字
----| "SEX"                             # int      玩家性别
----| "REAL_USER_NAME"                  # string   玩家真实姓名
----| "USER_NAME_COLOR"                 # int      玩家名字颜色值
----| "DIR"                             # int      人物方向
----| "USER_IS_DIE"                     # boolean  角色是否死亡
----| "USER_IS_CANREVIVE"               # boolean  角色是否能复活
----| "HP"                              # int      当前血量
----| "MAXHP"                           # string   最大血量
----| "MP"                              # int      当前蓝量
----| "MAXMP"                           # string   最大蓝量
----| "BURST"                           # int      暴击几率
----| "BURST_DAM"                       # int      暴击伤害
----| "IMM_ATT"                         # int      物伤减免
----| "IMM_MAG"                         # int      魔伤减免
----| "DROP"                            # int      怪物爆率
----| "LUCK"                            # int      幸运
----| "AC"                              # int      最小物防
----| "MAXAC"                           # int      最大物防
----| "MAC"                             # int      最小魔防
----| "MAXMAC"                          # int      最大魔防
----| "DC"                              # int      最小物理
----| "MAXDC"                           # int      最大物理
----| "MC"                              # int      最小魔法
----| "MAXMC"                           # int      最大魔法
----| "SC"                              # int      最小道术
----| "MAXSC"                           # int      最大道术
----| "HIT"                             # int      准确
----| "SPD"                             # int      敏捷
----| "EXP"                             # int      当前经验
----| "MAXEXP"                          # int      最大经验
----| "HITSPD"                          # int      攻速
----| "HW"                              # int      腕力
----| "MAXHW"                           # int      最大可穿戴腕力
----| "BW"                              # int      重量
----| "MAXBW"                           # int      玩家最大负重
----| "WW"                              # int      穿戴负重
----| "MAXWW"                           # int      最大穿戴负重
----| "HUNGER"                          # int      体力恢复
----| "LUCK"                            # int      幸运值
----| "DRESS"                           # string   获取玩家身上衣服的名字
----| "WEAPON"                          # string   获取玩家身上武器的名字
----| "RIGHTHAND"                       # string   获取玩家身上勋章的名字
----| "HELMET"                          # string   获取玩家身上头盔的名字
----| "NECKLACE"                        # string   获取玩家身上项链的名字
----| "RINGR"                           # string   获取玩家身上右戒指的名字
----| "RINGL"                           # string   获取玩家身上左戒指的名字
----| "“ARMRINGR"                       # string   获取玩家身上右手镯的名字
----| "ARMRINGL"                        # string   获取玩家身上左手镯的名字
----| "BUJUK"                           # string   获取玩家身上护符
----| "BELT"                            # string   获取玩家身上腰带的名字
----| "BOOTS"                           # string   获取玩家身上鞋子的名字
----| "CHARM"                           # string   获取玩家身上宝石的名字
----| "EQUIPBYPOS"                      # string   获取玩家某一装备位的装备名
----| "EX_ATTR"                         # string   脚本变量额外属性
----| "ATT_BY_TYPE"                     # int      根据类型id获取属性值
----| "EQUIP_DATA"                      # table    获取玩家某一装备数据
----| "EQUIP_DATA_LIST"                 # table    获取玩家对应装备位数据列表
----| "ALL_EQUIP_DATAS"                 # table    获取玩家所有装备数据
----| "EMBATTLE"                        # table    获取玩家法阵数据
----| "FEATURE"                         # table    玩家外观数据
----| "HAIR"                            # int      发型ID
----| "EQUIP_POS_DATAS"                 # table    获取装备位对应MakeIndex数据
----| "TITLES"                          # table    玩家的称号数据
----| "TITLE_DATA_BY_ID"                # table    获取玩家对应ID的称号数据
----| "ACTIVATE_TITLE"                  # int      玩家激活的称号id
----| "INTERNAL_FORCE"                  # int      人物内功当前内力值
----| "INTERNAL_MAXFORCE"               # int      人物内功最大内力值
----| "INTERNAL_EXP"                    # int      人物内功当前经验值
----| "INTERNAL_MAXEXP"                 # int      人物内功最大经验值
----| "INTERNAL_LEVEL"                  # int      人物内功等级
----| "INTERNAL_DZ_CURVALUE"            # int      人物内功当前斗转星移值
----| "INTERNAL_DZ_MAXVALUE"            # int      人物内功最大斗转星移值
----| "INTERNAL_SKILLS"                 # table    获取人物拥有内功技能列表
----| "INTERNAL_SKILL_DATA"             # table    获取人物内功技能数据
----| "INTERNAL_SKILL_TRAIN_DATA"       # table    获取人物内功技能等级熟练度数据
----| "INTERNAL_SKILL_ONOFF"            # int      获取人物内功技能开关
----| "INTERNAL_SKILL_RECT_ICON_PATH"   # string   获取人物内功技能矩形图标路径
----| "INTERNAL_SKILL_NAME"             # table    获取人物内功技能名字
----| "INTERNAL_SKILL_DESC"             # table    获取人物内功技能描述
----| "MERIDIAN_DESC"                   # table    获取人物内功经络的穴位描述
----| "MERIDIAN_AUCPOINT_STATE"         # table    获取人物内功对应经络的穴位是否激活列表
----| "MERIDIAN_OPEN_LIST"              # table    获取人物内功经络的开关列表
----| "MERIDIAN_LV"                     # int      获取人物内功对应经络等级
----| "HAVE_COMBO_SKILLS"               # table    获取人物所有拥有的连击技能
----| "COMBO_SKILL_DATA"                # table    获取人物对应连击技能
----| "COMBO_SKILL_TRAIN_DATA"          # table    获取人物连击技能等级熟练度数据
----| "SET_COMBO_SKILLS"                # table    获取人物设置为连击的数据
----| "OPEN_COMBO_NUM"                  # int      人物开启的连击个数
----| "IS_LEARNED_INTERNAL"             # boolean  人物是否学习内功
----| "EXTRA_COMBO_BJRATE"              # int      获取对应连击格子额外加暴击几率
----| "RUN_STEP"                        # int      跑步移动格子数
----| "CAN_RUN_ABLE"                    # boolean  能否跑
----| "LOOK_USER_ID"                    # string   当前查看他人角色ID
----| "LOOK_USER_NAME"                  # string   当前查看他人角色名字
----| "LOOK_USER_NAME_COLOR"            # int      当前查看他人角色名字颜色ID
----| "PLAYER_INITED"                   # boolean  玩家属性初始化完成
----| "L.M.JOB"                         # int      当前查看玩家职业
----| "L.M.HAIR"                        # int      当前查看玩家发型
----| "L.M.LEVEL"                       # int      当前查看玩家等级
----| "L.M.SEX"                         # int      当前查看玩家性别
----| "L.M.PLAYER_DATA"                 # table    当前查看玩家数据
----| "L.M.EQUIP_DATA"                  # table    当前查看玩家某个装备位数据
----| "L.M.EQUIP_DATA_LIST"             # table    当前查看玩家某个装备位数据列表
----| "L.M.EQUIP_POS_DATAS"             # table    当前查看玩家的所有装备位数据
----| "L.M.GUILD_INFO"                  # table    当前查看玩家的行会信息
----| "L.M.TITLES"                      # table    当前查看玩家的称号数据
----| "L.M.ACTIVATE_TITLE"              # int      当前查看玩家激活的称号id
----| "L.M.EMBATTLE"                    # table    当前查看玩家法阵数据
----| "H.USERNAME"                      # string   英雄名字
----| "H.LEVEL"                         # int      英雄等级
----| "H.RELEVEL"                       # int      转生等级
----| "H.EXP"                           # int      当前经验
----| "H.MAXEXP"                        # int      最大经验
----| "H.JOBNAME"                       # string   职业名称
----| "H.JOB"                           # int      职业
----| "H.SEX"                           # int      性别
----| "H.HAIR"                          # int      发型ID
----| "H.MAXHP"                         # int      最大生命值
----| "H.MAXMP"                         # int      最大魔法值
----| "H.HP"                            # int      当前生命值
----| "H.MP"                            # int      当前魔法值
----| "H.HPPercent"                     # int      当前血量百分比
----| "H.MPPercent"                     # int      当前蓝量百分比
----| "H.EXPPercent"                    # int      当前经验百分比
----| "H.MIN_ATK"                       # int      攻击下限
----| "H.MAX_ATK"                       # int      攻击上限
----| "H.MIN_MAT"                       # int      魔攻下限
----| "H.MAX_MAT"                       # int      魔攻上限
----| "H.MIN_DAO"                       # int      道术下限
----| "H.MAX_DAO"                       # int      道术上限
----| "H.MIN_DEF"                       # int      物防下限
----| "H.MAX_DEF"                       # int      物防上限
----| "H.MIN_MDF"                       # int      魔防下限
----| "H.MAX_MDF"                       # int      魔防上限
----| "H.HIT"                           # int      命中
----| "H.HITSPD"                        # int      攻击速度
----| "H.BURST"                         # int      暴击几率
----| "H.BURST_DAM"                     # int      暴击伤害
----| "H.IMM_ATT"                       # int      物伤减免
----| "H.IMM_MAG"                       # int      魔伤减免
----| "H.IGN_DEF"                       # int      物理穿透
----| "H.SUCK_HP"                       # int      吸血
----| "H.LUCK"                          # int      幸运
----| "H.DROP"                          # int      怪物爆率
----| "H.BW"                            # int      当前重量
----| "H.MAXBW"                         # int      英雄最大负重
----| "H.WW"                            # int      穿戴负重
----| "H.MAXWW"                         # int      最大穿戴负重
----| "H.HW"                            # int      腕力
----| "H.MAXHW"                         # int      当前最大可穿戴腕力
----| "H.ANGER"                         # int      当前愤怒
----| "H.MAXANGER"                      # int      最大愤怒
----| "H.SHAN"                          # boolen   英雄怒气值是否满
----| "H.SPEED"                         # int      单次怒气增加值
----| "H.DELAYT"                        # int      怒气增加间隔时间
----| "H.EQUIP_DATA"                    # table    获取英雄某一装备数据
----| "H.EQUIP_DATA_LIST"               # table    获取英雄对应装备位数据列表
----| "H.ALL_EQUIP_DATAS"               # table    获取英雄所有装备数据
----| "H.EMBATTLE"                      # table    获取英雄法阵数据
----| "H.EQUIP_POS_DATAS"               # table    获取装备位对应MakeIndex数据
----| "H.TITLES"                        # table    英雄的称号数据
----| "H.ACTIVATE_TITLE"                # int      英雄激活的称号id
----| "H.SKILL_TRAIN_DATA"              # table    获取技能的等级熟练度数据
----| "H.SKILL_DATA"                    # table    获取技能数据
----| "H.SKILL_NAME"                    # string   获取技能名
----| "H.SKILL_KEY"                     # int      获取技能快捷键
----| "H.LEARNED_SKILLS"                # table    获取已有技能数据
----| "H.INTERNAL_FORCE"                # int      英雄内功当前内力值
----| "H.INTERNAL_MAXFORCE"             # int      英雄内功最大内力值
----| "H.INTERNAL_EXP"                  # int      英雄内功当前经验值
----| "H.INTERNAL_MAXEXP"               # int      英雄内功最大经验值
----| "H.INTERNAL_LEVEL"                # int      英雄内功等级
----| "H.INTERNAL_DZ_CURVALUE"          # int      英雄内功当前斗转星移值
----| "H.INTERNAL_DZ_MAXVALUE"          # int      英雄内功最大斗转星移值
----| "H.INTERNAL_SKILLS"               # table    获取英雄拥有内功技能列表
----| "H.INTERNAL_SKILL_DATA"           # table    获取英雄内功技能数据
----| "H.INTERNAL_SKILL_TRAIN_DATA"     # table    获取英雄内功技能等级熟练度数据
----| "H.INTERNAL_SKILL_ONOFF"          # int      获取英雄内功技能开关
----| "H.INTERNAL_SKILL_RECT_ICON_PATH" # string   获取英雄内功技能矩形图标路径
----| "H.INTERNAL_SKILL_NAME"           # table    获取英雄内功技能名字
----| "H.INTERNAL_SKILL_DESC"           # table    获取英雄内功技能描述
----| "H.MERIDIAN_AUCPOINT_STATE"       # table    获取英雄内功对应经络的穴位是否激活列表
----| "H.MERIDIAN_OPEN_LIST"            # table    获取英雄内功经络的开关列表
----| "H.MERIDIAN_LV"                   # int      获取英雄内功对应经络等级
----| "H.HAVE_COMBO_SKILLS"             # table    获取英雄所有拥有的连击技能
----| "H.COMBO_SKILL_DATA"              # table    获取英雄对应连击技能
----| "H.COMBO_SKILL_TRAIN_DATA"        # table    获取英雄连击技能等级熟练度数据
----| "H.SET_COMBO_SKILLS"              # table    获取英雄设置为连击的数据
----| "H.OPEN_COMBO_NUM"                # int      英雄开启的连击个数
----| "H.IS_LEARNED_INTERNAL"           # boolean  英雄是否学习内功
----| "H.SKILL_ICON_PATH"               # string   获取英雄技能图标
----| "H.SKILL_RECT_ICON_PATH"          # string   获取英雄矩形技能图标
----| "HERO_INITED"                     # boolean  英雄属性初始化完成
----| "H.LOCK_TARGET_ID"                # int      英雄锁定ActorID
----| "T.M.USERNAME"                    # string   玩家名字
----| "T.M.LEVEL"                       # int      玩家等级
----| "T.M.RELEVEL"                     # int      转生等级
----| "T.M.EXP"                         # int      当前经验
----| "T.M.MAXEXP"                      # int      最大经验
----| "T.M.JOB"                         # int      职业
----| "T.M.JOBNAME"                     # string   职业名
----| "T.M.SEX"                         # int      性别
----| "T.M.HAIR"                        # int      发型ID
----| "T.M.MAXHP"                       # int      最大生命值
----| "T.M.MAXMP"                       # int      最大魔法值
----| "T.M.HP"                          # int      当前生命值
----| "T.M.MP"                          # int      当前魔法值
----| "T.M.MIN_ATK"                     # int      攻击下限
----| "T.M.MAX_ATK"                     # int      攻击上限
----| "T.M.MIN_MAT"                     # int      魔攻下限
----| "T.M.MAX_MAT"                     # int      魔攻上限
----| "T.M.MIN_DAO"                     # int      道术下限
----| "T.M.MAX_DAO"                     # int      道术上限
----| "T.M.MIN_DEF"                     # int      物防下限
----| "T.M.MAX_DEF"                     # int      物防上限
----| "T.M.MIN_MDF"                     # int      魔防下限
----| "T.M.MAX_MDF"                     # int      魔防上限
----| "T.M.HIT"                         # int      命中
----| "T.M.HITSPD"                      # int      攻击速度
----| "T.M.BURST"                       # int      暴击几率
----| "T.M.BURST_DAM"                   # int      暴击伤害
----| "T.M.IMM_ATT"                     # int      物伤减免
----| "T.M.IMM_MAG"                     # int      魔伤减免
----| "T.M.SUCK_HP"                     # int      吸血
----| "T.M.LUCK"                        # int      幸运
----| "T.M.DROP"                        # int      怪物爆率
----| "T.M.BW"                          # int      当前重量
----| "T.M.MAXBW"                       # int      玩家最大负重
----| "T.M.WW"                          # int      穿戴负重
----| "T.M.MAXWW"                       # int      最大穿戴负重
----| "T.M.HW"                          # int      腕力
----| "T.M.MAXHW"                       # int      当前最大可穿戴腕力
----| "T.M.USERNAME_COLOR"              # int      玩家名字颜色值
----| "T.M.TITLES"                      # table    玩家的称号数据
----| "T.M.ACTIVATE_TITLE"              # int      当前查看玩家激活的称号id
----| "T.M.SKILL_TRAIN_DATA"            # table    获取技能的等级熟练度数据
----| "T.M.SKILL_DATA"                  # table    获取技能数据
----| "T.M.LEARNED_SKILLS"              # table    获取已有技能数据
----| "T.M.ATT_BY_TYPE"                 # int      根据类型ID获取属性值
----| "T.M.EQUIP_POS_DATAS"             # table    当前查看玩家的所有装备位数据
----| "T.M.GUILD_INFO"                  # table    当前查看玩家的行会信息
----| "T.M.EQUIP_DATA"                  # table    获取当前查看玩家对应装备位的装备数据
----| "T.M.EQUIP_DATA_LIST"             # table    获取当前查看玩家对应装备位的装备数据列表
----| "T.M.EQUIP_DATA_BY_MAKEINDEX"     # table    通过MakeIndex获取查看交易行他人装备数据
----| "T.H.USERNAME"                    # string   英雄名字
----| "T.H.LEVEL"                       # int      英雄等级
----| "T.H.RELEVEL"                     # int      转生等级
----| "T.H.EXP"                         # int      当前经验
----| "T.H.MAXEXP"                      # int      最大经验
----| "T.H.JOB"                         # int      职业
----| "T.H.JOBNAME"                     # string   职业名
----| "T.H.SEX"                         # int      性别
----| "T.H.HAIR"                        # int      发型ID
----| "T.H.MAXHP"                       # int      最大生命值
----| "T.H.MAXMP"                       # int      最大魔法值
----| "T.H.HP"                          # int      当前生命值
----| "T.H.MP"                          # int      当前魔法值
----| "T.H.MIN_ATK"                     # int      攻击下限
----| "T.H.MAX_ATK"                     # int      攻击上限
----| "T.H.MIN_MAT"                     # int      魔攻下限
----| "T.H.MAX_MAT"                     # int      魔攻上限
----| "T.H.MIN_DAO"                     # int      道术下限
----| "T.H.MAX_DAO"                     # int      道术上限
----| "T.H.MIN_DEF"                     # int      物防下限
----| "T.H.MAX_DEF"                     # int      物防上限
----| "T.H.MIN_MDF"                     # int      魔防下限
----| "T.H.MAX_MDF"                     # int      魔防上限
----| "T.H.HIT"                         # int      命中
----| "T.H.HITSPD"                      # int      攻击速度
----| "T.H.BURST"                       # int      暴击几率
----| "T.H.BURST_DAM"                   # int      暴击伤害
----| "T.H.IMM_ATT"                     # int      物伤减免
----| "T.H.IMM_MAG"                     # int      魔伤减免
----| "T.H.SUCK_HP"                     # int      吸血
----| "T.H.LUCK"                        # int      幸运
----| "T.H.DROP"                        # int      怪物爆率
----| "T.H.BW"                          # int      当前重量
----| "T.H.MAXBW"                       # int      英雄最大负重
----| "T.H.WW"                          # int      穿戴负重
----| "T.H.MAXWW"                       # int      最大穿戴负重
----| "T.H.HW"                          # int      腕力
----| "T.H.MAXHW"                       # int      当前最大可穿戴腕力
----| "T.H.TITLES"                      # table    英雄的称号数据
----| "T.H.ACTIVATE_TITLE"              # int      当前查看英雄激活的称号id
----| "T.H.SKILL_TRAIN_DATA"            # table    获取技能的等级熟练度数据
----| "T.H.SKILL_DATA"                  # table    获取技能数据
----| "T.H.LEARNED_SKILLS"              # table    获取已有技能数据
----| "T.H.ATT_BY_TYPE"                 # int      根据类型ID获取属性值
----| "T.H.EQUIP_POS_DATAS"             # table    当前查看英雄的所有装备位数据
----| "T.H.EQUIP_DATA"                  # table    获取当前查看英雄对应装备位的装备数据
----| "T.H.EQUIP_DATA_LIST"             # table    获取当前查看英雄对应装备位的装备数据列表
----| "T.H.EQUIP_DATA_BY_MAKEINDEX"     # table    通过MakeIndex获取查看交易行他人英雄装备数据
-
+---@enum (key) metavalue
+local metavalue = { ---@class MetaValueTable
+	["996BOX_LOGIN"] = true, -- boolean 是否是996盒子登录
+	["996_CLOUD_DEVICE"] = true, -- boolean 是否是996云真机
+	["AC"] = 0, -- int 最小物防
+	["ACTIVATE_TITLE"] = 0, -- int 玩家激活的称号id
+	["ACTOR_APPR_ID"] = true, -- boolean 获取actor的外观ID
+	["ACTOR_BIGICON_ID"] = 0, -- int 获取怪物大图标ID
+	["ACTOR_BUFF_DATA"] = {}, -- table actor身上所有buff数据
+	["ACTOR_BUFF_DATA_BY_ID"] = {}, -- table 获取actor身上某个buff数据
+	["ACTOR_CAN_LOCK_BY_HERO"] = true, -- boolean 检查英雄选中的目标是否能锁定
+	["ACTOR_DEAR_ID"] = 0, -- int 获取actor的夫妻ID
+	["ACTOR_DIR"] = 0, -- int 获取actor方向
+	["ACTOR_FACTION"] = 0, -- int 获取actor阵营ID
+	["ACTOR_GM_DATA"] = {}, -- table 获取actor的GM自定义数据
+	["ACTOR_GUILD_ID"] = nil, -- string 获取actor行会ID
+	["ACTOR_GUILD_NAME"] = nil, -- string 获取actor行会名字
+	["ACTOR_HAIR_ID"] = true, -- boolean 获取actor的发型ID
+	["ACTOR_HAS_ONE_BUFF"] = true, -- boolean actor是否有某个buff
+	["ACTOR_HAVE_MASTER"] = true, -- boolean 获取actor是否有主人
+	["ACTOR_HIDE_HP_BAR"] = true, -- boolean 获取actor
+	["ACTOR_HIDE_NAME"] = true, -- boolean 获取actor
+	["ACTOR_HORSE_COPILOT_ID"] = 0, -- int 获取actor坐骑的副驾ID
+	["ACTOR_HORSE_MASTER_ID"] = 0, -- int 获取actor坐骑的主驾ID
+	["ACTOR_HP"] = 0, -- int 获取
+	["ACTOR_IN_SAFE_ZONE"] = true, -- boolean 获取actor是否在安全区
+	["ACTOR_IS_BODY_HORSE"] = true, -- boolean actor是否是连体坐骑
+	["ACTOR_IS_BORN"] = true, -- boolean actor是否出生
+	["ACTOR_IS_CAVE"] = true, -- boolean actor是否钻回洞穴
+	["ACTOR_IS_COLLECTION"] = true, -- boolean actor是否采集物
+	["ACTOR_IS_DEATH"] = true, -- boolean actor是否死亡
+	["ACTOR_IS_DEFENDER"] = true, -- boolean actor是否守卫
+	["ACTOR_IS_DIE"] = true, -- boolean actor是否死亡
+	["ACTOR_IS_DOUBLE_HORSE"] = true, -- boolean actor是否是双人坐骑
+	["ACTOR_IS_ESCORT"] = true, -- boolean actor是否镖车
+	["ACTOR_IS_GATE"] = true, -- boolean actor是否沙巴克大门
+	["ACTOR_IS_HERO"] = true, -- boolean 是否是英雄
+	["ACTOR_IS_HORSEBACK_RADING"] = true, -- boolean actor是否是骑马状态
+	["ACTOR_IS_HORSE_COPILOT"] = true, -- boolean actor是否是坐骑的副驾
+	["ACTOR_IS_HUMAN"] = true, -- boolean 是否是人形怪
+	["ACTOR_IS_HUSHEN"] = true, -- boolean 获取actor是否拥有护身
+	["ACTOR_IS_IN_STALL"] = true, -- boolean actor是否在摆摊
+	["ACTOR_IS_MAINPLAYER"] = true, -- boolean actor是否是主玩家
+	["ACTOR_IS_MONSTER"] = true, -- boolean 是否是怪物
+	["ACTOR_IS_MOVE"] = true, -- boolean 获取actor是否在移动状态
+	["ACTOR_IS_MYSTERY_MAN"] = true, -- boolean actor是否是神秘人
+	["ACTOR_IS_NETPLAYER"] = true, -- boolean actor是否网络玩家
+	["ACTOR_IS_NPC"] = true, -- boolean 是否是NPC
+	["ACTOR_IS_OFFLINE"] = nil, -- string 获取actor是否是离线状态玩家
+	["ACTOR_IS_PET"] = true, -- boolean actor是否宝宝
+	["ACTOR_IS_PICKUPSPRITE"] = true, -- boolean actor是否捡物小精灵
+	["ACTOR_IS_PLAYER"] = true, -- boolean 是否是玩家
+	["ACTOR_IS_WALL"] = true, -- boolean actor是否沙巴克城墙
+	["ACTOR_JOB_ID"] = 0, -- int 获取actor职业
+	["ACTOR_LEFT_WEAPON_ID"] = true, -- boolean 获取actor的左手武器ID
+	["ACTOR_LEVEL"] = 0, -- int 获取actor等级
+	["ACTOR_MAP_X"] = 0, -- int 获取actor地图坐标X
+	["ACTOR_MAP_Y"] = 0, -- int 获取actor地图坐标Y
+	["ACTOR_MASTER_ID"] = 0, -- int 获取actor主人ID
+	["ACTOR_MAXHP"] = 0, -- int 获取actor
+	["ACTOR_MAXMP"] = 0, -- int 获取actor
+	["ACTOR_MENTOR_ID"] = 0, -- int 获取actor的师徒ID
+	["ACTOR_MOUNT_NODE"] = nil, -- widget 获取actor挂接点
+	["ACTOR_MOVE_EFFECT"] = 0, -- int 获取actor的足迹特效ID
+	["ACTOR_MP"] = 0, -- int 获取actor
+	["ACTOR_NAME"] = nil, -- string 获取actor
+	["ACTOR_NATION_ENEMY_PK"] = true, -- boolean 获取actor
+	["ACTOR_NATION_ID"] = 0, -- int 获取actor国家ID
+	["ACTOR_NEAR_SHOW"] = true, -- boolean 获取actor是否在附近显示
+	["ACTOR_OWNER_ID"] = nil, -- string 获取actor归属ID
+	["ACTOR_OWNER_NAME"] = nil, -- string 获取actor归属名字
+	["ACTOR_PKLV"] = 0, -- int 获取actor红名灰名
+	["ACTOR_POSITION_X"] = 0, -- int 获取actor世界坐标X
+	["ACTOR_POSITION_Y"] = 0, -- int 获取actor世界坐标Y
+	["ACTOR_RACE_IMG"] = 0, -- int 获取actor
+	["ACTOR_RACE_SERVER"] = 0, -- int 获取actor
+	["ACTOR_SERVER_ID"] = 0, -- int 获取actor区服ID
+	["ACTOR_SEX"] = 0, -- int 获取actor性别
+	["ACTOR_SHIELD_ID"] = true, -- boolean 获取actor的盾牌ID
+	["ACTOR_STALL_NAME"] = nil, -- string 获取actor摆摊名
+	["ACTOR_STOME_MODE"] = true, -- boolean 获取actor
+	["ACTOR_TEAM_STATE"] = 0, -- int 获取actor组队状态
+	["ACTOR_TYPE_INDEX"] = 0, -- int 获取actor的typeIndex
+	["ACTOR_WEAPON_ID"] = true, -- boolean 获取actor的武器ID
+	["ACTOR_WINGS_ID"] = true, -- boolean 获取actor的翅膀ID
+	["ADD_STATUS_PERMIT"] = true, -- boolean 允许添加状态
+	["ALL_EQUIP_DATAS"] = {}, -- table 获取玩家所有装备数据
+	["ARMRINGL"] = nil, -- string 获取玩家身上左手镯的名字
+	["ATTR_CONFIG"] = {}, -- table cfg_att_score表
+	["ATTR_CONFIGS"] = {}, -- table cfg_att_score表
+	["ATT_BY_TYPE"] = 0, -- int 根据类型id获取属性值
+	["AUCTION_BIDPRICE_MAX"] = 0, -- int 默认最高竞拍价
+	["AUCTION_BIDPRICE_MIN"] = 0, -- int 默认最低竞拍价
+	["AUCTION_BUYPRICE_MAX"] = 0, -- int 默认最高一口价
+	["AUCTION_BUYPRICE_MIN"] = 0, -- int 默认最低一口价
+	["AUCTION_CAN_BID"] = true, -- boolean 是否可竞价
+	["AUCTION_CAN_BUY"] = true, -- boolean 是否可一口价
+	["AUCTION_DEFAULT_SHELF"] = 0, -- int 默认货架数量
+	["AUCTION_HAVE_MY_BIDDING"] = true, -- boolean 是否有我的竞拍物品
+	["AUCTION_ITEM_STATE"] = 0, -- int, string
+	["AUCTION_MONEY"] = 0, -- int 拍卖行货币
+	["AUCTION_MY_SHOW_LIST"] = {}, -- table 获取拍卖行我的展示可寄售道具
+	["AUCTION_PUT_LIST_CNT"] = 0, -- int 上架列表数量
+	["AUTOUSE_MAKEINDEX_BY_POS"] = 0, -- int 获取已添加的自动使用弹窗物品唯一ID
+	["BAG_CHECK_NEED_SPACE"] = true, -- boolean 检测物品背包是否有富余格子数存放
+	["BAG_DATA"] = {}, -- table 获取背包所有物品数据
+	["BAG_IS_FULL"] = true, -- boolean 背包是否满
+	["BAG_MAKEINDEX_BY_POS"] = 0, -- int 获取背包物品唯一ID
+	["BAG_PAGE_CUR"] = 0, -- int 当前选中的背包页签
+	["BAG_REMAIN_COUNT"] = 0, -- int 背包剩余格子数
+	["BAG_USED_COUNT"] = 0, -- int 背包已使用格子数
+	["BATTERY"] = 0, -- int 手机电量
+	["BATTLE_AFK_BEGIN"] = nil, -- void 开始自动挂机
+	["BATTLE_AFK_END"] = nil, -- void 结束自动挂机
+	["BATTLE_IS_AFK"] = true, -- boolean 是否自动挂机中
+	["BATTLE_IS_AUTO_MOVE"] = true, -- boolean 是否自动寻路中
+	["BATTLE_IS_AUTO_PICK"] = true, -- boolean 是否自动捡物中
+	["BATTLE_MOVE_BEGIN"] = nil, -- void 开始自动寻路
+	["BATTLE_MOVE_END"] = nil, -- void 结束自动寻路
+	["BATTLE_PICK_BEGIN"] = nil, -- void 开始自动捡物
+	["BATTLE_PICK_END"] = nil, -- void 结束自动捡物
+	["BELT"] = nil, -- string 获取玩家身上腰带的名字
+	["BEST_RING_OPENSTATE"] = true, -- boolean 首饰盒开启状态
+	["BEST_RING_WIN_ISOPEN"] = true, -- boolean 首饰盒界面是否打开
+	["BONUSPOINT"] = 0, -- int 转生属性点
+	["BOOTS"] = nil, -- string 获取玩家身上鞋子的名字
+	["BUBBLETIPS_INFO"] = {}, -- table 根据气泡index获取气泡数据
+	["BUFF_CONFIG"] = {}, -- table 获取buffID的配置表数据
+	["BUJUK"] = nil, -- string 获取玩家身上护符
+	["BURST"] = 0, -- int 暴击几率
+	["BURST_DAM"] = 0, -- int 暴击伤害
+	["BW"] = 0, -- int 重量
+	["CAN_RUN_ABLE"] = true, -- boolean 能否跑
+	["CHANNEL_ID"] = nil, -- string 渠道ID
+	["CHARM"] = nil, -- string 获取玩家身上宝石的名字
+	["CHATANDTIPS_USE_FONT"] = nil, -- string 聊天
+	["CHAT_CHANNEL_ENUM"] = {}, -- table 聊天频道列表
+	["CHAT_CHANNEL_ISRECEIVE"] = true, -- boolean 当前频道是否接受聊天信息
+	["CHAT_CUR_CDTIME"] = 0, -- int 获取当前聊天CD时间
+	["CHAT_EMOJI"] = {}, -- table 获取聊天表情包
+	["CHAT_INPUT_CACHE"] = {}, -- table 获取聊天输入历史记录缓存
+	["CHAT_MSGTYPE_ENUM"] = {}, -- table 聊天消息类型列表
+	["CHAT_SHOW_ITEMS"] = {}, -- table 获取聊天显示的道具
+	["CHAT_TARGETS"] = {}, -- table 获取聊天目标
+	["CHECK_FUNCBTN_SHOW"] = true, -- boolean 检查当前类别功能菜单的某种按钮是否显示
+	["CHECK_IN_GUIDE"] = true, -- boolean 是否在引导中
+	["CHECK_MINIMAP_OPEN"] = true, -- boolean 小地图界面是否打开
+	["CHECK_REDPOINT_ID"] = true, -- boolean 检测红点表对应id是否满足条件
+	["CHECK_USE_ITEM_BUFF"] = true, -- boolean, int
+	["COMBO_SKILL_DATA"] = {}, -- table 获取人物对应连击技能
+	["COMBO_SKILL_TRAIN_DATA"] = {}, -- table 获取人物连击技能等级熟练度数据
+	["COMPOUND_CHECK_LIST_IS_SHOW"] = true, -- boolean 检测该合成页签是否显示
+	["COMPOUND_CHECK_LIST_RED_POINT"] = true, -- boolean 检测合成红点
+	["COMPOUND_CHECK_OK"] = true, -- boolean 检查是否可以合成
+	["COMPOUND_CONFIG_BY_INDEX"] = {}, -- table 通过id获取合成对应配置
+	["COMPOUND_LIST_DATA"] = {}, -- table 获取合成数据
+	["COMPOUND_LIST_DATA_BY_INDEX"] = {}, -- table 通过id获取合成数据
+	["COMPOUND_OPEN_ID"] = 0, -- int 获取合成打开的ID
+	["COMPOUND_PAGE_BY_ID"] = 0, -- int 通过id获取合成页签组合id
+	["COMPOUND_PAGE_NAME"] = nil, -- string 获取合成页签名字
+	["COMPOUND_RED_POINT_BY_ID"] = true, -- boolean 获取合成红点状态
+	["COMPOUND_SHOW_CONDITION"] = true, -- boolean 判断合成条件是否显示红点
+	["CTRL_PRESSED"] = true, -- boolean PC端
+	["CURRENT_OPERMODE"] = 0, -- int 操作模式
+	["CURRENT_TALK_NPC_ID"] = 0, -- int 获取当前对话NPC的ID
+	["CURRENT_TALK_NPC_LAYER"] = nil, -- widget 获取当前打开的NPC面板
+	["CURRENT_TALK_NPC_TYPEINDEX"] = 0, -- int 获取当前对话NPC的Index
+	["CUR_CHAT_CHANNEL"] = 0, -- int 获取当前聊天频道
+	["CUSTOM_DESC"] = nil, -- string cfg_custpro_caption表
+	["CUSTOM_ICON"] = {}, -- table cfg_custpro_caption表
+	["CUST_ABIL_MAP"] = {}, -- table 自定义属性ID映射Map
+	["DARK_STATE"] = 0, -- int 黑夜当前状态
+	["DC"] = 0, -- int 最小物理
+	["DEAL_STATUS_PERMIT"] = true, -- boolean 允许交易状态
+	["DEVICE_UNIQUE_ID"] = nil, -- string PC唯一设备ID
+	["DIR"] = 0, -- int 人物方向
+	["DOCKTYPE_NENUM"] = {}, -- table func
+	["DROP"] = 0, -- int 怪物爆率
+	["DROP_TYPE_ISRECEIVE"] = true, -- boolean 是否接收该分类掉落信息
+	["EMBATTLE"] = {}, -- table 获取玩家法阵数据
+	["EQUIPBYPOS"] = nil, -- string 获取玩家某一装备位的装备名
+	["EQUIPMAP_BY_STDMODE"] = {}, -- table 装备Map
+	["EQUIP_DATA"] = {}, -- table 获取玩家某一装备数据
+	["EQUIP_DATA_BY_MAKEINDEX"] = {}, -- table 根据MakeIndex获取装备数据
+	["EQUIP_DATA_LIST"] = {}, -- table 获取玩家对应装备位数据列表
+	["EQUIP_POSLIST_BY_STDMODE"] = {}, -- table 通过stdmode获取装备位列表
+	["EQUIP_POS_BY_STDMODE"] = 0, -- int 通过stdmode获取装备位
+	["EQUIP_POS_DATAS"] = {}, -- table 获取装备位对应MakeIndex数据
+	["EXP"] = 0, -- int 当前经验
+	["EXTRA_COMBO_BJRATE"] = 0, -- int 获取对应连击格子额外加暴击几率
+	["EX_ATTR"] = nil, -- string 脚本变量额外属性
+	["EX_SHOWLAST_MAP"] = {}, -- table 除装备Map
+	["FEATURE"] = {}, -- table 玩家外观数据
+	["FIND_IN_VIEW_MONSTER_LIST"] = {}, -- table 获取视野内怪物列表
+	["FIND_IN_VIEW_NPC_LIST"] = {}, -- table 获取视野内NPC列表
+	["FIND_IN_VIEW_PLAYER_LIST"] = {}, -- table 获取视野内玩家列表
+	["FPS"] = 0, -- int 游戏帧率
+	["FRIEND_APPLYLIST"] = {}, -- table 好友申请列表
+	["FRIEND_BLACKLIST"] = {}, -- table 获取黑名单数据
+	["FRIEND_INFO_BY_NAME"] = {}, -- table 根据userName获取好友信息
+	["FRIEND_INFO_BY_UID"] = {}, -- table 根据userID获取好友信息
+	["FRIEND_LIST"] = {}, -- table 获取好友列表
+	["FRIEND_MAX_COUNT"] = 0, -- int 最大好友人数
+	["GAMEPAD_MOVE_PARAM"] = 0, -- int, int
+	["GAME_DATA"] = {}, -- table 获取cfg_game_data配置
+	["GAME_ID"] = nil, -- string 游戏ID
+	["GUILD_ALLY_APPLY_LIST"] = {}, -- table 行会结盟申请列表
+	["GUILD_APPLY_LIST"] = {}, -- table 行会申请列表
+	["GUILD_CREATE"] = {}, -- table 获取创建公会消耗信息
+	["GUILD_INFO"] = {}, -- table 我的行会信息
+	["GUILD_MEMBER_INFO"] = {}, -- table 通过uid获取行会成员信息
+	["GUILD_MEMBER_LIST"] = {}, -- table 行会成员列表
+	["GUILD_OFFICIAL"] = nil, -- string 获取行会职位名称
+	["GUILD_WORLD_LIST"] = {}, -- table 获取世界行会列表
+	["GUILD_WORLD_TOTAL_PAGES"] = 0, -- int 获取世界行会列表总页数
+	["H.ACTIVATE_TITLE"] = 0, -- int 英雄激活的称号id
+	["H.ALL_EQUIP_DATAS"] = {}, -- table 获取英雄所有装备数据
+	["H.ANGER"] = 0, -- int 当前愤怒
+	["H.BAG_DATA"] = {}, -- table 获取英雄背包所有物品数据
+	["H.BURST"] = 0, -- int 暴击几率
+	["H.BURST_DAM"] = 0, -- int 暴击伤害
+	["H.BW"] = 0, -- int 当前重量
+	["H.COMBO_SKILL_DATA"] = {}, -- table 获取英雄对应连击技能
+	["H.COMBO_SKILL_TRAIN_DATA"] = {}, -- table 获取英雄连击技能等级熟练度数据
+	["H.DELAYT"] = 0, -- int 怒气增加间隔时间
+	["H.DROP"] = 0, -- int 怪物爆率
+	["H.EMBATTLE"] = {}, -- table 获取英雄法阵数据
+	["H.EQUIP_DATA"] = {}, -- table 获取英雄某一装备数据
+	["H.EQUIP_DATA_LIST"] = {}, -- table 获取英雄对应装备位数据列表
+	["H.EQUIP_POS_DATAS"] = {}, -- table 获取装备位对应MakeIndex数据
+	["H.EXP"] = 0, -- int 当前经验
+	["H.EXPPercent"] = 0, -- int 当前经验百分比
+	["H.HAIR"] = 0, -- int 发型ID
+	["H.HAVE_COMBO_SKILLS"] = {}, -- table 获取英雄所有拥有的连击技能
+	["H.HIT"] = 0, -- int 命中
+	["H.HITSPD"] = 0, -- int 攻击速度
+	["H.HP"] = 0, -- int 当前生命值
+	["H.HPPercent"] = 0, -- int 当前血量百分比
+	["H.HW"] = 0, -- int 腕力
+	["H.IGN_DEF"] = 0, -- int 物理穿透
+	["H.IMM_ATT"] = 0, -- int 物伤减免
+	["H.IMM_MAG"] = 0, -- int 魔伤减免
+	["H.INTERNAL_DZ_CURVALUE"] = 0, -- int 英雄内功当前斗转星移值
+	["H.INTERNAL_DZ_MAXVALUE"] = 0, -- int 英雄内功最大斗转星移值
+	["H.INTERNAL_EXP"] = 0, -- int 英雄内功当前经验值
+	["H.INTERNAL_FORCE"] = 0, -- int 英雄内功当前内力值
+	["H.INTERNAL_LEVEL"] = 0, -- int 英雄内功等级
+	["H.INTERNAL_MAXEXP"] = 0, -- int 英雄内功最大经验值
+	["H.INTERNAL_MAXFORCE"] = 0, -- int 英雄内功最大内力值
+	["H.INTERNAL_SKILLS"] = {}, -- table 获取英雄拥有内功技能列表
+	["H.INTERNAL_SKILL_DATA"] = {}, -- table 获取英雄内功技能数据
+	["H.INTERNAL_SKILL_DESC"] = {}, -- table 获取英雄内功技能描述
+	["H.INTERNAL_SKILL_NAME"] = {}, -- table 获取英雄内功技能名字
+	["H.INTERNAL_SKILL_ONOFF"] = 0, -- int 获取英雄内功技能开关
+	["H.INTERNAL_SKILL_RECT_ICON_PATH"] = nil, -- string 获取英雄内功技能矩形图标路径
+	["H.INTERNAL_SKILL_TRAIN_DATA"] = {}, -- table 获取英雄内功技能等级熟练度数据
+	["H.IS_LEARNED_INTERNAL"] = true, -- boolean 英雄是否学习内功
+	["H.JOB"] = 0, -- int 职业
+	["H.JOBNAME"] = nil, -- string 职业名称
+	["H.LEARNED_SKILLS"] = {}, -- table 获取已有技能数据
+	["H.LEVEL"] = 0, -- int 英雄等级
+	["H.LOCK_TARGET_ID"] = 0, -- int 英雄锁定ActorID
+	["H.LUCK"] = 0, -- int 幸运
+	["H.MAXANGER"] = 0, -- int 最大愤怒
+	["H.MAXBW"] = 0, -- int 英雄最大负重
+	["H.MAXEXP"] = 0, -- int 最大经验
+	["H.MAXHP"] = 0, -- int 最大生命值
+	["H.MAXHW"] = 0, -- int 当前最大可穿戴腕力
+	["H.MAXMP"] = 0, -- int 最大魔法值
+	["H.MAXWW"] = 0, -- int 最大穿戴负重
+	["H.MAX_ATK"] = 0, -- int 攻击上限
+	["H.MAX_DAO"] = 0, -- int 道术上限
+	["H.MAX_DEF"] = 0, -- int 物防上限
+	["H.MAX_MAT"] = 0, -- int 魔攻上限
+	["H.MAX_MDF"] = 0, -- int 魔防上限
+	["H.MERIDIAN_AUCPOINT_STATE"] = {}, -- table 获取英雄内功对应经络的穴位是否激活列表
+	["H.MERIDIAN_LV"] = 0, -- int 获取英雄内功对应经络等级
+	["H.MERIDIAN_OPEN_LIST"] = {}, -- table 获取英雄内功经络的开关列表
+	["H.MIN_ATK"] = 0, -- int 攻击下限
+	["H.MIN_DAO"] = 0, -- int 道术下限
+	["H.MIN_DEF"] = 0, -- int 物防下限
+	["H.MIN_MAT"] = 0, -- int 魔攻下限
+	["H.MIN_MDF"] = 0, -- int 魔防下限
+	["H.MP"] = 0, -- int 当前魔法值
+	["H.MPPercent"] = 0, -- int 当前蓝量百分比
+	["H.OPEN_COMBO_NUM"] = 0, -- int 英雄开启的连击个数
+	["H.RELEVEL"] = 0, -- int 转生等级
+	["H.SET_COMBO_SKILLS"] = {}, -- table 获取英雄设置为连击的数据
+	["H.SEX"] = 0, -- int 性别
+	["H.SHAN"] = nil, -- boolen 英雄怒气值是否满
+	["H.SKILL_DATA"] = {}, -- table 获取技能数据
+	["H.SKILL_ICON_PATH"] = nil, -- string 获取英雄技能图标
+	["H.SKILL_KEY"] = 0, -- int 获取技能快捷键
+	["H.SKILL_NAME"] = nil, -- string 获取技能名
+	["H.SKILL_RECT_ICON_PATH"] = nil, -- string 获取英雄矩形技能图标
+	["H.SKILL_TRAIN_DATA"] = {}, -- table 获取技能的等级熟练度数据
+	["H.SPEED"] = 0, -- int 单次怒气增加值
+	["H.SUCK_HP"] = 0, -- int 吸血
+	["H.TITLES"] = {}, -- table 英雄的称号数据
+	["H.USERNAME"] = nil, -- string 英雄名字
+	["H.WW"] = 0, -- int 穿戴负重
+	["HAIR"] = 0, -- int 发型ID
+	["HAVE_COMBO_SKILLS"] = {}, -- table 获取人物所有拥有的连击技能
+	["HAVE_GOLDBOX_OPENTIME"] = true, -- boolean 是否还有重摇
+	["HELMET"] = nil, -- string 获取玩家身上头盔的名字
+	["HERO_ACTIVES_STATES"] = {}, -- table 英雄激活的状态列表
+	["HERO_GUARDSTATE"] = true, -- boolean 获取英雄守护状态
+	["HERO_GUARD_ISCLICK"] = true, -- boolean 是否点击守护按钮
+	["HERO_ID"] = 0, -- int 英雄ID
+	["HERO_INITED"] = true, -- boolean 英雄属性初始化完成
+	["HERO_IS_ACTIVE"] = true, -- boolean 是否激活英雄
+	["HERO_IS_ALIVE"] = true, -- boolean 是否召唤英雄
+	["HERO_STATE"] = 0, -- int 获取英雄状态
+	["HERO_STATES_SYS_VALUES"] = {}, -- table 英雄状态系统能设置的列表
+	["HIT"] = 0, -- int 准确
+	["HITSPD"] = 0, -- int 攻速
+	["HP"] = 0, -- int 当前血量
+	["HUNGER"] = 0, -- int 体力恢复
+	["HW"] = 0, -- int 腕力
+	["H_MAX_BAG"] = 0, -- int 英雄背包最大格子数量
+	["IMM_ATT"] = 0, -- int 物伤减免
+	["IMM_MAG"] = 0, -- int 魔伤减免
+	["INTERNAL_DZ_CURVALUE"] = 0, -- int 人物内功当前斗转星移值
+	["INTERNAL_DZ_MAXVALUE"] = 0, -- int 人物内功最大斗转星移值
+	["INTERNAL_EXP"] = 0, -- int 人物内功当前经验值
+	["INTERNAL_FORCE"] = 0, -- int 人物内功当前内力值
+	["INTERNAL_LEVEL"] = 0, -- int 人物内功等级
+	["INTERNAL_MAXEXP"] = 0, -- int 人物内功最大经验值
+	["INTERNAL_MAXFORCE"] = 0, -- int 人物内功最大内力值
+	["INTERNAL_SKILLS"] = {}, -- table 获取人物拥有内功技能列表
+	["INTERNAL_SKILL_DATA"] = {}, -- table 获取人物内功技能数据
+	["INTERNAL_SKILL_DESC"] = {}, -- table 获取人物内功技能描述
+	["INTERNAL_SKILL_NAME"] = {}, -- table 获取人物内功技能名字
+	["INTERNAL_SKILL_ONOFF"] = 0, -- int 获取人物内功技能开关
+	["INTERNAL_SKILL_RECT_ICON_PATH"] = nil, -- string 获取人物内功技能矩形图标路径
+	["INTERNAL_SKILL_TRAIN_DATA"] = {}, -- table 获取人物内功技能等级熟练度数据
+	["IN_SAFE_AREA"] = true, -- boolean 是否是安全区域
+	["IN_SIEGE_AREA"] = true, -- boolean 是否在攻城区域
+	["IS_CLOSE_FAKEDROP"] = true, -- boolean 是否关闭假掉落
+	["IS_LEARNED_INTERNAL"] = true, -- boolean 人物是否学习内功
+	["IS_NEW_BOUNS"] = true, -- boolean 是否启用新版属性加点
+	["IS_PC_PLAY_MODE"] = true, -- boolean 是否PC操作模式
+	["IS_PICKABLE_DROPITEM"] = true, -- boolean 掉落物是否可拾取
+	["IS_PICK_STATE"] = true, -- boolean 是否是自动拾取状态
+	["IS_SAMESEX_EQUIP"] = nil, -- boolen 是否是该玩家性别装备
+	["IS_SDK_LOGIN"] = true, -- boolean 是否是SDK登录
+	["IS_SDK_PAY"] = true, -- boolean 是否接入第三方SDK
+	["IS_SHOW_MAUNAL_SERVICE"] = nil, -- boolen 是否开启996客服服务
+	["ITEMFROMUI_ENUM"] = {}, -- table 物品来自UI
+	["ITEMTYPE"] = 0, -- int 根据道具数据获取物品类型
+	["ITEMTYPE_ENUM"] = {}, -- table 物品类型
+	["ITEM_ARTICLE_ENUM"] = {}, -- table 物品规则类型枚举
+	["ITEM_BELONG_BY_MAKEINDEX"] = 0, -- int 根据MakeIndex获取物品归属
+	["ITEM_CAN_AUTOUSE"] = true, -- boolean 物品能否自动使用
+	["ITEM_COUNT"] = 0, -- int 根据道具index或者名字获取道具数量
+	["ITEM_CUSTOM_ATTR"] = {}, -- table 获取物品变量数据
+	["ITEM_DATA"] = {}, -- table 根据道具index获取道具信息
+	["ITEM_DATA_BY_MAKEINDEX"] = {}, -- table 根据MakeIndex获取背包数据
+	["ITEM_INDEX_BY_NAME"] = 0, -- int 根据道具名字获取道具index
+	["ITEM_IS_BIND"] = true, -- boolean 物品是否绑定
+	["ITEM_NAME"] = nil, -- string 根据道具index获取道具名字
+	["ITEM_NAME_COLOR"] = nil, -- string 获取道具名字颜色
+	["ITEM_NAME_COLORID"] = nil, -- string 道具名字颜色ID
+	["ITEM_NAME_COLOR_VALUE"] = nil, -- string 道具名字颜色
+	["ITEM_PROMPT_DATA"] = {}, -- table 道具表prompt解析后数据
+	["ITEM_SCALE"] = 0, -- int 道具框默认缩放
+	["JOB"] = 0, -- int 玩家职业
+	["JOB_NAME"] = nil, -- string 职业名字
+	["KFSTATE"] = true, -- boolean 是否处于跨服
+	["L.M.ACTIVATE_TITLE"] = 0, -- int 当前查看玩家激活的称号id
+	["L.M.EMBATTLE"] = {}, -- table 当前查看玩家法阵数据
+	["L.M.EQUIP_DATA"] = {}, -- table 当前查看玩家某个装备位数据
+	["L.M.EQUIP_DATA_LIST"] = {}, -- table 当前查看玩家某个装备位数据列表
+	["L.M.EQUIP_POS_DATAS"] = {}, -- table 当前查看玩家的所有装备位数据
+	["L.M.GUILD_INFO"] = {}, -- table 当前查看玩家的行会信息
+	["L.M.HAIR"] = 0, -- int 当前查看玩家发型
+	["L.M.JOB"] = 0, -- int 当前查看玩家职业
+	["L.M.LEVEL"] = 0, -- int 当前查看玩家等级
+	["L.M.PLAYER_DATA"] = {}, -- table 当前查看玩家数据
+	["L.M.SEX"] = 0, -- int 当前查看玩家性别
+	["L.M.TITLES"] = {}, -- table 当前查看玩家的称号数据
+	["LEARNED_SKILLS"] = {}, -- table 获取已学技能
+	["LEVEL"] = 0, -- int 玩家等级
+	["LOCAL_RES_VERSION"] = nil, -- string 原始
+	["LOGIN_DATA"] = {}, -- table 登录角色信息
+	["LOOKPLAYER_DATA_BY_MAKEINDEX"] = {}, -- table 根据MakeIndex获取查看他人装备数据
+	["LOOK_USER_ID"] = nil, -- string 当前查看他人角色ID
+	["LOOK_USER_NAME"] = nil, -- string 当前查看他人角色名字
+	["LOOK_USER_NAME_COLOR"] = 0, -- int 当前查看他人角色名字颜色ID
+	["LUCK"] = 0, -- int 幸运值
+	["M2_FORBID_SAY"] = true, -- boolean M2是否禁止说话
+	["MAC"] = 0, -- int 最小魔防
+	["MAIL_BY_ID"] = nil, -- string 根据邮件ID获取邮件
+	["MAIL_CURRENT_ID"] = 0, -- int 当前邮件ID
+	["MAIL_HAVE_DEL_ITEM"] = true, -- boolean 是否有邮件可以删除
+	["MAIL_LIST"] = {}, -- table 邮件列表
+	["MAIN_ACTOR_ID"] = nil, -- string 主玩家actorID
+	["MAIN_SERVER_ID"] = nil, -- string 主服务器ID
+	["MAPSCALE_PER"] = 0, -- int 通过值获取地图缩放对应百分比
+	["MAPSCALE_VALUE"] = 0, -- int 通过百分比获取地图缩放值
+	["MAP_COLS"] = 0, -- int 地图纵向格子数
+	["MAP_CURRENT_PATH_INDEX"] = 0, -- int 地图获取当前路径坐标index
+	["MAP_DATA_ID"] = nil, -- string 地图数据ID
+	["MAP_DATA_LOADED"] = true, -- boolean 地图map文件是否加载
+	["MAP_FORBID_LAUNCH_SKILL"] = true, -- boolean 是否禁止释放某技能
+	["MAP_FORBID_LEVEL_AND_JOB"] = true, -- boolean 是否禁止职业和等级
+	["MAP_FORBID_LOOK"] = true, -- boolean 是否禁止查看
+	["MAP_FORBID_SAY"] = true, -- boolean 是否禁止说话
+	["MAP_GET_MONSTERS"] = {}, -- table 地图获取怪物列表位置等信息
+	["MAP_GET_PORTALS"] = {}, -- table 地图获取传送点列表位置等信息
+	["MAP_ID"] = nil, -- string 地图ID
+	["MAP_IS_OBSTACLE"] = true, -- boolean 获取地图格子是否是阻挡
+	["MAP_NAME"] = nil, -- string 地图名字
+	["MAP_PATH_POINTS"] = {}, -- table 地图计算路径坐标
+	["MAP_PATH_SIZE"] = 0, -- int 地图计算起点到终点X或者Y
+	["MAP_PLAYER_POS"] = {}, -- table 地图获取人物坐标
+	["MAP_ROWS"] = 0, -- int 地图横向格子数
+	["MAP_SHOW_HPPER"] = true, -- boolean 是否血量显示百分比
+	["MAP_SIZE_HEIGHT_PIXEL"] = nil, -- string 地图获取高度像素
+	["MAP_SIZE_WIDTH_PIXEL"] = 0, -- int 地图获取宽度像素
+	["MAXAC"] = 0, -- int 最大物防
+	["MAXBW"] = 0, -- int 玩家最大负重
+	["MAXDC"] = 0, -- int 最大物理
+	["MAXEXP"] = 0, -- int 最大经验
+	["MAXHP"] = nil, -- string 最大血量
+	["MAXHW"] = 0, -- int 最大可穿戴腕力
+	["MAXMAC"] = 0, -- int 最大魔防
+	["MAXMC"] = 0, -- int 最大魔法
+	["MAXMP"] = nil, -- string 最大蓝量
+	["MAXSC"] = 0, -- int 最大道术
+	["MAXWW"] = 0, -- int 最大穿戴负重
+	["MAX_BAG"] = 0, -- int 背包最大格子数量
+	["MC"] = 0, -- int 最小魔法
+	["MENU_LAYERS_BY_GROUNP"] = 0, -- int 通过
+	["MERGE_SERVER_COUNT"] = 0, -- int 合服次数
+	["MERGE_SERVER_DAY"] = 0, -- int 合服天数
+	["MERGE_SERVER_TIME"] = 0, -- int 合服时间戳
+	["MERIDIAN_AUCPOINT_STATE"] = {}, -- table 获取人物内功对应经络的穴位是否激活列表
+	["MERIDIAN_DESC"] = {}, -- table 获取人物内功经络的穴位描述
+	["MERIDIAN_LV"] = 0, -- int 获取人物内功对应经络等级
+	["MERIDIAN_OPEN_LIST"] = {}, -- table 获取人物内功经络的开关列表
+	["MINIMAP_ABLE"] = true, -- boolean 小地图资源是否有效
+	["MINIMAP_FILE"] = nil, -- string 获取小地图文件路径
+	["MINIMAP_ID"] = nil, -- string 小地图ID
+	["MISSION_ITEM_BY_ID"] = {}, -- table 根据任务类型
+	["MISSION_ITEM_ORDER"] = 0, -- int 根据任务类型
+	["MONEY"] = nil, -- string 获取货币数量
+	["MONEY_ASSOCIATED"] = nil, -- string 获取货币数量
+	["MOUSE_MOVE_POS"] = {}, -- table 鼠标移动位置
+	["MP"] = 0, -- int 当前蓝量
+	["MYSELL_DATA"] = {}, -- table 获取我的摊位物品信息
+	["MYSELL_DATA_BY_MAKEINDEX"] = {}, -- table 获取我的摊位的对应物品信息
+	["NECKLACE"] = nil, -- string 获取玩家身上项链的名字
+	["NET_TYPE"] = 0, -- int 网络类型
+	["NEW_BOUNS_ADD_DATA"] = {}, -- table 获取新版属性已加点数据
+	["NEW_BOUNS_CONFIG"] = {}, -- table 获取新版属性加点配置数据
+	["NOTCH_PHONE_INFO"] = true, -- boolean, table
+	["N_MAX_BAG"] = 0, -- int 仓库最大格子数量
+	["ONSELL_DATA"] = {}, -- table 获取购买摊位物品信息
+	["ONSELL_DATA_BY_MAKEINDEX"] = {}, -- table 获取购买摊位的对应物品信息
+	["OPEN_COMBO_NUM"] = 0, -- int 人物开启的连击个数
+	["OPEN_SERVER_DAY"] = 0, -- int 开服天数
+	["OPEN_SERVER_TIME"] = 0, -- int 开服时间戳
+	["PACKAGE_NAME"] = nil, -- string APK包名
+	["PC_NP_ISOWN"] = nil, -- boolen PC端检测是否自己的NP
+	["PC_NP_STATUS"] = true, -- boolean PC端
+	["PC_POS_Y"] = 0, -- int PC端Y轴适配
+	["PET_ALIVE"] = true, -- boolean 是否有存活的宝宝
+	["PET_LOCK_ID"] = nil, -- string 宠物锁定的目标ID
+	["PET_PKMODE"] = 0, -- int 获取宠物PK模式
+	["PICK_ACTORID_BY_POS"] = nil, -- actorID PC
+	["PKMODE"] = 0, -- int 获取当前PK模式
+	["PKMODE_CAN_USE"] = true, -- boolean 该PK模式是否可以切换
+	["PLATFORM_ANDROID"] = true, -- boolean 安卓平台
+	["PLATFORM_IOS"] = true, -- boolean iOS平台
+	["PLATFORM_MOBILE"] = true, -- boolean 手机平台
+	["PLATFORM_OHOS"] = true, -- boolean 鸿蒙平台
+	["PLATFORM_WINDOWS"] = true, -- boolean Windows平台
+	["PLAYER_INITED"] = true, -- boolean 玩家属性初始化完成
+	["PROMOTE_ID"] = nil, -- string 推广员ID
+	["PURCHASE_CURRENCIES"] = {}, -- table 求购货币列表
+	["PURCHASE_FILTER_LIST"] = {}, -- table 世界求购菜单列表
+	["PURCHASE_ITEM_LIST_BY_TYPE"] = {}, -- table 分类物品列表
+	["PURCHASE_MENU_CONFIG_BY_ID"] = {}, -- table 对应ID
+	["QUICKUSE_DATA"] = {}, -- table 获取快捷使用数据
+	["QUICKUSE_DATA_BY_MAKEINDEX"] = {}, -- table 根据MakeIndex获取快捷栏数据
+	["RANK_DATA_BY_TYPE"] = {}, -- table 根据页签index获取排行榜数据
+	["REAL_USER_NAME"] = nil, -- string 玩家真实姓名
+	["RECHARGE_PRODUCTS"] = {}, -- table 充值商品信息列表
+	["RECHARGE_PRODUCT_BY_ID"] = {}, -- table 通过商品Id获取商品信息
+	["RELEVEL"] = 0, -- int 玩家转生等级
+	["REMOTE_GM_RES_VERSION"] = nil, -- string GM资源版本号
+	["REMOTE_RES_VERSION"] = nil, -- string 热更客户端版本号
+	["RESTORE_ROLES"] = {}, -- table 可恢复角色信息
+	["RES_VERSION"] = nil, -- string 资源版本
+	["RIGHTHAND"] = nil, -- string 获取玩家身上勋章的名字
+	["RINGL"] = nil, -- string 获取玩家身上左戒指的名字
+	["RINGR"] = nil, -- string 获取玩家身上右戒指的名字
+	["RUN_STEP"] = 0, -- int 跑步移动格子数
+	["SC"] = 0, -- int 最小道术
+	["SCREEN_HEIGHT"] = 0, -- int 屏幕高
+	["SCREEN_WIDTH"] = 0, -- int 屏幕宽
+	["SELECT_SHIFT_ATTACK_ID"] = 0, -- int 获取PC持续攻击目标
+	["SELECT_TARGET_ID"] = 0, -- int 选中的目标actorID或者怪物归属者
+	["SELL_SHOW_NAME"] = nil, -- string 获取购买摊位名字
+	["SERVER_ID"] = nil, -- string 服务器ID
+	["SERVER_NAME"] = nil, -- string 服务器名字
+	["SERVER_OPTION"] = true, -- boolean 服务器开关
+	["SERVER_TIME"] = 0, -- int 当前服务器时间
+	["SERVER_VALUE"] = nil, -- string 服务端下发的变量值
+	["SETTING_CONFIG"] = {}, -- table 获取设置的配置
+	["SETTING_ENABLED"] = 0, -- int 设置是否生效
+	["SETTING_IS_ITEM_PICK_CAN_SET"] = {}, -- table 物品是否可以设置
+	["SETTING_PICK_CONFIG"] = {}, -- table 可以拣的物品配置
+	["SETTING_PICK_GROUP_VALUE"] = {}, -- table 拾取组的数据
+	["SETTING_PICK_VALUE"] = {}, -- table 获取物品拾取设置
+	["SETTING_VALUE"] = {}, -- table 获取设置的数据
+	["SET_COMBO_SKILLS"] = {}, -- table 获取人物设置为连击的数据
+	["SEX"] = 0, -- int 玩家性别
+	["SHOW_STATUS_PERMIT"] = true, -- boolean 允许在附近显示状态
+	["SKILLBOOK_CAN_USE"] = true, -- boolean 技能书能否使用
+	["SKILL_CONFIG"] = {}, -- table 获取技能配置
+	["SKILL_DATA"] = {}, -- table 获取技能数据
+	["SKILL_ICON_PATH"] = nil, -- string 获取技能图标
+	["SKILL_INFO_FILTER"] = {}, -- table 筛选技能数据
+	["SKILL_IS_ACTIVE"] = true, -- boolean 是否是主动技能
+	["SKILL_IS_ONOFF_SKILL"] = true, -- boolean 是否是开关型技能
+	["SKILL_IS_ON_SKILL"] = true, -- boolean 技能是否开启
+	["SKILL_KEY"] = 0, -- int 获取技能快捷键
+	["SKILL_LEVEL"] = 0, -- int 获取技能等级
+	["SKILL_NAME"] = nil, -- string 获取技能名字
+	["SKILL_RECT_ICON_PATH"] = nil, -- string 获取矩形技能图标
+	["SKILL_TRAIN_DATA"] = {}, -- table 获取技能的等级熟练度数据
+	["SOCIAL_IS_BLICKLIST"] = true, -- boolean 是否在黑名单
+	["SOCIAL_IS_FRIEND"] = true, -- boolean 是否是好友
+	["SPD"] = 0, -- int 敏捷
+	["SPINE_VERSION"] = nil, -- string 当前spine动画版本
+	["STD_ITEMS"] = {}, -- table 获取所有道具信息
+	["STORAGE_DATA_BY_MAKEINDEX"] = {}, -- table 根据MakeIndex获取仓库数据
+	["SUITEX_CONFIG"] = nil, -- string cfg_suitex表
+	["SUIT_CONFIG"] = nil, -- string cfg_suit表
+	["T.H.ACTIVATE_TITLE"] = 0, -- int 当前查看英雄激活的称号id
+	["T.H.ATT_BY_TYPE"] = 0, -- int 根据类型ID获取属性值
+	["T.H.BURST"] = 0, -- int 暴击几率
+	["T.H.BURST_DAM"] = 0, -- int 暴击伤害
+	["T.H.BW"] = 0, -- int 当前重量
+	["T.H.DROP"] = 0, -- int 怪物爆率
+	["T.H.EQUIP_DATA"] = {}, -- table 获取当前查看英雄对应装备位的装备数据
+	["T.H.EQUIP_DATA_BY_MAKEINDEX"] = {}, -- table 通过MakeIndex获取查看交易行他人英雄装备数据
+	["T.H.EQUIP_DATA_LIST"] = {}, -- table 获取当前查看英雄对应装备位的装备数据列表
+	["T.H.EQUIP_POS_DATAS"] = {}, -- table 当前查看英雄的所有装备位数据
+	["T.H.EXP"] = 0, -- int 当前经验
+	["T.H.HAIR"] = 0, -- int 发型ID
+	["T.H.HIT"] = 0, -- int 命中
+	["T.H.HITSPD"] = 0, -- int 攻击速度
+	["T.H.HP"] = 0, -- int 当前生命值
+	["T.H.HW"] = 0, -- int 腕力
+	["T.H.IMM_ATT"] = 0, -- int 物伤减免
+	["T.H.IMM_MAG"] = 0, -- int 魔伤减免
+	["T.H.JOB"] = 0, -- int 职业
+	["T.H.JOBNAME"] = nil, -- string 职业名
+	["T.H.LEARNED_SKILLS"] = {}, -- table 获取已有技能数据
+	["T.H.LEVEL"] = 0, -- int 英雄等级
+	["T.H.LUCK"] = 0, -- int 幸运
+	["T.H.MAXBW"] = 0, -- int 英雄最大负重
+	["T.H.MAXEXP"] = 0, -- int 最大经验
+	["T.H.MAXHP"] = 0, -- int 最大生命值
+	["T.H.MAXHW"] = 0, -- int 当前最大可穿戴腕力
+	["T.H.MAXMP"] = 0, -- int 最大魔法值
+	["T.H.MAXWW"] = 0, -- int 最大穿戴负重
+	["T.H.MAX_ATK"] = 0, -- int 攻击上限
+	["T.H.MAX_DAO"] = 0, -- int 道术上限
+	["T.H.MAX_DEF"] = 0, -- int 物防上限
+	["T.H.MAX_MAT"] = 0, -- int 魔攻上限
+	["T.H.MAX_MDF"] = 0, -- int 魔防上限
+	["T.H.MIN_ATK"] = 0, -- int 攻击下限
+	["T.H.MIN_DAO"] = 0, -- int 道术下限
+	["T.H.MIN_DEF"] = 0, -- int 物防下限
+	["T.H.MIN_MAT"] = 0, -- int 魔攻下限
+	["T.H.MIN_MDF"] = 0, -- int 魔防下限
+	["T.H.MP"] = 0, -- int 当前魔法值
+	["T.H.RELEVEL"] = 0, -- int 转生等级
+	["T.H.SEX"] = 0, -- int 性别
+	["T.H.SKILL_DATA"] = {}, -- table 获取技能数据
+	["T.H.SKILL_TRAIN_DATA"] = {}, -- table 获取技能的等级熟练度数据
+	["T.H.SUCK_HP"] = 0, -- int 吸血
+	["T.H.TITLES"] = {}, -- table 英雄的称号数据
+	["T.H.USERNAME"] = nil, -- string 英雄名字
+	["T.H.WW"] = 0, -- int 穿戴负重
+	["T.M.ACTIVATE_TITLE"] = 0, -- int 当前查看玩家激活的称号id
+	["T.M.ATT_BY_TYPE"] = 0, -- int 根据类型ID获取属性值
+	["T.M.BURST"] = 0, -- int 暴击几率
+	["T.M.BURST_DAM"] = 0, -- int 暴击伤害
+	["T.M.BW"] = 0, -- int 当前重量
+	["T.M.DROP"] = 0, -- int 怪物爆率
+	["T.M.EQUIP_DATA"] = {}, -- table 获取当前查看玩家对应装备位的装备数据
+	["T.M.EQUIP_DATA_BY_MAKEINDEX"] = {}, -- table 通过MakeIndex获取查看交易行他人装备数据
+	["T.M.EQUIP_DATA_LIST"] = {}, -- table 获取当前查看玩家对应装备位的装备数据列表
+	["T.M.EQUIP_POS_DATAS"] = {}, -- table 当前查看玩家的所有装备位数据
+	["T.M.EXP"] = 0, -- int 当前经验
+	["T.M.GUILD_INFO"] = {}, -- table 当前查看玩家的行会信息
+	["T.M.HAIR"] = 0, -- int 发型ID
+	["T.M.HIT"] = 0, -- int 命中
+	["T.M.HITSPD"] = 0, -- int 攻击速度
+	["T.M.HP"] = 0, -- int 当前生命值
+	["T.M.HW"] = 0, -- int 腕力
+	["T.M.IMM_ATT"] = 0, -- int 物伤减免
+	["T.M.IMM_MAG"] = 0, -- int 魔伤减免
+	["T.M.JOB"] = 0, -- int 职业
+	["T.M.JOBNAME"] = nil, -- string 职业名
+	["T.M.LEARNED_SKILLS"] = {}, -- table 获取已有技能数据
+	["T.M.LEVEL"] = 0, -- int 玩家等级
+	["T.M.LUCK"] = 0, -- int 幸运
+	["T.M.MAXBW"] = 0, -- int 玩家最大负重
+	["T.M.MAXEXP"] = 0, -- int 最大经验
+	["T.M.MAXHP"] = 0, -- int 最大生命值
+	["T.M.MAXHW"] = 0, -- int 当前最大可穿戴腕力
+	["T.M.MAXMP"] = 0, -- int 最大魔法值
+	["T.M.MAXWW"] = 0, -- int 最大穿戴负重
+	["T.M.MAX_ATK"] = 0, -- int 攻击上限
+	["T.M.MAX_DAO"] = 0, -- int 道术上限
+	["T.M.MAX_DEF"] = 0, -- int 物防上限
+	["T.M.MAX_MAT"] = 0, -- int 魔攻上限
+	["T.M.MAX_MDF"] = 0, -- int 魔防上限
+	["T.M.MIN_ATK"] = 0, -- int 攻击下限
+	["T.M.MIN_DAO"] = 0, -- int 道术下限
+	["T.M.MIN_DEF"] = 0, -- int 物防下限
+	["T.M.MIN_MAT"] = 0, -- int 魔攻下限
+	["T.M.MIN_MDF"] = 0, -- int 魔防下限
+	["T.M.MP"] = 0, -- int 当前魔法值
+	["T.M.RELEVEL"] = 0, -- int 转生等级
+	["T.M.SEX"] = 0, -- int 性别
+	["T.M.SKILL_DATA"] = {}, -- table 获取技能数据
+	["T.M.SKILL_TRAIN_DATA"] = {}, -- table 获取技能的等级熟练度数据
+	["T.M.SUCK_HP"] = 0, -- int 吸血
+	["T.M.TITLES"] = {}, -- table 玩家的称号数据
+	["T.M.USERNAME"] = nil, -- string 玩家名字
+	["T.M.USERNAME_COLOR"] = 0, -- int 玩家名字颜色值
+	["T.M.WW"] = 0, -- int 穿戴负重
+	["TARGET_ATTACK_ENABLE"] = true, -- boolean 检查该目标是否可以攻击
+	["TARGET_ID"] = nil, -- string 功能菜单选中目标ID
+	["TARGET_MAPPOS_DIR"] = 0, -- int 获取目标地图坐标到初始地图坐标的方向
+	["TARGET_NAME"] = nil, -- string 功能菜单选中目标名字
+	["TEAM_APPLY"] = {}, -- table 入队申请列表
+	["TEAM_COUNT"] = 0, -- int 当前队伍人数
+	["TEAM_IS_MEMBER"] = true, -- boolean 是否是队伍成员
+	["TEAM_MAC_COUNT"] = 0, -- int 队伍最大人数
+	["TEAM_MEMBER_LIST"] = {}, -- table 队伍成员列表
+	["TEAM_NEAR"] = {}, -- table 附近队伍列表
+	["TEAM_STATUS_PERMIT"] = true, -- boolean 允许组队状态
+	["TIP_POSLIST_BY_STDMODE"] = {}, -- table 通过stdmode获取TIPS装备位列表
+	["TITLES"] = {}, -- table 玩家的称号数据
+	["TITLE_DATA_BY_ID"] = {}, -- table 获取玩家对应ID的称号数据
+	["TOUCH_STATE"] = true, -- boolean 屏幕点击状态
+	["TRADE_DATA"] = {}, -- table 要交易的玩家信息
+	["TRADE_MY_LOCK_STATUS"] = true, -- boolean 交易自己锁定状态
+	["TRADE_OTHER_LOCK_STATUS"] = true, -- boolean 交易对方锁定状态
+	["TRADINGBANK_OPENSTATUS"] = true, -- boolean 交易行开启状态
+	["UID"] = nil, -- string 账号ID
+	["UIMODEL_EQUIP_OFFSET"] = {}, -- table 内观装备偏移配置
+	["UIMODEL_HAIR_OFFSET"] = {}, -- table 内观头发偏移配置
+	["USEHERO"] = true, -- boolean 是否开启英雄
+	["USER_ID"] = nil, -- string 玩家ID
+	["USER_IS_CANREVIVE"] = true, -- boolean 角色是否能复活
+	["USER_IS_DIE"] = true, -- boolean 角色是否死亡
+	["USER_NAME"] = nil, -- string 玩家名字
+	["USER_NAME_COLOR"] = 0, -- int 玩家名字颜色值
+	["VERSION_CODE"] = nil, -- string APK版本号
+	["VERSION_NAME"] = nil, -- string APK版本名
+	["WEAPON"] = nil, -- string 获取玩家身上武器的名字
+	["WINPLAYMODE"] = true, -- boolean PC操作模式
+	["WW"] = 0, -- int 穿戴负重
+	["X"] = 0, -- int 人物当前坐标X
+	["Y"] = 0, -- int 人物当前坐标Y
+	["“ARMRINGR"] = nil, -- string 获取玩家身上右手镯的名字
+}
 ---@param metavalue metavalue
 ---@param ... unknown
 ---@return unknown

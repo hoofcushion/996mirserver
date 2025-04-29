@@ -1,4 +1,4 @@
----@diagnostic disable: lowercase-global, missing-return
+---@meta M2ServerLuaAPI
 ---所有行会在当晚同时攻城
 function addattacksabukall() end
 
@@ -2639,7 +2639,7 @@ function takedlgitem(actor, count) end
 ---@param IgnoreJP? integer
 ---@param desc? string
 ---@return boolean 是否扣除成功
-function takeitem(actor, itemname, qty, IgnoreJP, desc) return boolean end
+function takeitem(actor, itemname, qty, IgnoreJP, desc) end
 
 ---脱下装备
 ---*  actor: 玩家对象
@@ -3633,9 +3633,7 @@ function genmon(mapid, X, Y, monname, range, count, color) end
 ---@param nPlayerPk? integer
 ---@param nNg? integer
 ---@return table 怪物列表
-function genmonex(mapid, x, y, monname, range, count, owner, color, showName, isFilt, countryName, nAttack, nNatMonPk,
-																		nPlayerPk, nNg)
-end
+function genmonex(mapid,x,y,monname,range,count,owner,color,showName,isFilt,countryName,nAttack,nNatMonPk,nPlayerPk,nNg)end
 
 -- ========================== ↓↓↓ 23.08.30新增 ↓↓↓==========================
 
@@ -4698,7 +4696,7 @@ function monitemsex(actor, monItem, value, delayTime) end
 --- @param X integer 目标点X坐标
 --- @param Y integer 目标点Y坐标
 --- @return boolean 是否允许传送
-function beginteleport(actor, X, Y) end
+function beginTeleporter(actor, X, Y) end
 
 --- 获取英雄模式
 --- @since 引擎64_24.05.23

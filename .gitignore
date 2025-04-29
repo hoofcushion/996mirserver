@@ -49,3 +49,6 @@ MirServer/RunGateH5/*
 !MirServer/RunGateH5/Key/dh2048.pem
 !MirServer/RunGateH5/Key/Server.crt
 !MirServer/RunGateH5/Key/Server.key
+
+Tool/996M2资源集成工具/UserPath
+Tool/996M2资源集成工具/tools

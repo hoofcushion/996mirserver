@@ -1,4 +1,5 @@
-GUI={}; SL={}; UIOperator={}; GUIFunction={};
+---@meta GUIASL
+GUI = {}; SL = {}; UIOperator = {}; GUIFunction = {};
 
 
 ---创建窗口控件
@@ -26,7 +27,7 @@ GUI={}; SL={}; UIOperator={}; GUIFunction={};
 ---@param npcID? number
 ---@param param? number
 ---@return userdata
-function GUI:Win_Create(ID,PosX,PosY,Width,Height,Main,Last,NeedVoice,EscClose,isRevmsg,npcID,param) end
+function GUI:Win_Create(ID, PosX, PosY, Width, Height, Main, Last, NeedVoice, EscClose, isRevmsg, npcID, param) end
 
 ---创建图片控件
 ---*  Parent : 父控件对象
@@ -40,7 +41,7 @@ function GUI:Win_Create(ID,PosX,PosY,Width,Height,Main,Last,NeedVoice,EscClose,i
 ---@param PosY number
 ---@param nimg string
 ---@return userdata
-function GUI:Image_Create( Parent, ID, PosX, PosY, nimg) end
+function GUI:Image_Create(Parent, ID, PosX, PosY, nimg) end
 
 ---创建按钮控件
 ---* Parent   父控件对象
@@ -49,10 +50,10 @@ function GUI:Image_Create( Parent, ID, PosX, PosY, nimg) end
 ---* Y     控件位置的纵坐标
 ---* nimg     图片路径
 ---@param Parent  userdata
----@param ID  string 
+---@param ID  string
 ---@param X    number
 ---@param Y    number
----@param nimg    string 
+---@param nimg    string
 ---@return userdata
 function GUI:Button_Create(Parent, ID, X, Y, nimg) end;
 
@@ -65,12 +66,12 @@ function GUI:Button_Create(Parent, ID, X, Y, nimg) end;
 ---* fontColor     字体颜色
 ---* str     文本
 ---@param Parent  userdata
----@param ID  string 
+---@param ID  string
 ---@param X    number
 ---@param Y    number
 ---@param fontSize    number
----@param fontColor    string 
----@param str    string 
+---@param fontColor    string
+---@param str    string
 ---@return userdata
 function GUI:Text_Create(Parent, ID, X, Y, fontSize, fontColor, str) end;
 
@@ -166,7 +167,7 @@ function GUI:RichText_Create(parent, ID, x, y, str, width, Size, Color, vspace, 
 ---@param fontPath? string
 ---@param outlineParam? table
 ---@return userdata
-function GUI:RichTextFCOLOR_Create(parent, ID, x, y, str, width, Size, Color, vspace, hyperlinkCB,fontPath,outlineParam) end
+function GUI:RichTextFCOLOR_Create(parent, ID, x, y, str, width, Size, Color, vspace, hyperlinkCB, fontPath, outlineParam) end
 
 ---创建自定义组合富文本
 ---* parent      父节点对象
@@ -412,8 +413,7 @@ function GUI:Effect_Create(parent, ID, x, y, effecttype, effectid, sex, act, dir
 ---@param job? number
 ---@param ext_param? table
 ---@return userdata
-function GUI:UIModel_Create( _parent, _ID, _PosX, _PosY, sex, feature, scale , useStaticScale, job, ext_param) end
-
+function GUI:UIModel_Create(_parent, _ID, _PosX, _PosY, sex, feature, scale, useStaticScale, job, ext_param) end
 
 ---创建层容器
 ---* parent      父节点对象
@@ -510,7 +510,7 @@ function GUI:PageView_Create(parent, ID, x, y, width, height, direction) end;
 ---@param activeCB?	 function
 ---@param data?	     table
 ---@return userdata
-function GUI:QuickCell_Create(parent, ID, x, y, w, h, createCB,activeCB,data) end;
+function GUI:QuickCell_Create(parent, ID, x, y, w, h, createCB, activeCB, data) end;
 
 ---创建序列帧动画
 ---* parent      父节点对象
@@ -578,7 +578,7 @@ function GUI:SpineAnim_Create(parent, ID, x, y, jsonPath, atlasPath, trackIndex,
 ---* width       宽
 ---* height      高
 ---* from     	 控件来自(界面位置)  官方默认的可参照元变量 ITEMFROMUI_ENUM, <br>自定义类型的示例 : <br>`SL:GetMetaValue(ITEMFROMUI_ENUM).xxx` <br>[xxx: 自定义类型名]
----* ext		 额外参数<br>beginMoveCB : 开始移动回调 <br>endMoveCB : 结束移动回调<br>cancelMoveCB : 取消移动回调 <br>equipPos: 放置装备的装备位置【来源 <br>`SL:GetMetaValue(ITEMFROMUI_ENUM).PALYER_EQUIP` 时生效】<br>pcDoubleCB : pc双击回调 <br> mouseScrollCB: 鼠标滚轮回调 
+---* ext		 额外参数<br>beginMoveCB : 开始移动回调 <br>endMoveCB : 结束移动回调<br>cancelMoveCB : 取消移动回调 <br>equipPos: 放置装备的装备位置【来源 <br>`SL:GetMetaValue(ITEMFROMUI_ENUM).PALYER_EQUIP` 时生效】<br>pcDoubleCB : pc双击回调 <br> mouseScrollCB: 鼠标滚轮回调
 ---@param parent      userdata|integer
 ---@param ID          string
 ---@param x           number
@@ -630,7 +630,7 @@ function GUI:ScrapePic_Create(parent, ID, x, y, showImg, maskImg, clearHei, move
 ---@param scrollGap   number
 ---@param param       table
 ---@return userdata
-function GUI:RotateView_Create(parent, ID, x, y, width,height, scrollGap, param) end;
+function GUI:RotateView_Create(parent, ID, x, y, width, height, scrollGap, param) end;
 
 ---创建装备框
 ---* parent      父节点对象
@@ -654,7 +654,7 @@ function GUI:EquipShow_Create(parent, ID, x, y, pos, isHero, data) end;
 ---* Parent   父控件对象
 ---* ID   控件ID
 ---@param parent  userdata
----@param ID  string 
+---@param ID  string
 function GUI:GetWindow(parent, ID) end;
 
 ---获取控件自定义参数
@@ -867,7 +867,6 @@ function GUI:ui_delegate(parent) end;
 
 ---屏蔽自动修复坐标为整数
 function GUI:DisableFixPosition() end;
-
 
 ---获取主界面左上挂接点
 ---@return userdata 主界面左上挂接点
@@ -1359,7 +1358,7 @@ function GUI:Text_setTextAreaSize(widget, value) end;
 ---@param time     number
 ---@param callback?   function
 ---@param showType?   number
-function Text_COUNTDOWN(widget, time, callback,showType) end;
+function Text_COUNTDOWN(widget, time, callback, showType) end;
 
 ---设置艺术字配置
 ---* widget      艺术字对象
@@ -2703,7 +2702,6 @@ function GUI:setMouseEnabled(widget, value) end;
 ---@param value    boolean
 function GUI:setSwallowTouches(widget, value) end;
 
-
 ---设置控件吞噬鼠标按键事件 [检查自身触摸吞噬时]
 ---* widget    控件对象
 ---@param widget    userdata
@@ -2739,7 +2737,7 @@ function GUI:addMouseMoveEvent(widget, param) end;
 
 ---设置鼠标按钮事件
 ---* widget    控件对象
----* param    onRightDownFunc: function 鼠标右键点击事件 <br> OnRightUpFunc: function 鼠标右键松开事件<br> needTouchPos: boolean 需要传入鼠标触摸位置<br>OnScrollFunc: function 鼠标滚轮滚动事件 
+---* param    onRightDownFunc: function 鼠标右键点击事件 <br> OnRightUpFunc: function 鼠标右键松开事件<br> needTouchPos: boolean 需要传入鼠标触摸位置<br>OnScrollFunc: function 鼠标滚轮滚动事件
 ---@param widget    userdata
 ---@param param    table
 function GUI:addMouseButtonEvent(widget, param) end;
@@ -2749,7 +2747,7 @@ function GUI:addMouseButtonEvent(widget, param) end;
 ---* str     文本
 ---* pos     位置
 ---* anr     锚点
----* param    checkCallback: function 检查接触点是否能展示[函数传入参数: pos <br>返回: true / false ]
+---* param    checkCallback: function 检查接触点是否能展示[函数传入参数: pos <br>返回: true | false ]
 ---@param widget    userdata
 ---@param str     string
 ---@param pos     table
@@ -2761,8 +2759,8 @@ function GUI:addMouseOverTips(widget, str, pos, anr, param) end;
 ---* codeKeys   要监听的键盘键key
 ---* pressedCB  按下回调
 ---* releaseCB  松开回调
----* checkFullSort 兼容全顺序键盘key排列, 针对监听多键 
----@param codeKeys   string / table
+---* checkFullSort 兼容全顺序键盘key排列, 针对监听多键
+---@param codeKeys   string | table
 ---@param pressedCB  function
 ---@param releaseCB?  function
 ---@param checkFullSort? boolean
@@ -2770,7 +2768,7 @@ function GUI:addKeyboardEvent(codeKeys, pressedCB, releaseCB, checkFullSort) end
 
 ---移除键盘监听
 ---* codeKeys   要移除监听的键盘键key
----@param codeKeys   string / table
+---@param codeKeys   string | table
 function GUI:removeKeyboardEvent(codeKeys) end;
 
 ---通过对象关闭界面
@@ -2780,7 +2778,7 @@ function GUI:Win_Close(widget) end;
 
 ---通过ID关闭界面
 ---* ID   界面ID
----@param ID  string 
+---@param ID  string
 function GUI:Win_CloseByID(ID) end;
 
 ---通过NPCID关闭界面
@@ -2846,7 +2844,7 @@ function GUI:Text_disableGlow(widget) end;
 
 ---添加自定义富文本cell
 ---* widget      控件对象
----* elements    [RichTextCombineCell] 单个元素控件对象 或 控件对象table 
+---* elements    [RichTextCombineCell] 单个元素控件对象 或 控件对象table
 ---@param widget      userdata
 ---@param elements    userdata
 function GUI:RichTextCombine_pushBackElements(widget, elements) end;
@@ -2886,7 +2884,7 @@ function GUI:ItemBox_RemoveBoxData(widget, boxindex) end;
 ---@param widget      userdata
 ---@param boxindex    number
 ---@param itemData    table
-function GUI:ItemBox_UpdateBoxData(widget, boxindex,itemData) end;
+function GUI:ItemBox_UpdateBoxData(widget, boxindex, itemData) end;
 
 ---关闭输入框输入
 ---* widget      输入框对象
@@ -2980,7 +2978,7 @@ function GUI:ListView_jumpToItem(widget, value) end;
 ---@param widget    userdata
 ---@param time     number
 ---@param boolvalue  boolean
-function GUI:ListView_scrollToTop(widget,time, boolvalue) end;
+function GUI:ListView_scrollToTop(widget, time, boolvalue) end;
 
 ---某一时间内滑动到列表容器底部
 ---* widget    容器对象
@@ -2989,7 +2987,7 @@ function GUI:ListView_scrollToTop(widget,time, boolvalue) end;
 ---@param widget    userdata
 ---@param time     number
 ---@param boolvalue  boolean
-function GUI:ListView_scrollToBottom(widget,time, boolvalue) end;
+function GUI:ListView_scrollToBottom(widget, time, boolvalue) end;
 
 ---列表容器刷新
 ---* widget    容器对象
@@ -3121,7 +3119,7 @@ function GUI:TableView_reloadData(widget) end;
 
 ---添加容器鼠标滚动事件
 ---* widget      tableView对象
----* func		 鼠标滚动回调函数传参{widget = widget, x = 滚动坐标X, y = 滚动坐标Y} [不填采用官方默认添加滚动] 
+---* func		 鼠标滚动回调函数传参{widget = widget, x = 滚动坐标X, y = 滚动坐标Y} [不填采用官方默认添加滚动]
 ---@param widget      userdata
 ---@param func		 function
 function GUI:TableView_addMouseScrollEvent(widget, func) end;
@@ -3216,7 +3214,7 @@ function GUI:HideWorldTips() end;
 ---* pNode     控件对象
 ---* param   布局参数
 ---@param pNode     userdata
----@param param   table 
+---@param param   table
 ---@return table {width = width, height = height}
 function GUI:UserUILayout(pNode, param) end;
 
@@ -3225,15 +3223,14 @@ function GUI:UserUILayout(pNode, param) end;
 ---* data      数据
 ---@param eventID      string
 ---@param data      any
-function SL:onLUAEvent(eventID,data) end;
-
+function SL:onLUAEvent(eventID, data) end;
 
 ---添加自动使用弹窗
 ---* key      元变量Key
 ---* ...      数值
 ---@param key      string
 ---@param ...      any
-function SL:SetMetaValue(key,...) end;
+function SL:SetMetaValue(key, ...) end;
 
 ---打印所有能获取的元变量
 function SL:PrintAllMetaValue() end;
@@ -3257,49 +3254,49 @@ function SL:PrintTraceback(...) end;
 ---* data    需要打印的表
 ---* desciption  打印表描述
 ---* nesting 需要打印的深度
----@param data    table   
+---@param data    table
 ---@param desciption  string
 ---@param nesting number
 function SL:dump(data, desciption, nesting) end;
 
 ---json字符串解密
----* jsonStr  json字符串             
+---* jsonStr  json字符串
 ---* isfilter  是否过滤违禁词 默认为true
----@param jsonStr  string 
+---@param jsonStr  string
 ---@param isfilter?  boolean
 ---@return table json table
 function SL:JsonDecode(jsonStr, isfilter) end;
 
 ---json字符串加密
----* jsonData json表                 
+---* jsonData json表
 ---* isfilter 是否过滤违禁词 默认为true
----@param jsonData table  
+---@param jsonData table
 ---@param isfilter boolean
 ---@return string  json string
 function SL:JsonEncode(jsonData, isfilter) end;
 
 ---颜色转换函数
----* hexStr  16进制字符                 
----@param hexStr  string  
+---* hexStr  16进制字符
+---@param hexStr  string
 ---@return table 从16进制字符转为{r, g, b}
 function SL:ConvertColorFromHexString(hexStr) end;
 
 ---文件路径是否存在
----* path 文件路径                 
----@param path string  
+---* path 文件路径
+---@param path string
 ---@return boolean 文件路径是否存在
 function SL:IsFileExist(path) end;
 
 ---深拷贝
----* data  需深拷贝内容                 
----@param data  table  
+---* data  需深拷贝内容
+---@param data  table
 ---@return table 深拷贝内容
 function SL:CopyData(data) end;
 
 ---字符串分割
----* str  分割内容               
+---* str  分割内容
 ---* delimiter  分割字符
----@param str  string  
+---@param str  string
 ---@param delimiter  string
 ---@return table 拆分后字符
 function SL:Split(str, delimiter) end;
@@ -3344,7 +3341,7 @@ function SL:LoadTxtFile(path, delimiter, callBack) end;
 
 ---数字转换成万、亿单位
 ---* num          数值
----* places       显示小数点后几位数 
+---* places       显示小数点后几位数
 ---@param num          number
 ---@param places?       number
 ---@return string 转换后数字
@@ -3435,7 +3432,7 @@ function SL:GBKToUTF8(str) end;
 ---@return number 两坐标间的平方距离
 function SL:GetPointDistanceSQ(pt1, pt2) end;
 
----计算两坐标间的距离 
+---计算两坐标间的距离
 ---* pt1  		  起始坐标 GUI:p(x, y) 或 <br>{x = x, y = y}
 ---* pt2  		  结束坐标 GUI:p(x, y) 或 <br>{x = x, y = y}
 ---@param pt1  		  table
@@ -3520,7 +3517,7 @@ function SL:GetPointRotateSelf(pt) end;
 function SL:GetH16Bit(value) end;
 
 ---获取低16位值
----* value  		  被操作值 
+---* value  		  被操作值
 ---@param value  		  number
 ---@return number 高16位值
 function SL:GetL16Bit(value) end;
@@ -3557,13 +3554,13 @@ function SL:CreateRedPoint(targetNode, offset) end;
 
 ---设置文本样式(按钮、文本)
 ---* widget   按钮或者文本对象
----* colorID       0 - 255 色值ID 
+---* colorID       0 - 255 色值ID
 ---@param widget   userdata
 ---@param colorID       number
 function SL:SetColorStyle(widget, colorID) end;
 
 ---获取对应色值ID的配置
----* colorID       0 - 255 色值ID 
+---* colorID       0 - 255 色值ID
 ---@param colorID       number
 ---@return table 对应色值ID的配置
 function SL:GetColorCfg(colorID) end;
@@ -3591,9 +3588,9 @@ function SL:ReloadMap() end;
 
 ---请求HTTP Get方式
 ---* url     链接地址
----* httpCB  回调函数 
----@param url    string   
----@param httpCB function 
+---* httpCB  回调函数
+---@param url    string
+---@param httpCB function
 function SL:HTTPRequestGet(url, httpCB) end;
 
 ---请求HTTP Post方式
@@ -3601,15 +3598,15 @@ function SL:HTTPRequestGet(url, httpCB) end;
 ---* httpCB     回调函数
 ---* suffix     请求信息
 ---* head       请求头
----@param url       string   
----@param httpCB    function 
----@param suffix    string   
----@param head      table    
+---@param url       string
+---@param httpCB    function
+---@param suffix    string
+---@param head      table
 function SL:HTTPRequestPost(url, httpCB, suffix, head) end;
 
 ---本地公告展示
 ---* data       具体参数配置
----@param data      table    
+---@param data      table
 function SL:ShowLocalNoticeByType(data) end;
 
 ---震屏
@@ -3625,9 +3622,9 @@ function SL:ShakeScene(time, distance) end;
 ---* msgtype  窗体事件id
 ---* callback  回调函数
 ---@param widget  userdata
----@param msg  string 
+---@param msg  string
 ---@param msgtype number
----@param callback function 
+---@param callback function
 function SL:RegisterWndEvent(widget, msg, msgtype, callback) end;
 
 ---注销控件事件
@@ -3635,76 +3632,76 @@ function SL:RegisterWndEvent(widget, msg, msgtype, callback) end;
 ---* desc   描述
 ---* msgtype  窗体事件id
 ---@param widget  userdata
----@param desc  string 
+---@param desc  string
 ---@param msgtype number
 function SL:UnRegisterWndEvent(widget, desc, msgtype) end;
 
 ---添加窗体控件自定义属性
----* widget    控件对象 
----* desc      描述    
+---* widget    控件对象
+---* desc      描述
 ---* key       属性名称
----* value     属性值  
+---* value     属性值
 ---@param widget    userdata
----@param desc      string 
----@param key       string 
----@param value     any    
+---@param desc      string
+---@param key       string
+---@param value     any
 function SL:AddWndProperty(widget, desc, key, value) end;
 
 ---删除窗体控件自定义属性
----* widget    控件对象 
----* desc      描述    
+---* widget    控件对象
+---* desc      描述
 ---* key       属性名称
 ---@param widget    userdata
----@param desc      string 
----@param key       string 
-function SL:DelWndProperty(widget, desc, key ) end;
+---@param desc      string
+---@param key       string
+function SL:DelWndProperty(widget, desc, key) end;
 
 ---获取窗体控件自定义属性
----* widget    控件对象 
----* desc      描述    
+---* widget    控件对象
+---* desc      描述
 ---* key       属性名称
 ---@param widget    userdata
----@param desc      string 
----@param key       string 
+---@param desc      string
+---@param key       string
 ---@return any
-function SL:GetWndProperty(widget, desc, key ) end;
+function SL:GetWndProperty(widget, desc, key) end;
 
 ---开启一个定时器
----* callback    回调函数 
----* time    时间 
----@param callback    function 
----@param time    number 
+---* callback    回调函数
+---* time    时间
+---@param callback    function
+---@param time    number
 ---@return number 定时器ID
 function SL:Schedule(callback, time) end;
 
 ---停止一个定时器
----* scheduleID    定时器ID 
----@param scheduleID    number 
+---* scheduleID    定时器ID
+---@param scheduleID    number
 function SL:UnSchedule(scheduleID) end;
 
 ---开启一个单次定时器
----* callback    回调函数 
----* time    时间 
----@param callback    function 
----@param time    number 
+---* callback    回调函数
+---* time    时间
+---@param callback    function
+---@param time    number
 function SL:ScheduleOnce(callback, time) end;
 
 ---开启一个定时器, 绑定node节点
----* node    bode节点 
----* callback    回调函数 
----* time    时间 
+---* node    bode节点
+---* callback    回调函数
+---* time    时间
 ---@param node    userdata
----@param callback    function 
----@param time    number 
+---@param callback    function
+---@param time    number
 function SL:schedule(node, callback, time) end;
 
 ---开启一个单次定时器, 绑定node节点
----* node    bode节点 
----* callback    回调函数 
----* time    时间 
+---* node    bode节点
+---* callback    回调函数
+---* time    时间
 ---@param node    userdata
----@param callback    function 
----@param time    number 
+---@param callback    function
+---@param time    number
 function SL:scheduleOnce(node, callback, time) end;
 
 ---打开引导
@@ -3718,15 +3715,15 @@ function SL:StartGuide(data) end;
 function SL:CloseGuide(guide) end;
 
 ---存储字符到本地
----* key   字段名   
+---* key   字段名
 ---* data   数据
 ---@param key   any
 ---@param data  number
 function SL:SetLocalString(key, data) end;
 
 ---从本地读取字符
----* key   字段名   
----@param key   any 
+---* key   字段名
+---@param key   any
 ---@return string 字符
 function SL:GetLocalString(key) end;
 
@@ -3734,29 +3731,29 @@ function SL:GetLocalString(key) end;
 function SL:RequestRefreshBagPos() end;
 
 ---使用物品
----* Index 物品Index   
+---* Index 物品Index
 ---@param Index number
 function SL:RequestUseItemByIndex(Index) end;
 
 ---批量勾选背包物品
----* data 物品唯一ID 数组   
----@param data table 
+---* data 物品唯一ID 数组
+---@param data table
 function SL:RequestSetBagItemChoose(data) end;
 
 ---丢弃物品
----* itemData 装备数据   
----@param itemData table 
+---* itemData 装备数据
+---@param itemData table
 function SL:RequestIntoDropBagItem(itemData) end;
 
 ---检测人物是否可穿戴
----* itemData 装备数据   
----@param itemData table 
+---* itemData 装备数据
+---@param itemData table
 ---@return boolean 是否可穿戴
 function SL:CheckItemUseNeed(itemData) end;
 
 ---检测英雄是否可穿戴
----* itemData 装备数据   
----@param itemData table 
+---* itemData 装备数据
+---@param itemData table
 ---@return boolean 是否可穿戴
 function SL:CheckItemUseNeed_Hero(itemData) end;
 
@@ -3764,7 +3761,7 @@ function SL:CheckItemUseNeed_Hero(itemData) end;
 ---* itemData   装备数据
 ---* pos        装备位置
 ---* isFromHero 是否来自英雄背包
----@param itemData   table    
+---@param itemData   table
 ---@param pos        number
 ---@param isFromHero boolean
 function SL:RequestPlayerTakeOnEquip(itemData, pos, isFromHero) end;
@@ -3772,7 +3769,7 @@ function SL:RequestPlayerTakeOnEquip(itemData, pos, isFromHero) end;
 ---人物装备脱下
 ---* itemData   装备数据
 ---* isToHero   是否脱到英雄背包
----@param itemData   table    
+---@param itemData   table
 ---@param isToHero   boolean
 function SL:RequestPlayerTakeOffEquip(itemData, isToHero) end;
 
@@ -3780,7 +3777,7 @@ function SL:RequestPlayerTakeOffEquip(itemData, isToHero) end;
 ---* itemData   装备数据
 ---* pos        装备位置
 ---* isFromPlayer 是否来自人物背包
----@param itemData   table    
+---@param itemData   table
 ---@param pos        number
 ---@param isFromPlayer boolean
 function SL:RequestHeroTakeOnEquip(itemData, pos, isFromPlayer) end;
@@ -3788,14 +3785,13 @@ function SL:RequestHeroTakeOnEquip(itemData, pos, isFromPlayer) end;
 ---英雄装备脱下
 ---* itemData   装备数据
 ---* isToPlayer   是否脱到人物背包
----@param itemData   table    
+---@param itemData   table
 ---@param isToPlayer   boolean
 function SL:RequestHeroTakeOffEquip(itemData, isToPlayer) end;
 
-
 ---查看他人角色界面
 ---* data   extent: 子页id<br> 1装备、2状态、3属性、4技能、6称号、11时装
----@param data   table    
+---@param data   table
 function SL:OpenOtherPlayerUI(data) end;
 
 ---关闭他人角色界面
@@ -3803,12 +3799,12 @@ function SL:CloseOtherPlayerUI() end;
 
 ---移除英雄角色界面对应子页id内容
 ---* data   extent: 子页id<br> 1装备、2状态、3属性、4技能、6称号、11时装
----@param data   table    
+---@param data   table
 function SL:CloseMyPlayerHeroPageUI(data) end;
 
 ---查看他人英雄界面
 ---* data   extent: 子页id<br> 1装备、2状态、3属性、4技能、6称号、11时装
----@param data   table    
+---@param data   table
 function SL:OpenOtherPlayerHeroUI(data) end;
 
 ---关闭他人英雄界面
@@ -3816,7 +3812,7 @@ function SL:CloseOtherPlayerHeroUI() end;
 
 ---交易行查看他人界面
 ---* data   extent: 子页id<br> 1装备、2状态、3属性、4技能、6称号、11时装
----@param data   table    
+---@param data   table
 function SL:CloseTradingBankHeroPageUI(data) end;
 
 ---打开装备面板
@@ -3849,7 +3845,6 @@ function SL:OpenPlayerTitleUI(param) end;
 ---@param param   number
 function SL:OpenPlayerSuperEquipUI(param) end;
 
-
 ---打开主界面技能按钮区域
 ---* param   param: <br>1: 自己人物<br>2：自己英雄<br>11：其他玩家人物<br>12：其他玩家英雄<br>21：交易行人物<br>22：交易行英雄
 ---@param param   number
@@ -3878,7 +3873,7 @@ function SL:OpenCallPayUI() end;
 ---* equipPos  物品为装备时装戴的装备位置
 ---* isBook    是否是技能书
 ---* isHero    是否为英雄
----@param itemData  table  
+---@param itemData  table
 ---@param equipPos  number
 ---@param isBook    boolean
 ---@param isHero    boolean
@@ -3893,7 +3888,7 @@ function SL:CloseAutoUsePopUI(makeIndex, isHero) end;
 
 ---打开开宝箱动画页
 ---* itemData  宝箱物品数据
----@param itemData  table  
+---@param itemData  table
 function SL:OpenTreasure(itemData) end;
 
 ---关闭开宝箱动画页
@@ -3901,15 +3896,15 @@ function SL:CloseTreasure() end;
 
 ---打开宝箱奖励界面
 ---* itemData  宝箱物品数据
----@param itemData  table  
+---@param itemData  table
 function SL:OpenGoldBox(itemData) end;
 
 ---关闭宝箱奖励界面
 function SL:CLoseGoldBox() end;
 
 ---打开通用描述Tips
----* data   str: 描述内容 <br> worldPos: 提示位置<br> width: 描述内容宽度<br> anchorPoint: 锚点<br>formatWay: 设置为1 解析富文本格式: `<font></font>`[！否则默认解析老脚本富文本`<RText/FCOLOR=254>`] 
----@param data   table    
+---* data   str: 描述内容 <br> worldPos: 提示位置<br> width: 描述内容宽度<br> anchorPoint: 锚点<br>formatWay: 设置为1 解析富文本格式: `<font></font>`[！否则默认解析老脚本富文本`<RText/FCOLOR=254>`]
+---@param data   table
 function SL:OpenCommonDescTipsUI(data) end;
 
 ---关闭通用描述Tips
@@ -3917,7 +3912,7 @@ function SL:CloseCommonDescTipsUI() end;
 
 ---打开通用弹窗
 ---* data   str: 文本<br>btnType: 按钮类型 int 1:&quot;确定&quot; 2:{&quot;确定&quot;,&quot;取消&quot;} <br> btnDesc: 按钮描述 table<br> showEdit: 是否显示输入框<br>editParams: 输入框参数table <br>```{ inputMode: 键盘编辑类型, maxLength: 可输入最大长度, str: 默认文本内容}```<br> callback: 按钮回调 [参数1: 点击的按钮id 参数2: 额外参数 table: {editStr=输入框字符串}]
----@param data   table    
+---@param data   table
 function SL:OpenCommonTipsUI(data) end;
 
 ---关闭通用弹窗
@@ -3925,7 +3920,7 @@ function SL:CloseCommonTipsUI() end;
 
 ---打开道具拆分弹窗
 ---* itemData   物品数据
----@param itemData   table    
+---@param itemData   table
 function SL:OpenItemSplitPop(itemData) end;
 
 ---关闭道具拆分弹窗
@@ -3933,7 +3928,7 @@ function SL:CloseItemSplitPop() end;
 
 ---打开网址/链接
 ---* url   网址/链接
----@param url   string    
+---@param url   string
 function SL:OpenURL(url) end;
 
 ---表中的对应 id 的颜色转换成 RGB 格式
@@ -3956,7 +3951,7 @@ function SL:GetSizeByStyleId(id) end;
 
 ---Color3B颜色转化为hex 16进制
 ---* color3B   例: {r = 255, g = 255, b = 255}
----@param color3B   table  
+---@param color3B   table
 ---@return string 16进制 &quot;#FFFFFF&quot;
 function SL:GetColorHexFromRGB(color3B) end;
 
@@ -3987,7 +3982,6 @@ function SL:StopSound(id) end;
 ---停止所有音效
 function SL:StopAllAudio() end;
 
-
 ---发送[普通消息]到聊天
 ---* msg  	    消息内容
 ---* channel    设置频道, 不设置默认当前聊天频道
@@ -4009,31 +4003,30 @@ function SL:ShowSystemChat(msg, fcolor, bcolor) end;
 ---@param channel    number
 function SL:RequestSendChatEquipMsg(channel) end;
 
-
 ---新增本地掉落消息到聊天
 ---* data  	    Msg: 掉落内容富文本<br> FColor: 字体颜色ID <br> BColor: 背景颜色ID <br> dropType: 掉落分类ID (1-10)
 ---@param data  	    table
 function SL:AddDropChatMsgShow(data) end;
 
 ---资源下载
----* path        保存的文件路径 
----* url         下载资源地址  
----* downloadCB  回调函数      
----@param path        string   
----@param url         string   
----@param downloadCB  function 
+---* path        保存的文件路径
+---* url         下载资源地址
+---* downloadCB  回调函数
+---@param path        string
+---@param url         string
+---@param downloadCB  function
 function SL:DownLoadRes(path, url, downloadCB) end;
 
 ---小地图资源下载
----* mapId       小地图Id 
----* callback    回调函数 
+---* mapId       小地图Id
+---* callback    回调函数
 ---@param mapId       number
----@param callback    function 
+---@param callback    function
 function SL:DownloadMiniMapRes(mapId, callback) end;
 
 ---删除GM缓存资源
----* filePath        文件路径 
----@param filePath        string   
+---* filePath        文件路径
+---@param filePath        string
 function SL:RemoveGMResFile(filePath) end;
 
 ---快速选择目标
@@ -4042,14 +4035,14 @@ function SL:RemoveGMResFile(filePath) end;
 function SL:QuickSelectTarget(data) end;
 
 ---控件加入到元变量自动刷新的组件
----* metaValue  传入已配置元变量的字符串 <br>&amp;<元变量KEY/参数>&amp; <br>例 : <br> 红点变量U91: &amp;<REDKEY/U91>&amp; <br>角色名: &amp;<USER_NAME>&amp; 
+---* metaValue  传入已配置元变量的字符串 <br>&amp;<元变量KEY/参数>&amp; <br>例 : <br> 红点变量U91: &amp;<REDKEY/U91>&amp; <br>角色名: &amp;<USER_NAME>&amp;
 ---* widget 文本控件 Text
 ---@param metaValue  string
 ---@param widget userdata
 function SL:CustomAttrWidgetAdd(metaValue, widget) end;
 
 ---检测控件是否可视
----* node 控件 
+---* node 控件
 ---* touchPos 当前接触坐标
 ---@param node userdata
 ---@param touchPos table
@@ -4126,7 +4119,7 @@ function SL:RequestJoinQQGroup(key) end;
 function SL:RequestOpenWX() end;
 
 ---添加地图特效
----* ID        该地图特效标识 必须唯一!!!! 
+---* ID        该地图特效标识 必须唯一!!!!
 ---* mapID     添加到的地图ID
 ---* sfxId     特效ID
 ---* x         地图坐标X
@@ -4140,10 +4133,10 @@ function SL:RequestOpenWX() end;
 ---@param y         number
 ---@param loop      boolean
 ---@param showType  number
-function SL:AddMapSpecialEffect(ID, mapID, sfxId, x, y, loop,showType) end;
+function SL:AddMapSpecialEffect(ID, mapID, sfxId, x, y, loop, showType) end;
 
 ---删除地图特效
----* ID        该地图特效标识 必须唯一!!!! 
+---* ID        该地图特效标识 必须唯一!!!!
 ---* mapID     添加到的地图ID
 ---@param ID        number
 ---@param mapID     string
@@ -4185,7 +4178,7 @@ function SL:RequestPay(payWay, currencyID, price, productIndex) end;
 
 ---兑换激活码
 ---* cdk  激活码
----@param cdk  string 
+---@param cdk  string
 function SL:RequestCDK(cdk) end;
 
 ---请求改变PK模式
@@ -4210,7 +4203,7 @@ function SL:RequestSaveItemToNpcStorage(data) end;
 
 ---请求使用道具
 ---* itemData   道具数据
----@param itemData  table 
+---@param itemData  table
 function SL:RequestUseItem(itemData) end;
 
 ---请求使用英雄道具
@@ -4228,7 +4221,7 @@ function SL:RequestSplitItem(data, num) end;
 ---拆分道具(英雄)
 ---* data  道具数据
 ---* num   数量
----@param data  table 
+---@param data  table
 ---@param num   number
 function SL:RequestSplitHeroItem(data, num) end;
 
@@ -4318,7 +4311,7 @@ function SL:RequestCreateTeam() end;
 ---* uid  玩家id
 ---* name 玩家昵称
 ---@param uid?  number
----@param name? string 
+---@param name? string
 function SL:RequestInviteJoinTeam(uid, name) end;
 
 ---拒绝组队邀请
@@ -4375,7 +4368,7 @@ function SL:RequestFriendList() end;
 
 ---请求添加好友
 ---* uname 玩家昵称
----@param uname string 
+---@param uname string
 function SL:RequestAddFriend(uname) end;
 
 ---删除好友
@@ -4385,7 +4378,7 @@ function SL:RequestDelFriend(uid) end;
 
 ---好友加到黑名单
 ---* uname 玩家昵称
----@param uname string 
+---@param uname string
 function SL:RequestAddBlacklistByName(uname) end;
 
 ---移出黑名单
@@ -4395,7 +4388,7 @@ function SL:RequestOutBlacklist(uid) end;
 
 ---同意好友申请
 ---* uname 玩家昵称
----@param uname string 
+---@param uname string
 function SL:RequestAgreeFriendApply(uname) end;
 
 ---清空好友申请列表
@@ -4482,7 +4475,7 @@ function SL:RequestAcquireBidItem(makeindex) end;
 ---* selectType 选择类别
 ---@param type number
 ---@param selectType number
-function SL:RequestRankData(type,selectType) end;
+function SL:RequestRankData(type, selectType) end;
 
 ---请求玩家排行榜数据
 ---* userID   玩家ID
@@ -4546,10 +4539,10 @@ function SL:ResquestCompoundItem(compoundID) end;
 ---请求敏感词检测
 ---* str   需要检测的文本
 ---* type 文本类型 <br> 1 : 昵称类<br> 2 : 聊天类<br> 3 : 行会公告
----* callback  检测完毕的回调事件<br> 事件传入参数: param1: boolean 能否通过 param2: 文本 
+---* callback  检测完毕的回调事件<br> 事件传入参数: param1: boolean 能否通过 param2: 文本
 ---@param str  string
 ---@param type number
----@param callback function 
+---@param callback function
 function SL:RequestCheckSensitiveWord(str, type, callback) end;
 
 ---邀请上马
@@ -4607,23 +4600,23 @@ function SL:RequestOpenGoldBox() end;
 ---请求确认加属性点
 ---* data      加点数据table `{&quot;Bonus&quot;:[{&quot;id&quot;:1,&quot;value&quot;:1}, ...]}`
 ---* m_nBonusPoint  剩余加点数
----@param data     table 
+---@param data     table
 ---@param m_nBonusPoint number
 function SL:RequestAddReinAttr_N(data, m_nBonusPoint) end;
 
 ---请求求购数据
 ---* data      请求参数
----@param data     table 
+---@param data     table
 function SL:RequestPurchaseItemList(data) end;
 
 ---请求求购出售物品
 ---* data      请求参数 {guid = 求购列表标识id, qty = 出售数量}
----@param data     table 
+---@param data     table
 function SL:RequestPurchaseSell(data) end;
 
 ---请求上架求购物品
 ---* data      请求参数
----@param data     table 
+---@param data     table
 function SL:RequestPurchasePutIn(data) end;
 
 ---请求下架求购物品
@@ -5111,221 +5104,221 @@ PLAYER_INITED = '玩家属性初始化完成'
 
 
 
-WND_EVENT_MOUSE_LB_DOWN="鼠标左键按下事件"
-WND_EVENT_MOUSE_LB_UP="鼠标左键弹起事件"
-WND_EVENT_MOUSE_LB_CLICK="鼠标左键点击事件"
-WND_EVENT_MOUSE_LB_DBCLICK="鼠标左键双击事件"
-WND_EVENT_MOUSE_RB_DOWN="鼠标右键按下事件"
-WND_EVENT_MOUSE_RB_UP="鼠标右键弹起事件"
-WND_EVENT_MOUSE_RB_CLICK="鼠标右键点击事件"
-WND_EVENT_MOUSE_RB_DBCLICK="鼠标右键双击事件"
-WND_EVENT_MOUSE_MOVE="鼠标移动事件"
-WND_EVENT_MOUSE_WHEEL="鼠标滚轮滚动事件"
-WND_EVENT_MOUSE_IN="鼠标进入控件事件"
-WND_EVENT_MOUSE_OUT="鼠标离开控件事件"
-WND_EVENT_WND_VISIBLE="可见状态发生变化事件"
-WND_EVENT_WND_POS_CHANGE="控件位置发生变化事件"
-WND_EVENT_WND_SIZECHANGE="窗口大小发生变化事件"
-WND_EVENT_WND_DESTROY="窗体被销毁事件"
+WND_EVENT_MOUSE_LB_DOWN = "鼠标左键按下事件"
+WND_EVENT_MOUSE_LB_UP = "鼠标左键弹起事件"
+WND_EVENT_MOUSE_LB_CLICK = "鼠标左键点击事件"
+WND_EVENT_MOUSE_LB_DBCLICK = "鼠标左键双击事件"
+WND_EVENT_MOUSE_RB_DOWN = "鼠标右键按下事件"
+WND_EVENT_MOUSE_RB_UP = "鼠标右键弹起事件"
+WND_EVENT_MOUSE_RB_CLICK = "鼠标右键点击事件"
+WND_EVENT_MOUSE_RB_DBCLICK = "鼠标右键双击事件"
+WND_EVENT_MOUSE_MOVE = "鼠标移动事件"
+WND_EVENT_MOUSE_WHEEL = "鼠标滚轮滚动事件"
+WND_EVENT_MOUSE_IN = "鼠标进入控件事件"
+WND_EVENT_MOUSE_OUT = "鼠标离开控件事件"
+WND_EVENT_WND_VISIBLE = "可见状态发生变化事件"
+WND_EVENT_WND_POS_CHANGE = "控件位置发生变化事件"
+WND_EVENT_WND_SIZECHANGE = "窗口大小发生变化事件"
+WND_EVENT_WND_DESTROY = "窗体被销毁事件"
 
-LUA_EVENT_ROLE_PROPERTY_INITED="玩家角色属性初始化完毕"
-LUA_EVENT_ROLE_PROPERTY_CHANGE="玩家属性变化时"
-LUA_EVENT_LEVELCHANGE="等级改变"
-LUA_EVENT_REINLEVELCHANGE="转生等级改变"
-LUA_EVENT_HPMPCHANGE="HP/MP改变"
-LUA_EVENT_EXPCHANGE="EXP改变"
-LUA_EVENT_BATTERYCHANGE="电池电量改变"
-LUA_EVENT_NETCHANGE="网络状态改变"
-LUA_EVENT_WEIGHTCHANGE="负重改变"
-LUA_EVENT_PKMODECHANGE="pk模式改变"
-LUA_EVENT_AFKBEGIN="自动挂机开始"
-LUA_EVENT_AFKEND="自动挂机结束"
-LUA_EVENT_AUTOMOVEBEGIN="自动寻路开始"
-LUA_EVENT_AUTOMOVEEND="自动寻路结束"
-LUA_EVENT_AUTOPICKBEGIN="自动捡物开始"
-LUA_EVENT_AUTOPICKEND="自动捡物结束"
-LUA_EVENT_MAINBUFFUPDATE="主玩家buff刷新"
-LUA_EVENT_BUFFUPDATE="通用buff刷新"
-LUA_EVENT_TALKTONPC="与NPC对话"
-LUA_EVENT_CHANGESCENE="切换地图(包含同地图)"
-LUA_EVENT_MAPINFOCHANGE="切换地图(不同地图)"
-LUA_EVENT_MAPINFOINIT="地图初始化"
-LUA_EVENT_MAP_STATE_CHANGE="地图状态改变"
-LUA_EVENT_MAP_SIEGEAREA_CHANGE="地图攻城区域状态改变"
-LUA_EVENT_OPENWIN="打开界面"
-LUA_EVENT_CLOSEWIN="关闭界面"
-LUA_EVENT_WINDOW_CHANGE="窗体尺寸改变"
-LUA_EVENT_DEVICE_ROTATION_CHANGED="设备方向改变"
-LUA_EVENT_MONEYCHANGE="货币变化"
-LUA_EVENT_GUILD_MAIN_INFO="行会信息刷新"
-LUA_EVENT_GUILD_CREATE="行会创建消耗"
-LUA_EVENT_GUILD_WORLDLIST="世界行会列表刷新"
-LUA_EVENT_GUILD_APPLYLIST="入会申请列表刷新"
-LUA_EVENT_GUILDE_ALLY_APPLY_UPDATE="结盟申请列表刷新"
-LUA_EVENT_TRADE_MONEY_CHANGE="对方交易货币改变"
-LUA_EVENT_TRADE_MY_MONEY_CHANGE="自己交易货币改变"
-LUA_EVENT_TRADE_STATUS_CHANGE="对方交易状态改变"
-LUA_EVENT_TRADE_MY_STATUS_CHANGE="自己交易状态改变"
-LUA_EVENT_ADDFIREND="添加好友"
-LUA_EVENT_REMFIREND="删除好友"
-LUA_EVENT_JOINTEAM="加入队伍"
-LUA_EVENT_LEAVETEAM="离开队伍"
-LUA_EVENT_REF_ITEM_LIST="刷新背包道具列表"
-LUA_EVENT_PLAYER_EQUIP_CHANGE="角色装备数据操作"
-LUA_EVENT_BAG_ITEM_CHANGE="背包数据变化"
-LUA_EVENT_REF_HERO_ITEM_LIST="刷新英雄背包道具列表"
-LUA_EVENT_HERO_EQUIP_CHANGE="英雄装备变化"
-LUA_EVENT_HERO_BAG_ITEM_CAHNGE="英雄背包数据变化"
-LUA_EVENT_DISCONNECT="断线"
-LUA_EVENT_RECONNECT="重连"
-LUA_EVENT_TAKE_ON_EQUIP="玩家穿戴装备"
-LUA_EVENT_TAKE_OFF_EQUIP="玩家脱掉装备"
-LUA_EVENT_HERO_TAKE_ON_EQUIP="英雄穿戴装备"
-LUA_EVENT_HERO_TAKE_OFF_EQUIP="英雄脱掉装备"
-LUA_EVENT_SETTING_CAHNGE="设置项改变"
-LUA_EVENT_BESTRINGBOX_STATE="首饰盒状态改变"
-LUA_EVENT_ACTOR_IN_OF_VIEW="玩家/怪物/NPC进视野"
-LUA_EVENT_ACTOR_OUT_OF_VIEW="玩家/怪物/NPC出视野"
-LUA_EVENT_DROPITEM_IN_OF_VIEW="掉落物进视野"
-LUA_EVENT_DROPITEM_OUT_OF_VIEW="掉落物出视野"
-LUA_EVENT_TARGET_HP_CHANGE="目标血量变化"
-LUA_EVENT_TARGET_CAHNGE="目标改变"
-LUA_EVENT_ACTOR_OWNER_CHANGE="目标归属改变"
-LUA_EVENT_HERO_ANGER_CAHNGE="英雄怒气改变"
-LUA_EVENT_PLAYER_BEHAVIOR_STATE_CAHNGE="玩家行为状态改变（站立、走、跑等）"
-LUA_EVENT_PLAYER_ACTION_BEGIN="主玩家行为动作开始（站立、走、跑等）"
-LUA_EVENT_PLAYER_ACTION_COMPLETE="主玩家行为动作结束（站立、走、跑等）"
-LUA_EVENT_NET_PLAYER_ACTION_BEGIN="网络玩家行为动作开始（站立、走、跑等）"
-LUA_EVENT_NET_PLAYER_ACTION_COMPLETE="网络玩家行为动作结束（站立、走、跑等）"
-LUA_EVENT_MONSTER_ACTION_BEGIN="怪物行为动作开始（站立、走、跑等）"
-LUA_EVENT_MONSTER_ACTION_COMPLETE="怪物行为动作结束（站立、走、跑等）"
-LUA_EVENT_ACTOR_GMDATA_UPDATE="玩家/怪物GM自定义数据改变"
-LUA_EVENT_SKILL_INIT="初始化技能"
-LUA_EVENT_SKILL_ADD="新增技能"
-LUA_EVENT_SKILL_DEL="删除技能"
-LUA_EVENT_SKILL_UPDATE="技能更新"
-LUA_EVENT_SUMMON_MODE_CHANGE="召唤物-状态改变"
-LUA_EVENT_SUMMON_ALIVE_CHANGE="召唤物-存活状态改变"
-LUA_EVENT_BUBBLETIPS_STATUS_CHANGE="气泡状态改变"
-LUA_EVENT_PLAY_MAGICBALL_EFFECT="脚本魔血球动画"
-LUA_EVENT_AUTOFIGHT_TIPS_SHOW="自动战斗提示显示与否"
-LUA_EVENT_AUTOMOVE_TIPS_SHOW="自动寻路提示显示与否"
-LUA_EVENT_AUTOPICK_TIPS_SHOW="自动捡物提示显示与否"
-LUA_EVENT_HERO_LOGIN_OROUT="英雄登录/登出"
-LUA_EVENT_REIN_ATTR_CHANGE="转生点数据变化"
-LUA_EVENT_ASSIST_MISSION_TOP="主界面-辅助-任务置顶"
-LUA_EVENT_ASSIST_MISSION_ADD="主界面-辅助-任务增加"
-LUA_EVENT_ASSIST_MISSION_CHANGE="主界面-辅助-任务改变"
-LUA_EVENT_ASSIST_MISSION_REMOVE="主界面-辅助-任务移除"
-LUA_EVENT_ASSIST_MISSION_SHOW="主界面-辅助-任务显示和隐藏"
-LUA_EVENT_TEAM_MEMBER_UPDATE="主界面-辅助-队伍刷新"
-LUA_EVENT_TEAM_NEAR_UPDATE="附近队伍刷新"
-LUA_EVENT_TEAM_APPLY_UPDATE="申请入队列表刷新"
-LUA_EVENT_RANK_PLAYER_UPDATE="排行榜个人数据刷新"
-LUA_EVENT_RANK_DATA_UPDATE="排行榜分类数据刷新"
-LUA_EVENT_BIND_MAINPLAYER="绑定主玩家"
-LUA_EVENT_PLAYER_MAPPOS_CHANGE="主玩家位置改变"
-LUA_EVENT_FRIEND_LIST_UPDATE="好友列表刷新"
-LUA_EVENT_FRIEND_APPLY="收到好友申请"
-LUA_EVENT_MAIL_UPDATE="邮件列表刷新"
-LUA_EVENT_ITEMTIPS_MOUSE_SCROLL="ITEMTIPS鼠标滚轮滚动"
-LUA_EVENT_PCMINIMAP_STATUS_CHANGE="PC主界面小地图展示状态改变"
-LUA_EVENT_DARK_STATE_CHANGE="黑夜状态改变"
-LUA_EVENT_MONSTER_IGNORELIST_ADD="设置-怪物忽略列表增加"
-LUA_EVENT_BOSSTIPSLIST_ADD="设置-boss提示-增加"
-LUA_EVENT_MONSTER_NAME_RM="设置-怪物类型删除"
-LUA_EVENT_SKILL_RANKDATA_ADD="设置-技能数据添加"
-LUA_EVENT_SKILLBUTTON_DISTANCE_CHANGE="技能边距调整"
-LUA_EVENT_PLAYER_FRAME_PAGE_ADD="角色框增加子页"
-LUA_EVENT_PLAYER_FRAME_NAME_RRFRESH="角色外框角色名刷新"
-LUA_EVENT_ROLE_PROPERTY_INITED="玩家角色属性初始化完毕"
-LUA_EVENT_PLAYER_LOOK_FRAME_PAGE_ADD="查看他人角色框增加子页"
-LUA_EVENT_PLAYER_GUILD_INFO_CHANGE="玩家行会信息改变"
-LUA_EVENT_HERO_FRAME_PAGE_ADD="英雄框增加子页"
-LUA_EVENT_HERO_FRAME_NAME_RRFRESH="英雄框名字刷新"
-LUA_EVENT_HERO_LOOK_FRAME_PAGE_ADD="查看他人英雄框增加子页"
-LUA_EVENT_TRAD_PLAYER_LOOK_FRAME_PAGE_ADD="交易行查看他人玩家框增加子页"
-LUA_EVENT_TRAD_HERO_LOOK_FRAME_PAGE_ADD="交易行查看他人英雄框增加子页"
-LUA_EVENT_SERVER_VALUE_CHANGE="服务器下发的变量改变"
-LUA_EVENT_MAIN_PLAYER_REVIVE="主玩家复活"
-LUA_EVENT_NET_PLAYER_REVIVE="网络玩家复活"
-LUA_EVENT_MONSTER_REVIVE="怪物复活"
-LUA_EVENT_MAIN_PLAYER_DIE="主玩家死亡"
-LUA_EVENT_NET_PLAYER_DIE="网络玩家死亡"
-LUA_EVENT_MONSTER_DIE="怪物死亡"
-LUA_EVENT_NPCLAYER_OPENSTATUS="NPC界面打开/关闭状态刷新"
-LUA_EVENT_NPC_TALK="NPC对话[打开TXT-NPC界面]"
-LUA_EVENT_MINIMAP_FIND_PATH="寻路路径"
-LUA_EVENT_MINIMAP_MONSTER="小地图怪物数据刷新"
-LUA_EVENT_MINIMAP_PLAYER="小地图人物坐标刷新"
-LUA_EVENT_MINIMAP_TEAM="小地图组队成员数据刷新"
-LUA_EVENT_MINIMAP_RELEASE="小地图释放内存"
-LUA_EVENT_PLAYER_INTERNAL_FORCE_CHANGE="人物内力值改变"
-LUA_EVENT_PLAYER_INTERNAL_EXP_CHANGE="人物内功经验值改变"
-LUA_EVENT_PLAYER_INTERNAL_LEVEL_CHANGE="人物内功等级改变"
-LUA_EVENT_INTERNAL_SKILL_ADD="人物内功技能增加"
-LUA_EVENT_INTERNAL_SKILL_DEL="人物内功技能删除"
-LUA_EVENT_INTERNAL_SKILL_UPDATE="人物内功技能刷新"
-LUA_EVENT_PLAYER_LEARNED_INTERNAL="人物学习内功"
-LUA_EVENT_MERIDIAN_DATA_REFRESH="人物内功经络数据刷新"
-LUA_EVENT_PLAYER_INTERNAL_DZVALUE_CHANGE="人物内功斗转值改变/恢复"
-LUA_EVENT_PLAYER_COMBO_SKILL_ADD="人物连击技能增加"
-LUA_EVENT_PLAYER_COMBO_SKILL_DEL="人物连击技能删除"
-LUA_EVENT_PLAYER_COMBO_SKILL_UPDATE="人物连击技能刷新"
-LUA_EVENT_PLAYER_SET_COMBO_REFRESH="人物设置的连击技能刷新"
-LUA_EVENT_PLAYER_COMBO_SKILLCD_STATE="人物连击技能CD状态"
-LUA_EVENT_PLAYER_OPEN_COMBO_NUM="人物开启连击格子数"
-LUA_EVENT_HERO_INTERNAL_FORCE_CHANGE="英雄内力值改变"
-LUA_EVENT_HERO_INTERNAL_EXP_CHANGE="英雄内功经验值改变"
-LUA_EVENT_HERO_INTERNAL_LEVEL_CHANGE="英雄内功等级改变"
-LUA_EVENT_HERO_INTERNAL_SKILL_ADD="英雄内功技能增加"
-LUA_EVENT_HERO_INTERNAL_SKILL_DEL="英雄内功技能删除"
-LUA_EVENT_HERO_INTERNAL_SKILL_UPDATE="英雄内功技能刷新"
-LUA_EVENT_HERO_LEARNED_INTERNAL="英雄学习内功"
-LUA_EVENT_HERO_MERIDIAN_DATA_REFRESH="英雄内功经络数据刷新"
-LUA_EVENT_HERO_INTERNAL_DZVALUE_CHANGE="英雄内功斗转值改变/恢复"
-LUA_EVENT_HERO_COMBO_SKILL_ADD="英雄连击技能增加"
-LUA_EVENT_HERO_COMBO_SKILL_DEL="英雄连击技能删除"
-LUA_EVENT_HERO_COMBO_SKILL_UPDATE="英雄连击技能刷新"
-LUA_EVENT_HERO_SET_COMBO_REFRESH="英雄设置连击技能刷新"
-LUA_EVENT_HERO_OPEN_COMBO_NUM="英雄开启连击格子数"
-LUA_EVENT_HERO_PROPERTY_CHANGE="英雄属性变化"
-LUA_EVENT_NOTICE_SERVER="顶部跑马灯全服公告"
-LUA_EVENT_NOTICE_SERVER_EVENT="屏幕跑马灯系统公告"
-LUA_EVENT_NOTICE_SYSYTEM="屏幕跑马灯公告可控制Y轴"
-LUA_EVENT_NOTICE_SYSYTEM_SCALE="系统公告缩放"
-LUA_EVENT_NOTICE_SYSYTEM_XY="跑马灯公告可控制XY轴"
-LUA_EVENT_NOTICE_SYSYTEM_TIPS="系统提示弹窗"
-LUA_EVENT_NOTICE_TIMER="聊天上方倒计时公告"
-LUA_EVENT_NOTICE_DELETE_TIMER="移除倒计时公告"
-LUA_EVENT_NOTICE_ITEM_TIPS="飘字物品获取/消耗提示"
-LUA_EVENT_NOTICE_ATTRIBUTE="飘字属性变化"
-LUA_EVENT_NOTICE_EXP="飘字经验变化"
-LUA_EVENT_NOTICE_DROP="公告掉落物品提示"
-LUA_EVENT_RICHTEXT_OPEN_URL="富文本超链(href)点击触发"
-LUA_EVENT_KF_STATUS_CHANGE="跨服状态改变"
-LUA_EVENT_QUICKUSE_DATA_OPER="快捷栏道具数据变动触发"
-LUA_EVENT_ENTER_WORLD="进入游戏世界主界面已经初始化"
-LUA_EVENT_LEAVE_WORLD="离开游戏世界小退触发"
-LUA_EVENT_PLAYER_IN_SAFEZONE_CHANGE="主玩家安全区状态改变"
-LUA_EVENT_NET_PLAYER_IN_SAFEZONE_CHANGE="网络玩家安全区状态改变"
-LUA_EVENT_PLAYER_STALL_STATUS_CHANGE="主玩家摆摊状态改变"
-LUA_EVENT_NET_PLAYER_STALL_STATUS_CHANGE="网络玩家摆摊状态改变"
-LUA_EVENT_PLAYER_HUSHEN_STATUS_CHANGE="主玩家护身状态改变"
-LUA_EVENT_NET_PLAYER_HUSHEN_STATUS_CHANGE="网络玩家护身状态改变"
-LUA_EVENT_PLAYER_TEAM_STATUS_CHANGE="主玩家组队状态改变"
-LUA_EVENT_NET_PLAYER_TEAM_STATUS_CHANGE="网络玩家组队状态改变"
-LUA_EVENT_PURCHASE_ITEM_LIST_PULL="求购列表数据返回"
-LUA_EVENT_PURCHASE_ITEM_LIST_COMPLETE="求购列表加载完成"
-LUA_EVENT_PURCHASE_SEARCH_ITEM_UPDATE="求购搜索参数刷新"
-LUA_EVENT_PURCHASE_MYITEM_UPDATE="我的求购数据刷新"
-LUA_EVENT_PURCHASE_WORLDITEM_UPDATE="世界求购数据刷新"
-LUA_EVENT_RED_POINT_ADD="红点增(按红点表cfg_redpoint配置)"
-LUA_EVENT_RED_POINT_DEL="红点删(按红点表cfg_redpoint配置)"
-LUA_EVENT_FLYIN_BTN_ITEM_COMPLETE="道具飞入指定按钮完成"
-LUA_EVENT_STORAGE_DATA_CHANGE="仓库数据变动"
-LUA_EVENT_HERO_LOCK_CHANGE="英雄锁定刷新"
-LUA_EVENT_PLAYER_TITLE_CHANGE="人物称号数据变动"
-LUA_EVENT_SKILL_ADD_TO_UI_WIN32="PC端-添加技能到主界面触发"
-LUA_EVENT_SKILL_REMOVE_TO_UI_WIN32="PC端-移除主界面技能触发"
-LUA_EVENT_SKILL_CD_TIME_CHANGE="技能CD时间变动"
+LUA_EVENT_ROLE_PROPERTY_INITED = "玩家角色属性初始化完毕"
+LUA_EVENT_ROLE_PROPERTY_CHANGE = "玩家属性变化时"
+LUA_EVENT_LEVELCHANGE = "等级改变"
+LUA_EVENT_REINLEVELCHANGE = "转生等级改变"
+LUA_EVENT_HPMPCHANGE = "HP/MP改变"
+LUA_EVENT_EXPCHANGE = "EXP改变"
+LUA_EVENT_BATTERYCHANGE = "电池电量改变"
+LUA_EVENT_NETCHANGE = "网络状态改变"
+LUA_EVENT_WEIGHTCHANGE = "负重改变"
+LUA_EVENT_PKMODECHANGE = "pk模式改变"
+LUA_EVENT_AFKBEGIN = "自动挂机开始"
+LUA_EVENT_AFKEND = "自动挂机结束"
+LUA_EVENT_AUTOMOVEBEGIN = "自动寻路开始"
+LUA_EVENT_AUTOMOVEEND = "自动寻路结束"
+LUA_EVENT_AUTOPICKBEGIN = "自动捡物开始"
+LUA_EVENT_AUTOPICKEND = "自动捡物结束"
+LUA_EVENT_MAINBUFFUPDATE = "主玩家buff刷新"
+LUA_EVENT_BUFFUPDATE = "通用buff刷新"
+LUA_EVENT_TALKTONPC = "与NPC对话"
+LUA_EVENT_CHANGESCENE = "切换地图(包含同地图)"
+LUA_EVENT_MAPINFOCHANGE = "切换地图(不同地图)"
+LUA_EVENT_MAPINFOINIT = "地图初始化"
+LUA_EVENT_MAP_STATE_CHANGE = "地图状态改变"
+LUA_EVENT_MAP_SIEGEAREA_CHANGE = "地图攻城区域状态改变"
+LUA_EVENT_OPENWIN = "打开界面"
+LUA_EVENT_CLOSEWIN = "关闭界面"
+LUA_EVENT_WINDOW_CHANGE = "窗体尺寸改变"
+LUA_EVENT_DEVICE_ROTATION_CHANGED = "设备方向改变"
+LUA_EVENT_MONEYCHANGE = "货币变化"
+LUA_EVENT_GUILD_MAIN_INFO = "行会信息刷新"
+LUA_EVENT_GUILD_CREATE = "行会创建消耗"
+LUA_EVENT_GUILD_WORLDLIST = "世界行会列表刷新"
+LUA_EVENT_GUILD_APPLYLIST = "入会申请列表刷新"
+LUA_EVENT_GUILDE_ALLY_APPLY_UPDATE = "结盟申请列表刷新"
+LUA_EVENT_TRADE_MONEY_CHANGE = "对方交易货币改变"
+LUA_EVENT_TRADE_MY_MONEY_CHANGE = "自己交易货币改变"
+LUA_EVENT_TRADE_STATUS_CHANGE = "对方交易状态改变"
+LUA_EVENT_TRADE_MY_STATUS_CHANGE = "自己交易状态改变"
+LUA_EVENT_ADDFIREND = "添加好友"
+LUA_EVENT_REMFIREND = "删除好友"
+LUA_EVENT_JOINTEAM = "加入队伍"
+LUA_EVENT_LEAVETEAM = "离开队伍"
+LUA_EVENT_REF_ITEM_LIST = "刷新背包道具列表"
+LUA_EVENT_PLAYER_EQUIP_CHANGE = "角色装备数据操作"
+LUA_EVENT_BAG_ITEM_CHANGE = "背包数据变化"
+LUA_EVENT_REF_HERO_ITEM_LIST = "刷新英雄背包道具列表"
+LUA_EVENT_HERO_EQUIP_CHANGE = "英雄装备变化"
+LUA_EVENT_HERO_BAG_ITEM_CAHNGE = "英雄背包数据变化"
+LUA_EVENT_DISCONNECT = "断线"
+LUA_EVENT_RECONNECT = "重连"
+LUA_EVENT_TAKE_ON_EQUIP = "玩家穿戴装备"
+LUA_EVENT_TAKE_OFF_EQUIP = "玩家脱掉装备"
+LUA_EVENT_HERO_TAKE_ON_EQUIP = "英雄穿戴装备"
+LUA_EVENT_HERO_TAKE_OFF_EQUIP = "英雄脱掉装备"
+LUA_EVENT_SETTING_CAHNGE = "设置项改变"
+LUA_EVENT_BESTRINGBOX_STATE = "首饰盒状态改变"
+LUA_EVENT_ACTOR_IN_OF_VIEW = "玩家/怪物/NPC进视野"
+LUA_EVENT_ACTOR_OUT_OF_VIEW = "玩家/怪物/NPC出视野"
+LUA_EVENT_DROPITEM_IN_OF_VIEW = "掉落物进视野"
+LUA_EVENT_DROPITEM_OUT_OF_VIEW = "掉落物出视野"
+LUA_EVENT_TARGET_HP_CHANGE = "目标血量变化"
+LUA_EVENT_TARGET_CAHNGE = "目标改变"
+LUA_EVENT_ACTOR_OWNER_CHANGE = "目标归属改变"
+LUA_EVENT_HERO_ANGER_CAHNGE = "英雄怒气改变"
+LUA_EVENT_PLAYER_BEHAVIOR_STATE_CAHNGE = "玩家行为状态改变（站立、走、跑等）"
+LUA_EVENT_PLAYER_ACTION_BEGIN = "主玩家行为动作开始（站立、走、跑等）"
+LUA_EVENT_PLAYER_ACTION_COMPLETE = "主玩家行为动作结束（站立、走、跑等）"
+LUA_EVENT_NET_PLAYER_ACTION_BEGIN = "网络玩家行为动作开始（站立、走、跑等）"
+LUA_EVENT_NET_PLAYER_ACTION_COMPLETE = "网络玩家行为动作结束（站立、走、跑等）"
+LUA_EVENT_MONSTER_ACTION_BEGIN = "怪物行为动作开始（站立、走、跑等）"
+LUA_EVENT_MONSTER_ACTION_COMPLETE = "怪物行为动作结束（站立、走、跑等）"
+LUA_EVENT_ACTOR_GMDATA_UPDATE = "玩家/怪物GM自定义数据改变"
+LUA_EVENT_SKILL_INIT = "初始化技能"
+LUA_EVENT_SKILL_ADD = "新增技能"
+LUA_EVENT_SKILL_DEL = "删除技能"
+LUA_EVENT_SKILL_UPDATE = "技能更新"
+LUA_EVENT_SUMMON_MODE_CHANGE = "召唤物-状态改变"
+LUA_EVENT_SUMMON_ALIVE_CHANGE = "召唤物-存活状态改变"
+LUA_EVENT_BUBBLETIPS_STATUS_CHANGE = "气泡状态改变"
+LUA_EVENT_PLAY_MAGICBALL_EFFECT = "脚本魔血球动画"
+LUA_EVENT_AUTOFIGHT_TIPS_SHOW = "自动战斗提示显示与否"
+LUA_EVENT_AUTOMOVE_TIPS_SHOW = "自动寻路提示显示与否"
+LUA_EVENT_AUTOPICK_TIPS_SHOW = "自动捡物提示显示与否"
+LUA_EVENT_HERO_LOGIN_OROUT = "英雄登录/登出"
+LUA_EVENT_REIN_ATTR_CHANGE = "转生点数据变化"
+LUA_EVENT_ASSIST_MISSION_TOP = "主界面-辅助-任务置顶"
+LUA_EVENT_ASSIST_MISSION_ADD = "主界面-辅助-任务增加"
+LUA_EVENT_ASSIST_MISSION_CHANGE = "主界面-辅助-任务改变"
+LUA_EVENT_ASSIST_MISSION_REMOVE = "主界面-辅助-任务移除"
+LUA_EVENT_ASSIST_MISSION_SHOW = "主界面-辅助-任务显示和隐藏"
+LUA_EVENT_TEAM_MEMBER_UPDATE = "主界面-辅助-队伍刷新"
+LUA_EVENT_TEAM_NEAR_UPDATE = "附近队伍刷新"
+LUA_EVENT_TEAM_APPLY_UPDATE = "申请入队列表刷新"
+LUA_EVENT_RANK_PLAYER_UPDATE = "排行榜个人数据刷新"
+LUA_EVENT_RANK_DATA_UPDATE = "排行榜分类数据刷新"
+LUA_EVENT_BIND_MAINPLAYER = "绑定主玩家"
+LUA_EVENT_PLAYER_MAPPOS_CHANGE = "主玩家位置改变"
+LUA_EVENT_FRIEND_LIST_UPDATE = "好友列表刷新"
+LUA_EVENT_FRIEND_APPLY = "收到好友申请"
+LUA_EVENT_MAIL_UPDATE = "邮件列表刷新"
+LUA_EVENT_ITEMTIPS_MOUSE_SCROLL = "ITEMTIPS鼠标滚轮滚动"
+LUA_EVENT_PCMINIMAP_STATUS_CHANGE = "PC主界面小地图展示状态改变"
+LUA_EVENT_DARK_STATE_CHANGE = "黑夜状态改变"
+LUA_EVENT_MONSTER_IGNORELIST_ADD = "设置-怪物忽略列表增加"
+LUA_EVENT_BOSSTIPSLIST_ADD = "设置-boss提示-增加"
+LUA_EVENT_MONSTER_NAME_RM = "设置-怪物类型删除"
+LUA_EVENT_SKILL_RANKDATA_ADD = "设置-技能数据添加"
+LUA_EVENT_SKILLBUTTON_DISTANCE_CHANGE = "技能边距调整"
+LUA_EVENT_PLAYER_FRAME_PAGE_ADD = "角色框增加子页"
+LUA_EVENT_PLAYER_FRAME_NAME_RRFRESH = "角色外框角色名刷新"
+LUA_EVENT_ROLE_PROPERTY_INITED = "玩家角色属性初始化完毕"
+LUA_EVENT_PLAYER_LOOK_FRAME_PAGE_ADD = "查看他人角色框增加子页"
+LUA_EVENT_PLAYER_GUILD_INFO_CHANGE = "玩家行会信息改变"
+LUA_EVENT_HERO_FRAME_PAGE_ADD = "英雄框增加子页"
+LUA_EVENT_HERO_FRAME_NAME_RRFRESH = "英雄框名字刷新"
+LUA_EVENT_HERO_LOOK_FRAME_PAGE_ADD = "查看他人英雄框增加子页"
+LUA_EVENT_TRAD_PLAYER_LOOK_FRAME_PAGE_ADD = "交易行查看他人玩家框增加子页"
+LUA_EVENT_TRAD_HERO_LOOK_FRAME_PAGE_ADD = "交易行查看他人英雄框增加子页"
+LUA_EVENT_SERVER_VALUE_CHANGE = "服务器下发的变量改变"
+LUA_EVENT_MAIN_PLAYER_REVIVE = "主玩家复活"
+LUA_EVENT_NET_PLAYER_REVIVE = "网络玩家复活"
+LUA_EVENT_MONSTER_REVIVE = "怪物复活"
+LUA_EVENT_MAIN_PLAYER_DIE = "主玩家死亡"
+LUA_EVENT_NET_PLAYER_DIE = "网络玩家死亡"
+LUA_EVENT_MONSTER_DIE = "怪物死亡"
+LUA_EVENT_NPCLAYER_OPENSTATUS = "NPC界面打开/关闭状态刷新"
+LUA_EVENT_NPC_TALK = "NPC对话[打开TXT-NPC界面]"
+LUA_EVENT_MINIMAP_FIND_PATH = "寻路路径"
+LUA_EVENT_MINIMAP_MONSTER = "小地图怪物数据刷新"
+LUA_EVENT_MINIMAP_PLAYER = "小地图人物坐标刷新"
+LUA_EVENT_MINIMAP_TEAM = "小地图组队成员数据刷新"
+LUA_EVENT_MINIMAP_RELEASE = "小地图释放内存"
+LUA_EVENT_PLAYER_INTERNAL_FORCE_CHANGE = "人物内力值改变"
+LUA_EVENT_PLAYER_INTERNAL_EXP_CHANGE = "人物内功经验值改变"
+LUA_EVENT_PLAYER_INTERNAL_LEVEL_CHANGE = "人物内功等级改变"
+LUA_EVENT_INTERNAL_SKILL_ADD = "人物内功技能增加"
+LUA_EVENT_INTERNAL_SKILL_DEL = "人物内功技能删除"
+LUA_EVENT_INTERNAL_SKILL_UPDATE = "人物内功技能刷新"
+LUA_EVENT_PLAYER_LEARNED_INTERNAL = "人物学习内功"
+LUA_EVENT_MERIDIAN_DATA_REFRESH = "人物内功经络数据刷新"
+LUA_EVENT_PLAYER_INTERNAL_DZVALUE_CHANGE = "人物内功斗转值改变/恢复"
+LUA_EVENT_PLAYER_COMBO_SKILL_ADD = "人物连击技能增加"
+LUA_EVENT_PLAYER_COMBO_SKILL_DEL = "人物连击技能删除"
+LUA_EVENT_PLAYER_COMBO_SKILL_UPDATE = "人物连击技能刷新"
+LUA_EVENT_PLAYER_SET_COMBO_REFRESH = "人物设置的连击技能刷新"
+LUA_EVENT_PLAYER_COMBO_SKILLCD_STATE = "人物连击技能CD状态"
+LUA_EVENT_PLAYER_OPEN_COMBO_NUM = "人物开启连击格子数"
+LUA_EVENT_HERO_INTERNAL_FORCE_CHANGE = "英雄内力值改变"
+LUA_EVENT_HERO_INTERNAL_EXP_CHANGE = "英雄内功经验值改变"
+LUA_EVENT_HERO_INTERNAL_LEVEL_CHANGE = "英雄内功等级改变"
+LUA_EVENT_HERO_INTERNAL_SKILL_ADD = "英雄内功技能增加"
+LUA_EVENT_HERO_INTERNAL_SKILL_DEL = "英雄内功技能删除"
+LUA_EVENT_HERO_INTERNAL_SKILL_UPDATE = "英雄内功技能刷新"
+LUA_EVENT_HERO_LEARNED_INTERNAL = "英雄学习内功"
+LUA_EVENT_HERO_MERIDIAN_DATA_REFRESH = "英雄内功经络数据刷新"
+LUA_EVENT_HERO_INTERNAL_DZVALUE_CHANGE = "英雄内功斗转值改变/恢复"
+LUA_EVENT_HERO_COMBO_SKILL_ADD = "英雄连击技能增加"
+LUA_EVENT_HERO_COMBO_SKILL_DEL = "英雄连击技能删除"
+LUA_EVENT_HERO_COMBO_SKILL_UPDATE = "英雄连击技能刷新"
+LUA_EVENT_HERO_SET_COMBO_REFRESH = "英雄设置连击技能刷新"
+LUA_EVENT_HERO_OPEN_COMBO_NUM = "英雄开启连击格子数"
+LUA_EVENT_HERO_PROPERTY_CHANGE = "英雄属性变化"
+LUA_EVENT_NOTICE_SERVER = "顶部跑马灯全服公告"
+LUA_EVENT_NOTICE_SERVER_EVENT = "屏幕跑马灯系统公告"
+LUA_EVENT_NOTICE_SYSYTEM = "屏幕跑马灯公告可控制Y轴"
+LUA_EVENT_NOTICE_SYSYTEM_SCALE = "系统公告缩放"
+LUA_EVENT_NOTICE_SYSYTEM_XY = "跑马灯公告可控制XY轴"
+LUA_EVENT_NOTICE_SYSYTEM_TIPS = "系统提示弹窗"
+LUA_EVENT_NOTICE_TIMER = "聊天上方倒计时公告"
+LUA_EVENT_NOTICE_DELETE_TIMER = "移除倒计时公告"
+LUA_EVENT_NOTICE_ITEM_TIPS = "飘字物品获取/消耗提示"
+LUA_EVENT_NOTICE_ATTRIBUTE = "飘字属性变化"
+LUA_EVENT_NOTICE_EXP = "飘字经验变化"
+LUA_EVENT_NOTICE_DROP = "公告掉落物品提示"
+LUA_EVENT_RICHTEXT_OPEN_URL = "富文本超链(href)点击触发"
+LUA_EVENT_KF_STATUS_CHANGE = "跨服状态改变"
+LUA_EVENT_QUICKUSE_DATA_OPER = "快捷栏道具数据变动触发"
+LUA_EVENT_ENTER_WORLD = "进入游戏世界主界面已经初始化"
+LUA_EVENT_LEAVE_WORLD = "离开游戏世界小退触发"
+LUA_EVENT_PLAYER_IN_SAFEZONE_CHANGE = "主玩家安全区状态改变"
+LUA_EVENT_NET_PLAYER_IN_SAFEZONE_CHANGE = "网络玩家安全区状态改变"
+LUA_EVENT_PLAYER_STALL_STATUS_CHANGE = "主玩家摆摊状态改变"
+LUA_EVENT_NET_PLAYER_STALL_STATUS_CHANGE = "网络玩家摆摊状态改变"
+LUA_EVENT_PLAYER_HUSHEN_STATUS_CHANGE = "主玩家护身状态改变"
+LUA_EVENT_NET_PLAYER_HUSHEN_STATUS_CHANGE = "网络玩家护身状态改变"
+LUA_EVENT_PLAYER_TEAM_STATUS_CHANGE = "主玩家组队状态改变"
+LUA_EVENT_NET_PLAYER_TEAM_STATUS_CHANGE = "网络玩家组队状态改变"
+LUA_EVENT_PURCHASE_ITEM_LIST_PULL = "求购列表数据返回"
+LUA_EVENT_PURCHASE_ITEM_LIST_COMPLETE = "求购列表加载完成"
+LUA_EVENT_PURCHASE_SEARCH_ITEM_UPDATE = "求购搜索参数刷新"
+LUA_EVENT_PURCHASE_MYITEM_UPDATE = "我的求购数据刷新"
+LUA_EVENT_PURCHASE_WORLDITEM_UPDATE = "世界求购数据刷新"
+LUA_EVENT_RED_POINT_ADD = "红点增(按红点表cfg_redpoint配置)"
+LUA_EVENT_RED_POINT_DEL = "红点删(按红点表cfg_redpoint配置)"
+LUA_EVENT_FLYIN_BTN_ITEM_COMPLETE = "道具飞入指定按钮完成"
+LUA_EVENT_STORAGE_DATA_CHANGE = "仓库数据变动"
+LUA_EVENT_HERO_LOCK_CHANGE = "英雄锁定刷新"
+LUA_EVENT_PLAYER_TITLE_CHANGE = "人物称号数据变动"
+LUA_EVENT_SKILL_ADD_TO_UI_WIN32 = "PC端-添加技能到主界面触发"
+LUA_EVENT_SKILL_REMOVE_TO_UI_WIN32 = "PC端-移除主界面技能触发"
+LUA_EVENT_SKILL_CD_TIME_CHANGE = "技能CD时间变动"

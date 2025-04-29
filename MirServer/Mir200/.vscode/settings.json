@@ -1,9 +1,9 @@
 {
 	"files.encoding": "gb2312",
-	"Lua.runtime.version": "Lua 5.1",
+	"Lua.runtime.version": "LuaJIT",
 	"Lua.runtime.fileEncoding": "ansi",
 	"Lua.runtime.path": [
-		"?"
+		"?.lua"
 	],
 	"Lua.completion.requireSeparator": "/",
 	"Lua.diagnostics.disable": [
@@ -78,5 +78,9 @@
 		"mapeventwalk",
 		"struckdamage",
 		"delattlist"
+	],
+	"Lua.workspace.library": [
+		"${workspaceFolder}/../../Client/dev/HC/Client",
+		"${workspaceFolder}/../../MirServer/Mir200/Envir/HC/Server"
 	],
 }
