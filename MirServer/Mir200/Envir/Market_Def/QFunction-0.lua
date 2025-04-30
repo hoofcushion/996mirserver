@@ -1,12 +1,17 @@
-require("Envir/HC/init", true)
-require("Envir/HC/Server/init", true)
-require("Envir/HC/Server/Console", true)
-require("Envir/HC/Server/Teleporter", true)
+package.path = package.path .. ";./Envir/?.lua" .. ";./Envir/?/init.lua"
+require("HC/init", true)
+require("HC/common", true)
+require("HC/Server/init", true)
+require("HC/Server/Console", true)
+require("HC/Server/Teleporter", true)
+require("HC/Server/LuckyNecklace", true)
+require("HC/Server/Realive", true)
+require("HC/Server/Craft1", true)
+require("HC/Server/NPC", true)
 
 Event.register(Reg.login, {
 	fn = function(actor)
-		Event.push(Reg.sync, actor)
-		-- 记录第一次登录
+		-- 记录是否是第一次登录
 		local playvar = PlayVar(actor)
 		if playvar.enter_game == 0 then
 			playvar.enter_game = 1
@@ -19,26 +24,28 @@ Event.register(Reg.login, {
 		if getbaseinfo(actor, 0) == true then
 			realive(actor)
 		end
+		-- 登录时进入主城
 		mapmove(actor, "3", 333, 333)
 	end
 })
 
+--- 登录时同步数据
+Event.register(Reg.login, {
+	fn = function(actor)
+		Event.push(Reg.sync, actor)
+	end
+})
+
+--- 客户端请求同步数据
 Event.register(Reg.handlerequest, {
 	fn = function(actor, msgid)
-		if msgid == 0 then
+		if msgid == Msg.sync then
 			Event.push(Reg.sync, actor)
 		end
 	end
 })
 
-function Sync(key, value)
-	Event.add(Reg.sync, {
-		fn = function(actor)
-			client_run(actor, key .. "=" .. HC.serialize_minimal(value))
-		end
-	})
-end
-
+--- 部署时同步数据
 Event.register(Reg.qfloadend, {
 	fn = function()
 		for _, actor in ipairs(getplayerlst(0)) do
@@ -47,33 +54,10 @@ Event.register(Reg.qfloadend, {
 	end
 })
 
--- 自动复活
-Event.register(Reg.playdie, {
-	fn = function(actor)
-		senddelaymsg(actor, "%s 秒后将自动复活", 5, 249, 0, Export.delayrelive)
-	end
-})
-
-Export.delayrelive = unknown(function(actor)
-	realive(actor)
-end)
-
-NPCScriptMap = {}
-for _, info in ipairs(get_all_npc_info()) do
-	NPCScriptMap[info.id] = info.script
+if TEST then
+	Event.add(Reg.login, {
+		fn = function(actor)
+			setgmlevel(actor, 10)
+		end
+	})
 end
-
-Sync(Reg.NPCScriptMap, NPCScriptMap)
-
-NPCFuncMap = {
-	["主城传送员"] = "Teleporter",
-	["幸运项链"] = "LuckyNecklace"
-}
-
-Sync(Reg.NPCFuncMap, NPCFuncMap)
-
-Event.add(Reg.sync, {
-	fn = function(actor)
-		setgmlevel(actor, 10)
-	end
-})

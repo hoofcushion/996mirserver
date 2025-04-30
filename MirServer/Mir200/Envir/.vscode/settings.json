@@ -1,0 +1,29 @@
+{
+	"files.encoding": "gb2312",
+	"Lua.runtime.version": "LuaJIT",
+	"Lua.runtime.fileEncoding": "ansi",
+	"Lua.runtime.path": [
+		"?.lua"
+	],
+	"Lua.completion.requireSeparator": "/",
+	"Lua.diagnostics.disable": [
+		"discard-returns",
+		"missing-parameter",
+		"redundant-parameter",
+		"lowercase-global"
+	],
+	"Lua.workspace.ignoreDir": [
+		".vscode",
+		"Data",
+		"LogSys",
+		"MapQuest_Def",
+		"MonIcons",
+		"MonItems",
+		"Nations",
+		"Robot_def",
+		"UserData",
+	],
+	"Lua.workspace.library": [
+		"${workspaceFolder}/../../../Client/dev/HC/Client",
+	]
+}

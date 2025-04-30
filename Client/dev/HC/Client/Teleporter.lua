@@ -6,8 +6,8 @@ function Teleporter.main(npcid)
 	Teleporter.window = Window(Reg.Teleporter, npcid)
 	Teleporter.tree = GUI:ui_delegate(Teleporter.window)
 
-	GUI:LoadExport(Teleporter.window, "Custom/Teleporter")
-	GUI:Win_SetDrag(Teleporter.window, Teleporter.tree.BackGround)
+	GUI:LoadExport(Teleporter.window, "A/Teleporter")
+	GUI:Win_SetDrag(Teleporter.window, Teleporter.tree.Background)
 	local w, h = SL:GetMetaValue("SCREEN_WIDTH"), SL:GetMetaValue("SCREEN_HEIGHT")
 	GUI:setPosition(Teleporter.tree.Node, w / 2, h / 2)
 

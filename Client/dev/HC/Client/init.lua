@@ -1,10 +1,22 @@
 ---@type MetaValueTable
 Meta = setmetatable({}, {
 	__index = function(_, k)
-		if HC.is_client then
-			return SL:GetMetaValue(k)
+		return SL:GetMetaValue(k)
+	end,
+	__newindex = function(_, k, v)
+		SL:SetMetaValue(k, v)
+	end
+})
+
+---@class MetaGet
+---@field [metavalue] function
+MetaGet = setmetatable({}, {
+	__index = function(t, k)
+		local fn = function(...)
+			return SL:GetMetaValue(k, ...)
 		end
-		error("Client side only")
+		rawset(t, k, fn)
+		return fn
 	end
 })
 
@@ -202,18 +214,11 @@ local function node(keys, actor)
 		end,
 		__newindex = function(_, k, v)
 			if HC.is_server then
-				sendluamsg(actor, -2 ^ 31, 1, 0, 0, HC.encode({ keys, { k, v } }))
+				Common.sendmsg(Msg.call, 1, 0, 0, Json.encode({ keys, { k, v } }), actor)
 			end
-			-- if HC.is_client then
-			-- 	SL:SendLuaNetMsg(-2 ^ 31, 1, 0, 0, HC.encode({ keys, { k, v } }))
-			-- end
 		end,
 		__call = function(_, ...)
-			if HC.is_server then
-				sendluamsg(actor, -2 ^ 31, 0, 0, 0, HC.encode({ keys, { ... } }))
-			elseif HC.is_client then
-				SL:SendLuaNetMsg(-2 ^ 31, 0, 0, 0, HC.encode({ keys, { ... } }))
-			end
+			Common.sendmsg(Msg.call, 0, 0, 0, Json.encode({ keys, { ... } }), actor)
 		end,
 	})
 end
@@ -229,8 +234,8 @@ Server = setmetatable({}, {
 -- client api register
 ---@class Client
 Client = {}
-SL:RegisterLuaNetMsg(-2 ^ 31, function(_, id, _, _, data)
-	data = HC.decode(data)
+SL:RegisterLuaNetMsg(Msg.call, function(_, id, _, _, data)
+	data = Json.decode(data)
 	if type(data) ~= "table"
 	or type(data[1]) ~= "table"
 	or type(data[2]) ~= "table"
@@ -244,13 +249,13 @@ SL:RegisterLuaNetMsg(-2 ^ 31, function(_, id, _, _, data)
 		if tmp == nil
 		or string.sub(v, 1, 1) == "_"
 		then
-			HC.log(("Invalid API call: %s"):format(table.concat(keys, ".")))
+			Common.log(("Invalid API call: %s"):format(table.concat(keys, ".")))
 			return
 		end
 	end
 	if id == 1 then
 		local k, v = args[1], args[2]
-		local value = HC.decode(v)
+		local value = v
 		tmp[k] = value
 	else
 		tmp(HC.unpack(args))
@@ -318,15 +323,16 @@ end)
 ---@param widget userdata|table # 节点
 ---@param prefix string # 前缀
 function GetAllByPrefix(widget, prefix, i, e)
-	local ui = type(widget) == "table" and widget or GUI:ui_delegate(widget)
+	i = i or 0
 	return coroutine.wrap(function()
-		local start = ui[prefix]
+		local start = GUI:getChildByName(widget, prefix .. "_" .. i)
 		if start ~= nil then
-			coroutine.yield(0, start)
+			i = i + 1
+			coroutine.yield(i, start)
 		end
-		i = i or 1
 		while true do
-			local v = ui[prefix .. "_" .. i]
+			i = i + 1
+			local v = GUI:getChildByName(widget, prefix .. "_" .. i)
 			if v == nil then
 				return
 			end
@@ -334,7 +340,22 @@ function GetAllByPrefix(widget, prefix, i, e)
 			if i == e then
 				return
 			end
-			i = i + 1
 		end
 	end)
+end
+
+function CloseButton(Background)
+	local BackGroundsize = GUI:getContentSize(Background)
+	local Button_Close = GUI:Button_Create(Background, "Button_Close", BackGroundsize.width, BackGroundsize.height,
+		"res/public/1900000510.png")
+	GUI:Button_loadTexturePressed(Button_Close, "res/public/1900000511.png")
+	GUI:Button_loadTextureDisabled(Button_Close, "res/public/1900000511.png")
+	GUI:Button_setTitleText(Button_Close, "")
+	GUI:Button_setTitleColor(Button_Close, "#ffffff")
+	GUI:Button_setTitleFontSize(Button_Close, 14)
+	GUI:Button_titleEnableOutline(Button_Close, "#000000", 1)
+	GUI:setAnchorPoint(Button_Close, 0.00, 1.00)
+	GUI:setTouchEnabled(Button_Close, true)
+	GUI:setTag(Button_Close, -1)
+	return Button_Close
 end

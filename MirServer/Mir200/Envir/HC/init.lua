@@ -132,7 +132,7 @@ function HC.runcode(code, env)
 	if env then
 		debug.setfenv(fn, env)
 	end
-	return pcall(fn)
+	return HC.packpcall(fn)
 end
 
 function HC.loadcode(code)
@@ -149,10 +149,13 @@ function Pipe(...)
 		if fn == nil then
 			return args
 		end
-		local append_args = HC.packlen(...)
-		table.move(append_args, 1, append_args.n, args.n + 1, args)
-		args.n = args.n + append_args.n
-		return pipe(fn(HC.unpacklen(args)))
+		if type(fn) == "function" then
+			local append_args = HC.packlen(...)
+			table.move(append_args, 1, append_args.n, args.n + 1, args)
+			args.n = args.n + append_args.n
+			return Pipe(fn(HC.unpacklen(args)))
+		end
+		error("Wrong argument to pipe")
 	end
 end
 
@@ -759,352 +762,182 @@ function HC.serialize_minimal(obj)
 	return table.concat(buffer)
 end
 
-if HC.is_server then
-	local patch = {}
-	local handlers = {}
-	local index = {}
-	setmetatable(_G, {
-		__index = function(t, k)
-			return index[k] or rawget(t, k)
-		end,
-		__newindex = function(t, k, v)
-			if patch[k] then
-				handlers[k] = handlers[k] or {}
-				table.insert(handlers[k], v)
-				index[k] = function(...)
-					for _, v in ipairs(handlers[k]) do
-						xpcall(v, print, ...)
-					end
-				end
-				return
-			end
-			rawset(t, k, v)
-		end,
-	})
+local cache = {}
 
-	patch.handlerequest = true
-	function handlerequest(...)
-		print(...)
-	end
-end
-
-ColorTab = {
-	[0] = "#000000",
-	[1] = "#800000",
-	[2] = "#008000",
-	[3] = "#808000",
-	[4] = "#000080",
-	[5] = "#800080",
-	[6] = "#008080",
-	[7] = "#c0c0c0",
-	[8] = "#558097",
-	[9] = "#9db9c8",
-	[10] = "#7b7373",
-	[11] = "#2d2929",
-	[12] = "#5a5252",
-	[13] = "#635a5a",
-	[14] = "#423939",
-	[15] = "#1d1818",
-	[16] = "#181010",
-	[17] = "#291818",
-	[18] = "#100808",
-	[19] = "#f27971",
-	[20] = "#e1675f",
-	[21] = "#ff5a5a",
-	[22] = "#ff3131",
-	[23] = "#d65a52",
-	[24] = "#941000",
-	[25] = "#942918",
-	[26] = "#390800",
-	[27] = "#731000",
-	[28] = "#b51800",
-	[29] = "#bd6352",
-	[30] = "#421810",
-	[31] = "#ffaa99",
-	[32] = "#5a1000",
-	[33] = "#733929",
-	[34] = "#a54a31",
-	[35] = "#947b73",
-	[36] = "#bd5231",
-	[37] = "#522110",
-	[38] = "#7b3118",
-	[39] = "#2d1810",
-	[40] = "#8c4a31",
-	[41] = "#942900",
-	[42] = "#bd3100",
-	[43] = "#c67352",
-	[44] = "#6b3118",
-	[45] = "#c66b42",
-	[46] = "#ce4a00",
-	[47] = "#a56339",
-	[48] = "#5a3118",
-	[49] = "#2a1000",
-	[50] = "#150800",
-	[51] = "#3a1800",
-	[52] = "#080000",
-	[53] = "#290000",
-	[54] = "#4a0000",
-	[55] = "#9d0000",
-	[56] = "#dc0000",
-	[57] = "#de0000",
-	[58] = "#fb0000",
-	[59] = "#9c7352",
-	[60] = "#946b4a",
-	[61] = "#734a29",
-	[62] = "#523118",
-	[63] = "#8c4a18",
-	[64] = "#884411",
-	[65] = "#4a2100",
-	[66] = "#211810",
-	[67] = "#d6945a",
-	[68] = "#c66b21",
-	[69] = "#ef6b00",
-	[70] = "#ff7700",
-	[71] = "#a59484",
-	[72] = "#423121",
-	[73] = "#181008",
-	[74] = "#291808",
-	[75] = "#211000",
-	[76] = "#392918",
-	[77] = "#8c6339",
-	[78] = "#422910",
-	[79] = "#6b4218",
-	[80] = "#7b4a18",
-	[81] = "#944a00",
-	[82] = "#8c847b",
-	[83] = "#6b635a",
-	[84] = "#4a4239",
-	[85] = "#292118",
-	[86] = "#463929",
-	[87] = "#b5a594",
-	[88] = "#7b6b5a",
-	[89] = "#ceb194",
-	[90] = "#a58c73",
-	[91] = "#8c735a",
-	[92] = "#b59473",
-	[93] = "#d6a573",
-	[94] = "#efa54a",
-	[95] = "#efc68c",
-	[96] = "#7b6342",
-	[97] = "#6b5639",
-	[98] = "#bd945a",
-	[99] = "#633900",
-	[100] = "#d6c6ad",
-	[101] = "#524229",
-	[102] = "#946318",
-	[103] = "#efd6ad",
-	[104] = "#a58c63",
-	[105] = "#635a4a",
-	[106] = "#bda57b",
-	[107] = "#5a4218",
-	[108] = "#bd8c31",
-	[109] = "#353129",
-	[110] = "#948463",
-	[111] = "#7b6b4a",
-	[112] = "#a58c5a",
-	[113] = "#5a4a29",
-	[114] = "#9c7b39",
-	[115] = "#423110",
-	[116] = "#efad21",
-	[117] = "#181000",
-	[118] = "#292100",
-	[119] = "#9c6b00",
-	[120] = "#94845a",
-	[121] = "#524218",
-	[122] = "#6b5a29",
-	[123] = "#7b6321",
-	[124] = "#9c7b21",
-	[125] = "#dea500",
-	[126] = "#5a5239",
-	[127] = "#312910",
-	[128] = "#cebd7b",
-	[129] = "#635a39",
-	[130] = "#94844a",
-	[131] = "#c6a529",
-	[132] = "#109c18",
-	[133] = "#428c4a",
-	[134] = "#318c42",
-	[135] = "#109429",
-	[136] = "#081810",
-	[137] = "#081818",
-	[138] = "#082910",
-	[139] = "#184229",
-	[140] = "#a5b5ad",
-	[141] = "#6b7373",
-	[142] = "#182929",
-	[143] = "#18424a",
-	[144] = "#31424a",
-	[145] = "#63c6de",
-	[146] = "#44ddff",
-	[147] = "#8cd6ef",
-	[148] = "#736b39",
-	[149] = "#f7de39",
-	[150] = "#f7ef8c",
-	[151] = "#f7e700",
-	[152] = "#6b6b5a",
-	[153] = "#5a8ca5",
-	[154] = "#39b5ef",
-	[155] = "#4a9cce",
-	[156] = "#3184b5",
-	[157] = "#31526b",
-	[158] = "#deded6",
-	[159] = "#bdbdb5",
-	[160] = "#8c8c84",
-	[161] = "#f7f7de",
-	[162] = "#000818",
-	[163] = "#081839",
-	[164] = "#081029",
-	[165] = "#081800",
-	[166] = "#082900",
-	[167] = "#0052a5",
-	[168] = "#007bde",
-	[169] = "#10294a",
-	[170] = "#10396b",
-	[171] = "#10528c",
-	[172] = "#215aa5",
-	[173] = "#10315a",
-	[174] = "#104284",
-	[175] = "#315284",
-	[176] = "#182131",
-	[177] = "#4a5a7b",
-	[178] = "#526ba5",
-	[179] = "#293963",
-	[180] = "#104ade",
-	[181] = "#292921",
-	[182] = "#4a4a39",
-	[183] = "#292918",
-	[184] = "#4a4a29",
-	[185] = "#7b7b42",
-	[186] = "#9c9c4a",
-	[187] = "#5a5a29",
-	[188] = "#424214",
-	[189] = "#393900",
-	[190] = "#595900",
-	[191] = "#ca352c",
-	[192] = "#6b7321",
-	[193] = "#293100",
-	[194] = "#313910",
-	[195] = "#313918",
-	[196] = "#424a00",
-	[197] = "#526318",
-	[198] = "#5a7329",
-	[199] = "#314a18",
-	[200] = "#182100",
-	[201] = "#183100",
-	[202] = "#183910",
-	[203] = "#63844a",
-	[204] = "#6bbd4a",
-	[205] = "#63b54a",
-	[206] = "#63bd4a",
-	[207] = "#5a9c4a",
-	[208] = "#4a8c39",
-	[209] = "#63c64a",
-	[210] = "#63d64a",
-	[211] = "#52844a",
-	[212] = "#317329",
-	[213] = "#63c65a",
-	[214] = "#52bd4a",
-	[215] = "#10ff00",
-	[216] = "#182918",
-	[217] = "#4a884a",
-	[218] = "#4ae74a",
-	[219] = "#005a00",
-	[220] = "#008800",
-	[221] = "#009400",
-	[222] = "#00de00",
-	[223] = "#00ee00",
-	[224] = "#00fb00",
-	[225] = "#4a5a94",
-	[226] = "#6373b5",
-	[227] = "#7b8cd6",
-	[228] = "#6b7bd6",
-	[229] = "#7788ff",
-	[230] = "#c6c6ce",
-	[231] = "#94949c",
-	[232] = "#9c94c6",
-	[233] = "#313139",
-	[234] = "#291884",
-	[235] = "#180084",
-	[236] = "#4a4252",
-	[237] = "#52427b",
-	[238] = "#635a73",
-	[239] = "#ceb5f7",
-	[240] = "#8c7b9c",
-	[241] = "#7722cc",
-	[242] = "#ddaaff",
-	[243] = "#f0b42a",
-	[244] = "#df009f",
-	[245] = "#e317b3",
-	[246] = "#fffbf0",
-	[247] = "#a0a0a4",
-	[248] = "#808080",
-	[249] = "#ff0000",
-	[250] = "#00ff00",
-	[251] = "#ffff00",
-	[252] = "#0000ff",
-	[253] = "#ff00ff",
-	[254] = "#00ffff",
-	[255] = "#ffffff",
-}
-
----@param str string # 提示字符串
----@param actor? string # 服务端需要传入 actor
----@param color? string | integer # 颜色
-function HC.tips(str, actor, color)
-	assert_type("actor", actor, { "string", "number" }, true, 2)
-	color = color or "#FFFFFF"
-	if HC.is_client then
-		if type(color) == "number" then
-			color = SL:GetHexColorByStyleId(color)
+---接受一个字符串，返回一个整数，该整数是字符串的哈希值。
+---@param str string # 输入字符串
+---@return integer # -2147483648 ~ 2147483647
+function HC.hash(str)
+	local ret = cache[str]
+	if ret == nil then
+		local sum = 0
+		local mul = 1
+		for i = 1, #str do
+			mul = (i % 4 == 0) and 1 or mul * 256
+			sum = sum + string.byte(str, i) * mul
 		end
-		SL:ShowSystemTips(("<font color='%s'>%s</font>"):format(color, str))
-	else
-		if type(color) == "number" then
-			color = ColorTab[color]
-		end
-		sendmsg(actor, 1, tbl2json({ Msg = ("<font color='%s'>%s</font>"):format(color, str), Type = 9 }))
+		ret = ((sum + (2 ^ (32 - 1))) % (2 ^ 32)) - (2 ^ (32 - 1))
+		ret = math.floor(ret)
+		cache[str] = ret
+	end
+	return ret
+end
+
+local function _forbit(num, pos)
+	num = math.floor(num / 2 ^ pos)
+	if num > 0 then
+		local bitValue = num % 2
+		return pos + 1, bitValue
 	end
 end
 
-function HC.encode(x)
-	if HC.is_client then
-		return SL:JsonEncode(x)
-	else
-		return tbl2json(x)
-	end
+function HC.forbit(num)
+	return _forbit, num, 0
 end
 
-function HC.decode(x)
-	if HC.is_client then
-		return SL:JsonDecode(x)
-	else
-		return json2tbl(x)
+function HC.map(tbl, fn)
+	local ret = {}
+	for k, v in pairs(tbl) do
+		ret[k] = fn(v)
 	end
+	return ret
 end
 
-function HC.log(msg, actor)
-	if HC.is_server then
-		print(("Player: %s, ID: %s, %s"):format(getbaseinfo(actor, 1), getbaseinfo(actor, 2), msg))
-	elseif HC.is_client then
-		print(("Player: %s, ID: %s, %s"):format(Meta["USER_NAME"], Meta["USER_ID"], msg))
-	end
-end
-
----@param jobs fun(callback:function)[] # 接收回调的任务列表
-function Job(jobs)
-	local i = 0
-	local function job()
-		i = i + 1
-		local v = jobs[i]
-		if v then
-			v(job)
+function HC.filter(tbl, fn)
+	local ret = {}
+	for k, v in pairs(tbl) do
+		if fn(v) then
+			ret[k] = v
 		end
 	end
-	job()
+	return ret
 end
 
-Reg = setmetatable({}, { __index = function(_, k) return k end })
+function HC.reduce(tbl, fn, init)
+	local ret = init
+	for _, v in pairs(tbl) do
+		ret = fn(ret, v)
+	end
+	return ret
+end
 
+function HC.keys(tbl)
+	local ret = {}
+	for k, _ in pairs(tbl) do
+		table.insert(ret, k)
+	end
+	return ret
+end
+
+function HC.values(tbl)
+	local ret = {}
+	for _, v in pairs(tbl) do
+		table.insert(ret, v)
+	end
+	return ret
+end
+
+function HC.find(tbl, fn)
+	local ret = nil
+	for k, v in pairs(tbl) do
+		if fn(v) then
+			ret = k
+			break
+		end
+	end
+	return ret
+end
+
+function HC.select(tbl, fn)
+	local ret = {}
+	for _, v in pairs(tbl) do
+		if fn(v) then
+			table.insert(ret, v)
+		end
+	end
+	return ret
+end
+
+---@generic T
+---@param fn fun():T?
+---@return T?
+function HC.get(tbl, fn)
+	for _, v in pairs(tbl) do
+		local ret = fn(v)
+		if ret then
+			return ret
+		end
+	end
+end
+
+function HC.walk(tbl, fn)
+	for k, v in pairs(tbl) do
+		if type(v) == "table" then
+			HC.walk(v, fn)
+		else
+			fn(tbl, k, v)
+		end
+	end
+end
+
+Rng = {}
+
+--- Get a random key from a table.
+---@generic T
+---@param tbl table<T,any>
+---@return T
+function Rng.key(tbl)
+	local keys = HC.keys(tbl)
+	local index = math.random(1, #keys)
+	return tbl[keys[index]]
+end
+
+--- Get a random value from a table.
+---@generic T
+---@param tbl table<any,T>
+---@return T
+function Rng.value(tbl)
+	local values = HC.values(tbl)
+	local index = math.random(1, #values)
+	return values[index]
+end
+
+--- Create a weighted random table.
+---@param tbl table<number,any[]>
+---@return table<any,number>
+function Rng.create(tbl)
+	local ret = {}
+	local total_weight = 0
+	for weight, items in pairs(tbl) do
+		local count = #items
+		for _, item in ipairs(items) do
+			table.insert(ret, { item, weight / count })
+		end
+		total_weight = total_weight + weight
+	end
+	for _, v in ipairs(ret) do
+		v[2] = v[2] / total_weight
+	end
+	return ret
+end
+
+--- Get a random item from a weighted random table.
+---@generic T
+---@param tbl table<T,number>
+---@return T
+function Rng.get(tbl)
+	local ret = 0
+	local rng = math.random()
+	local x = 0
+	for _, v in ipairs(tbl) do
+		x = x + v[2]
+		if rng <= x then
+			ret = v[1]
+			break
+		end
+	end
+	return ret
+end
 
 --- ---
 --- 执行延迟调用

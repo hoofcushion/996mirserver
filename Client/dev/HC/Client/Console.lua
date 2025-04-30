@@ -44,23 +44,35 @@ function Console.main(npcid)
 
 	GUI:addOnClickEvent(Console.tree.RunClient, function()
 		local code = GUI:TextInput_getString(Console.tree.TextInput)
-		local ret = HC.serialize_tuple(HC.nilpcall(HC.runcode(code, setmetatable({}, { __index = _G }))))
-		Console.update(code, ret)
-		Server.Console.save(code, ret)
+		local success, ret = HC.runcode(code, setmetatable({}, { __index = _G }))
+		ret = HC.serialize_tuple(HC.unpacklen(ret))
+		local spec = { code = code, success = success, ret = ret }
+		Console.last = spec
+		Server.Console.save(spec)
+		Console.update(spec)
 	end)
 
 	GUI:addOnClickEvent(Console.tree.RunServer, function()
 		local code = GUI:TextInput_getString(Console.tree.TextInput)
 		Server.Console.runcode(code)
 	end)
-	Console.update(Console.last.code, Console.last.ret)
+
+	if Console.last then
+		Console.update(Console.last)
+	end
 end
 
-function Console.update()
-	local code = Console.last.code
+function Console.update(spec)
+	if GUI:Win_IsNull(Console.window) then
+		return
+	end
+	local code = spec.code
 	GUI:TextInput_setString(Console.tree.TextInput, code)
-	local ret = Console.last.ret
-	GUI:TextInput_setString(Console.tree.TextOutput, ret)
+	local success, ret = spec.success, spec.ret
+
+	GUI:TextInput_setString(Console.tree.TextOutput, ([[Status: %s
+	Result: %s
+]]):format(success and "Success" or "Failed", ret))
 end
 
 GUI:addKeyboardEvent({ "KEY_CTRL", "KEY_0" }, function()

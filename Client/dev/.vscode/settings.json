@@ -32,7 +32,6 @@
 		"SLDefine"
 	],
 	"Lua.workspace.library": [
-		"${workspaceFolder}/../../Client/dev/HC/Client",
-		"${workspaceFolder}/../../MirServer/Mir200/Envir/HC/Server"
+		"${workspaceFolder}/../../../MirServer/Mir200/Envir/HC/Server"
 	],
 }

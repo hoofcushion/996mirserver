@@ -1,24 +1,26 @@
 local Teleporter = {}
+
 ---@class TeleporterCfg
 Teleporter.cfg = {
-	{ id = "0", title = "比奇村", x = 297, y = 626 },
-	{ id = "2", title = "毒蛇山谷", x = 503, y = 481 },
-	{ id = "3", title = "盟重省", x = 333, y = 333 },
-	{ id = "4", title = "封魔谷", x = 241, y = 200 },
-	{ id = "5", title = "苍月岛", x = 141, y = 335 },
-	{ id = "6", title = "魔龙城", x = 141, y = 335 },
+	{ title = "盟重省", mapid = "3", x = 333, y = 333 },
+	{ title = "比奇城", mapid = "0", x = 330, y = 269 },
+	{ title = "白日门", mapid = "11", x = 177, y = 326 },
+	{ title = "封魔谷", mapid = "4", x = 241, y = 201 },
+	{ title = "苍月岛", mapid = "5", x = 140, y = 334 },
+	{ title = "魔龙城", mapid = "6", x = 124, y = 156 },
+	{ title = "边界村", mapid = "0", x = 290, y = 618 },
 }
 local validnpc = get_all_script_npc({ "主城传送员" })
 
 function Teleporter._teleport(actor, id)
 	local info = Teleporter.cfg[id]
-	mapmove(actor, info.id, info.x, info.y)
+	mapmove(actor, info.mapid, info.x, info.y)
 end
 
 Teleporter.teleport = check_npc_warp(Teleporter._teleport, validnpc)
 
 function Teleporter._sync(actor)
-	Clients[actor].Teleporter.cfg = unknown(HC.encode(Teleporter.cfg))
+	Clients[actor].Teleporter.cfg = unknown(Teleporter.cfg)
 end
 
 Event.add(Reg.sync, {

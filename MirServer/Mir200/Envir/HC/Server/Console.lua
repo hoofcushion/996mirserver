@@ -1,19 +1,19 @@
 local Console = {}
 
 function Console.runcode(actor, code)
-	local ret = HC.serialize_tuple(HC.nilpcall(HC.runcode(code, setmetatable({}, { __index = _G }))))
-	Console.save(actor, code, ret)
-	Console._sync(actor)
-	Clients[actor].Console.update()
+	local success, ret = HC.runcode(code, setmetatable({ actor = actor }, { __index = _G }))
+	ret = HC.serialize_tuple(HC.unpacklen(ret))
+	local spec = { code = code, success = success, ret = ret }
+	Console.save(actor, spec)
+	Clients[actor].Console.update(spec)
 end
 
-function Console.save(actor, code, ret)
-	setplaydef(actor, VarType.T(254), HC.encode({ code = code, ret = ret }))
-	Console._sync(actor)
+function Console.save(actor, spec)
+	setplaydef(actor, VarType.T(254), Json.encode(spec))
 end
 
 function Console._sync(actor)
-	Clients[actor].Console.last = getplaydef(actor, VarType.T(254))
+	Clients[actor].Console.last = Json.decode(getplaydef(actor, VarType.T(254)))
 end
 
 Event.add(Reg.sync, {
