@@ -1,28 +1,27 @@
-Client.NPCScriptMap = {}
-Client.NPCFuncMap = {}
-Talking_NPC = nil
-SL:RegisterLUAEvent(LUA_EVENT_TALKTONPC, "GUIUtil", function(data)
-	Talking_NPC = data
-	local script = Client.NPCScriptMap[Talking_NPC.index]
+Client.NPCScriptMap={}
+Client.NPCFuncMap={}
+Talking_NPC=nil
+SL:RegisterLUAEvent(LUA_EVENT_TALKTONPC,"GUIUtil",function(data)
+	Talking_NPC=data
+	local script=Client.NPCScriptMap[Talking_NPC.index]
 	if not script then
-		print("No script found for NPC index " .. Talking_NPC.index)
+		print("No script found for NPC index "..Talking_NPC.index)
 		return
 	end
-	local func = Client.NPCFuncMap[script]
+	local func=Client.NPCFuncMap[script]
 	if not func then
-		print("No function found for script " .. script)
+		print("No function found for script "..script)
 		return
 	end
-	local mod = Client[func]
+	local mod=Client[func]
 	if not mod then
-		print("No module found for function " .. func)
+		print("No module found for function "..func)
 		return
 	end
 	mod.main(Talking_NPC.index)
 end)
-
-SL:RegisterLUAEvent(LUA_EVENT_ACTOR_OUT_OF_VIEW, "GUIUtil", function(data)
-	if Talking_NPC.UserId == data.id then
+SL:RegisterLUAEvent(LUA_EVENT_ACTOR_OUT_OF_VIEW,"GUIUtil",function(data)
+	if Talking_NPC.UserId==data.id then
 		GUI:Win_CloseByNPCID(Talking_NPC.index)
 	end
 end)

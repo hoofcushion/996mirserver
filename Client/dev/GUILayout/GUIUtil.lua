@@ -5,6 +5,7 @@ require("HC/Client/Console", true)
 require("HC/Client/Teleporter", true)
 require("HC/Client/LuckyNecklace", true)
 require("HC/Client/Craft1", true)
+require("HC/Client/Rage", true)
 require("HC/Client/NPC", true)
 
 SL:RegisterLUAEvent(LUA_EVENT_MAPINFOCHANGE, "GUIUtil", function(data)
@@ -24,7 +25,7 @@ if TEST then
 
 	GUI:addKeyboardEvent({ "KEY_CTRL", "KEY_TAB" }, function()
 		GUI:Win_CloseAll()
-		SL:SendLuaNetMsg(Msg.sync)
+		Server.sync()
 		for k, _ in pairs(package.loaded) do
 			if string.find(k, "game/") or string.find(k, "scripts/") then
 				package.loaded[k] = nil
