@@ -113,8 +113,7 @@ function BaseUI.BmpText(parent,id,x,y)
 end
 -- 创建 TextAtlas
 function BaseUI.TextAtlas(parent,id,x,y)
-	local textAtlas=GUI:TextAtlas_Create(parent,id,x,y,"./0123456789","res/private/gui_edit/TextAtlas.png",14,
-																																						18,".")
+	local textAtlas=GUI:TextAtlas_Create(parent,id,x,y,"./0123456789","res/private/gui_edit/TextAtlas.png",14,18,".")
 	GUI:setTouchEnabled(textAtlas,false)
 	return textAtlas
 end

@@ -21,6 +21,6 @@
 		"UserData",
 	],
 	"Lua.workspace.library": [
-		"${workspaceFolder}/../../../Client/dev/HC/Client",
+		"${workspaceFolder}/../../../Client/dev/HC/client.lua",
 	]
 }
