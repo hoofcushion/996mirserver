@@ -41,5 +41,22 @@ Event.add(Reg.sync,{
 		Rage._sync(actor)
 	end,
 })
+-- 有称号的人击杀另一个有称号的人，可以获得一半的激活费用，被击杀的人失去称号
+Event.register(Reg.playdie,{
+	fn=function(actor,hiter)
+		for _,v in ipairs(cfg) do
+			if check_items(actor,v.give) and check_items(hiter,v.give) then
+				give_items(hiter,v.cost,0.5)
+				take_items(actor,v.give)
+				Common.tips(("您斩杀了激活了 %s 的 %s！"):format(ItemStd.name(v.give[1].id),ItemStd.name(v.give[1].id)),actor,
+																ColorTab.success)
+				return
+			end
+		end
+	end,
+})
+function Rage._is_protected(actor)
+	return BaseInfo.attack_area(actor)
+end
 Server.Rage=Rage
 return Rage

@@ -7,3 +7,11 @@ Event.register(Reg.playdie,{
 Export.delayrelive=unknown(function(actor)
 	realive(actor)
 end)
+Event.register(Reg.delayrelive,{
+	fn=function(actor)
+		-- µÇÂ¼×Ô¶¯¸´»î
+		if getbaseinfo(actor,0)==true then
+			realive(actor)
+		end
+	end,
+})

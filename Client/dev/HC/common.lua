@@ -543,8 +543,6 @@ end
 AttrTab={}
 if Common.is_client then
 	AttrTab=require("scripts/game_config/cfg_att_score",true)
-	HC.print(AttrTab)
 else
 	AttrTab=require("game_config/cfg_att_score",true)
-	HC.print(AttrTab)
 end

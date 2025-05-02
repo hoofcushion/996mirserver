@@ -3,15 +3,12 @@
 	"Lua.runtime.version": "LuaJIT",
 	"Lua.runtime.fileEncoding": "ansi",
 	"Lua.runtime.path": [
-		"?.lua"
+		"?.lua",
+		"?/init.lua",
+		"Envir/?.lua",
+		"Envir/?/init.lua"
 	],
 	"Lua.completion.requireSeparator": "/",
-	"Lua.diagnostics.disable": [
-		"discard-returns",
-		"missing-parameter",
-		"redundant-parameter",
-		"lowercase-global"
-	],
 	"Lua.workspace.ignoreDir": [
 		".vscode",
 		"Data",

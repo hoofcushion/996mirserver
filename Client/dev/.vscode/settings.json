@@ -6,12 +6,6 @@
 		"?.lua"
 	],
 	"Lua.completion.requireSeparator": "/",
-	"Lua.diagnostics.disable": [
-		"discard-returns",
-		"missing-parameter",
-		"redundant-parameter",
-		"lowercase-global"
-	],
 	"Lua.workspace.ignoreDir": [
 		".vscode",
 		"GUIExport",
@@ -23,13 +17,6 @@
 		"mp3",
 		"res",
 		"scene"
-	],
-	"Lua.diagnostics.globals": [
-		"cc",
-		"SL",
-		"GUI",
-		"ssr",
-		"SLDefine"
 	],
 	"Lua.workspace.library": [
 		"${workspaceFolder}/../../../MirServer/Mir200/Envir/HC/Server"

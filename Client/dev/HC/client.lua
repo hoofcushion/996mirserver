@@ -318,8 +318,7 @@ function GetAllByPrefix(widget,prefix,i,e)
 end
 function CloseButton(Background)
 	local BackGroundsize=GUI:getContentSize(Background)
-	local Button_Close=GUI:Button_Create(Background,"Button_Close",BackGroundsize.width,BackGroundsize.height,
-																																						"res/public/1900000510.png")
+	local Button_Close=GUI:Button_Create(Background,"Button_Close",BackGroundsize.width,BackGroundsize.height,"res/public/1900000510.png")
 	GUI:Button_loadTexturePressed(Button_Close,"res/public/1900000511.png")
 	GUI:Button_loadTextureDisabled(Button_Close,"res/public/1900000511.png")
 	GUI:Button_setTitleText(Button_Close,"")
