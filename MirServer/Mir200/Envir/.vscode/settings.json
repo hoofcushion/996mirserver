@@ -22,5 +22,6 @@
 	],
 	"Lua.workspace.library": [
 		"${workspaceFolder}/../../../Client/dev/HC/client.lua",
+		"${workspaceFolder}/../../../Client/dev/HC/Client"
 	]
 }

@@ -1,10 +1,13 @@
 local Console={}
 function Console.runcode(actor,code)
-	local success,ret=HC.runcode(code,setmetatable({actor=actor},{__index=_G}))
-	ret=HC.serialize_tuple(HC.unpacklen(ret))
+	local success,_ret=HC.runcode(code,setmetatable({},{__index=_G}))
+	local ret=HC.serialize_tuple(HC.unpacklen(_ret))
 	local spec={code=code,success=success,ret=ret}
 	Console.save(actor,spec)
-	Clients[actor].Console.update(spec)
+	Async(function()
+		AClients[actor].Console.last=spec
+		AClients[actor].Console.update(spec)
+	end)
 end
 function Console.save(actor,spec)
 	setplaydef(actor,VarType.T(254),Json.encode(spec))

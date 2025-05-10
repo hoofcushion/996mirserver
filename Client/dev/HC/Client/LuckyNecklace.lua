@@ -1,22 +1,28 @@
 local LuckyNecklace={}
 function LuckyNecklace.main(npcid)
-	LuckyNecklace.window=Window(Reg.LuckyNecklace,npcid)
-	LuckyNecklace.tree=GUI:ui_delegate(LuckyNecklace.window)
-	GUI:LoadExport(LuckyNecklace.window,"A/LuckyNecklace")
-	GUI:Win_SetDrag(LuckyNecklace.window,   LuckyNecklace.tree.Background)
-	local w,h=SL:GetMetaValue("SCREEN_WIDTH"),SL:GetMetaValue("SCREEN_HEIGHT")
-	GUI:setPosition(LuckyNecklace.tree.Node,w/2,                          h/2)
-	CloseButton(LuckyNecklace.tree.Background)
-	GUI:addOnClickEvent(LuckyNecklace.tree.Button_Close,function()
-		GUI:Win_Close(LuckyNecklace.window)
-	end)
-	GUI:addOnClickEvent(LuckyNecklace.tree.Button_Upgrade,function()
-		Server.LuckyNecklace.upgrade()
-	end)
-	GUI:addOnClickEvent(LuckyNecklace.tree.Button_Reset,function()
-		Server.LuckyNecklace.reset()
-	end)
-	LuckyNecklace.update()
+	return Window({
+		id=Reg.LuckyNecklace,
+		npcid=npcid,
+		init=function(window)
+			LuckyNecklace.window=window
+			LuckyNecklace.tree=GUI:ui_delegate(LuckyNecklace.window)
+			GUI:LoadExport(LuckyNecklace.window,"A/LuckyNecklace")
+			GUI:Win_SetDrag(LuckyNecklace.window,LuckyNecklace.tree.Background)
+			local w,h=SL:GetMetaValue("SCREEN_WIDTH"),SL:GetMetaValue("SCREEN_HEIGHT")
+			GUI:setPosition(LuckyNecklace.tree.Node,w/2,h/2)
+			CloseButton(LuckyNecklace.tree.Background)
+			GUI:addOnClickEvent(LuckyNecklace.tree.Button_Close,function()
+				GUI:Win_Close(LuckyNecklace.window)
+			end)
+			GUI:addOnClickEvent(LuckyNecklace.tree.Button_Upgrade,function()
+				Server.LuckyNecklace.upgrade()
+			end)
+			GUI:addOnClickEvent(LuckyNecklace.tree.Button_Reset,function()
+				Server.LuckyNecklace.reset()
+			end)
+			LuckyNecklace.update()
+		end,
+	})
 end
 function LuckyNecklace.update()
 	if GUI:Win_IsNull(LuckyNecklace.window) then

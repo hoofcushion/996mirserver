@@ -81,7 +81,6 @@ function ui.init(parent)
 	local Item_Cost = GUI:ItemShow_Create(Node_1, "Item_Cost", 20.00, -55.00, {count = 1, index = 1, look = true, bgVisible = true})
 	GUI:setAnchorPoint(Item_Cost, 0.50, 0.50)
 	GUI:setTag(Item_Cost, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_Cost, true)
 
 	-- Create RText_1
 	local RText_1 = GUI:RichText_Create(Node_1, "RText_1", 0.00, 120.00, "<font color='#FF0000'>金币回收比例+30%</font><br>攻魔道+5%<br>生命值+5%<br>沙巴克攻城期间不掉<br>被龙的传人击杀后，被击杀玩家龙的传人消失", 420, 16, "#ffffff", nil, nil, "fonts/font2.ttf")
@@ -115,7 +114,6 @@ function ui.init(parent)
 	local Item_Cost = GUI:ItemShow_Create(Node_2, "Item_Cost", 20.00, -55.00, {count = 1, index = 1, look = true, bgVisible = true})
 	GUI:setAnchorPoint(Item_Cost, 0.50, 0.50)
 	GUI:setTag(Item_Cost, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_Cost, true)
 
 	-- Create RText_1
 	local RText_1 = GUI:RichText_Create(Node_2, "RText_1", 0.00, 120.00, "<font color='#FF0000'>吸血+3%</font><br>杀怪爆率+20%<br>几率禁锢敌人3*3范围2秒<br>沙巴克攻城期间不掉<br>被横扫千军玩家击杀后，被击杀玩家横扫千军消失", 420, 16, "#ffffff", nil, nil, "fonts/font2.ttf")

@@ -106,25 +106,21 @@ function ui.init(parent)
 	local Item_1 = GUI:ItemShow_Create(Node_1, "Item_1", -100.00, 0.00, {index = 1, count = 1, look = true, bgVisible = true})
 	GUI:setAnchorPoint(Item_1, 0.50, 0.50)
 	GUI:setTag(Item_1, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_1, true)
 
 	-- Create Item_2
 	local Item_2 = GUI:ItemShow_Create(Node_1, "Item_2", -50.00, 0.00, {index = 1, count = 1, look = true, bgVisible = true})
 	GUI:setAnchorPoint(Item_2, 0.50, 0.50)
 	GUI:setTag(Item_2, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_2, true)
 
 	-- Create Item_3
 	local Item_3 = GUI:ItemShow_Create(Node_1, "Item_3", 0.00, 0.00, {look = true, count = 1, bgVisible = true, index = 1})
 	GUI:setAnchorPoint(Item_3, 0.50, 0.50)
 	GUI:setTag(Item_3, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_3, true)
 
 	-- Create Item_Out
 	local Item_Out = GUI:ItemShow_Create(Node_1, "Item_Out", 75.00, 0.00, {index = 1, count = 1, look = true, bgVisible = true})
 	GUI:setAnchorPoint(Item_Out, 0.50, 0.50)
 	GUI:setTag(Item_Out, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_Out, true)
 
 	-- Create Node_2
 	local Node_2 = GUI:Node_Create(Node_ItemShows, "Node_2", -50.00, 0.00)
@@ -134,25 +130,21 @@ function ui.init(parent)
 	local Item_1 = GUI:ItemShow_Create(Node_2, "Item_1", -100.00, 0.00, {look = true, count = 1, bgVisible = true, index = 1})
 	GUI:setAnchorPoint(Item_1, 0.50, 0.50)
 	GUI:setTag(Item_1, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_1, true)
 
 	-- Create Item_2
 	local Item_2 = GUI:ItemShow_Create(Node_2, "Item_2", -50.00, 0.00, {look = true, count = 1, bgVisible = true, index = 1})
 	GUI:setAnchorPoint(Item_2, 0.50, 0.50)
 	GUI:setTag(Item_2, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_2, true)
 
 	-- Create Item_3
 	local Item_3 = GUI:ItemShow_Create(Node_2, "Item_3", 0.00, 0.00, {bgVisible = true, count = 1, index = 1, look = true})
 	GUI:setAnchorPoint(Item_3, 0.50, 0.50)
 	GUI:setTag(Item_3, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_3, true)
 
 	-- Create Item_Out
 	local Item_Out = GUI:ItemShow_Create(Node_2, "Item_Out", 75.00, 0.00, {look = true, count = 1, bgVisible = true, index = 1})
 	GUI:setAnchorPoint(Item_Out, 0.50, 0.50)
 	GUI:setTag(Item_Out, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_Out, true)
 
 	-- Create Node_3
 	local Node_3 = GUI:Node_Create(Node_ItemShows, "Node_3", -50.00, -70.00)
@@ -162,25 +154,21 @@ function ui.init(parent)
 	local Item_1 = GUI:ItemShow_Create(Node_3, "Item_1", -100.00, 0.00, {look = true, count = 1, bgVisible = true, index = 1})
 	GUI:setAnchorPoint(Item_1, 0.50, 0.50)
 	GUI:setTag(Item_1, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_1, true)
 
 	-- Create Item_2
 	local Item_2 = GUI:ItemShow_Create(Node_3, "Item_2", -50.00, 0.00, {look = true, count = 1, bgVisible = true, index = 1})
 	GUI:setAnchorPoint(Item_2, 0.50, 0.50)
 	GUI:setTag(Item_2, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_2, true)
 
 	-- Create Item_3
 	local Item_3 = GUI:ItemShow_Create(Node_3, "Item_3", 0.00, 0.00, {bgVisible = true, count = 1, index = 1, look = true})
 	GUI:setAnchorPoint(Item_3, 0.50, 0.50)
 	GUI:setTag(Item_3, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_3, true)
 
 	-- Create Item_Out
 	local Item_Out = GUI:ItemShow_Create(Node_3, "Item_Out", 75.00, 0.00, {look = true, count = 1, bgVisible = true, index = 1})
 	GUI:setAnchorPoint(Item_Out, 0.50, 0.50)
 	GUI:setTag(Item_Out, -1)
-	GUI:ItemShow_setItemTouchSwallow(Item_Out, true)
 end
 
 return ui

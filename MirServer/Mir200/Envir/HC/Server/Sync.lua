@@ -15,6 +15,7 @@ Event.register(Reg.qfloadend,{
 --- 请求同步数据
 function Server.sync(actor)
 	Event.push(Reg.sync,actor)
+	Clients[actor].synced=true
 end
 if TEST then
 	Event.add(Reg.login,{

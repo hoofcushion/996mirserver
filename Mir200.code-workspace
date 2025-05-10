@@ -41,7 +41,7 @@
 			"align_continuous_assign_statement": "true",
 			"align_continuous_inline_comment": "true",
 			"align_continuous_rect_table_field": "true",
-			"align_continuous_similar_call_args": "true",
+			"align_continuous_similar_call_args": "false",
 			"align_function_params": "true",
 			"align_if_branch": "true",
 			"auto_collapse_lines": "false",

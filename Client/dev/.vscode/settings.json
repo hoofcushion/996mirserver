@@ -19,6 +19,7 @@
 		"scene"
 	],
 	"Lua.workspace.library": [
-		"${workspaceFolder}/../../../MirServer/Mir200/Envir/HC/server.lua"
+		"${workspaceFolder}/../../MirServer/Mir200/Envir/HC/server.lua",
+		"${workspaceFolder}/../../MirServer/Mir200/Envir/HC/Server"
 	],
 }

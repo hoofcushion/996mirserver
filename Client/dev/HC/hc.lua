@@ -100,10 +100,25 @@ function unknown(x)
 end
 HC={}
 function HC.print(...)
-	print(HC.Serializer.new():serialize_varargs(...))
+	print(HC.getline(1),HC.Serializer.new():serialize_varargs(...))
 end
 function HC.printf(fmt,...)
-	print(string.format(fmt,HC.Serializer.new():serialize_varargs(...)))
+	print(HC.getline(1),string.format(fmt,HC.Serializer.new():serialize_varargs(...)))
+end
+function HC.getline(i)
+	local info=debug.getinfo(2+(i or 0))
+	return info.short_src..":"..info.currentline
+end
+function HC.hook(fn,hook)
+	return function(...)
+		local ok,ret=HC.packpcall(fn,...)
+		hook(...)
+		if ok then
+			return HC.unpacklen(ret)
+		else
+			error(ret)
+		end
+	end
 end
 function HC.runcode(code,env)
 	local fn,err=HC.loadcode(code)
@@ -149,46 +164,7 @@ end
 --- ---
 --- Table functions
 --- ---
-function HC.check(t,k)
-	local ret=t[k]
-	if ret==nil then
-		ret={}
-		t[k]=ret
-	end
-	return ret
-end
-function HC.is_list(x)
-	local i=0
-	for _ in pairs(x) do
-		i=i+1
-		if x[i]==nil then
-			return false
-		end
-	end
-	return true
-end
-local function deepcopy(t,seen)
-	if type(t)~="table" then
-		return t
-	end
-	if seen[t] then
-		error("deepcopy loop")
-	end
-	seen[t]=true
-	local ret={}
-	for k,v in pairs(t) do
-		ret[deepcopy(k,seen)]=deepcopy(v,seen)
-	end
-	seen[t]=nil
-	return ret
-end
-
-function HC.deepcopy(t)
-	return deepcopy(t,{})
-end
-function HC.empty_function()
-
-end
+function HC.empty_function() end
 function HC.collect(ret,next,tbl,i)
 	local i,v=next(tbl,i)
 	if i==nil then
@@ -300,6 +276,83 @@ end
 function HC.sanepairs(tbl)
 	return _sanepairs,{t=tbl,k=nil,i=0}
 end
+function HC.check(t,k)
+	local ret=t[k]
+	if ret==nil then
+		ret={}
+		t[k]=ret
+	end
+	return ret
+end
+function HC.index(t,keys,p)
+	local ret=t
+	for _,k in ipairs(keys) do
+		if ret[k]==nil then
+			if p then
+				return
+			end
+			ret[k]={}
+		end
+		ret=ret[k]
+	end
+	return ret
+end
+function HC.newindex(t,keys,k,v,p)
+	local ret=t
+	for _,k in ipairs(keys) do
+		if ret[k]==nil then
+			if p then
+				return
+			end
+			ret[k]={}
+		end
+		ret=ret[k]
+	end
+	ret[k]=v
+end
+---@param tbl table
+---@return boolean
+function HC.is_list(tbl)
+	local i=0
+	for _ in pairs(tbl) do
+		i=i+1
+		if tbl[i]==nil then
+			return false
+		end
+	end
+	return true
+end
+---@generic T
+---@param tbl table<any,T>
+---@return T[]
+function HC.to_set(tbl)
+	local ret={}
+	for _,v in pairs(tbl) do
+		table.insert(ret,v)
+	end
+	return ret
+end
+local function deepcopy(t,seen)
+	if type(t)~="table" then
+		return t
+	end
+	if seen[t] then
+		error("deepcopy loop")
+	end
+	seen[t]=true
+	local ret={}
+	for k,v in pairs(t) do
+		ret[deepcopy(k,seen)]=deepcopy(v,seen)
+	end
+	seen[t]=nil
+	return ret
+end
+
+---@generic T
+---@return T
+function HC.deepcopy(t)
+	return deepcopy(t,{})
+end
 function HC.protect(pairs,tbl)
 	if type(tbl)=="table" then
 		return pairs(tbl)
@@ -333,10 +386,10 @@ function HC.filter(tbl,fn)
 end
 ---@generic T,V
 ---@param tbl table<any,T>
----@param fn fun(ret:T,v:T):V
 ---@param init V
+---@param fn fun(ret:T,v:T):V
 ---@return V
-function HC.reduce(tbl,fn,init)
+function HC.reduce(tbl,init,fn)
 	local ret=init
 	for _,v in pairs(tbl) do
 		ret=fn(ret,v)
@@ -362,6 +415,27 @@ function HC.values(tbl)
 		table.insert(ret,v)
 	end
 	return ret
+end
+---@param tbl table
+---@return {}
+function HC.clear(tbl)
+	for k,_ in pairs(tbl) do
+		tbl[k]=nil
+	end
+	return tbl
+end
+---@generic T
+---@param tbl table<any,T>
+---@param fn fun(v:T):boolean
+---@return integer
+function HC.count(tbl,fn)
+	local count=0
+	for _,v in pairs(tbl) do
+		if not fn or fn(v) then
+			count=count+1
+		end
+	end
+	return count
 end
 ---@generic K,T
 ---@param tbl table<K,T>
@@ -763,20 +837,6 @@ local function pindex(t,k)
 	return ret
 end
 
-local PCache={}
---- WALKAROUND: __newindex for nil key is unavaliable in lua 5.1
---- use class with :get :set instead.
-function PCache.new()
-	local obj=Class.new(PCache)
-	obj.data={}
-	return obj
-end
-function PCache:get(k)
-	return self.data[(k)]
-end
-function PCache:set(k,v)
-	self.data[pkey(k)]=v
-end
 --- General Cache object
 --- Allow multipe arg to be cached
 Cache={}
@@ -811,6 +871,7 @@ function Cache.table(fn)
 		end),
 	})
 end
+HC.Cache=Cache
 --- 序列化器配置项
 ---@class SerializerOptions
 ---@field auto_join boolean 是否自动折叠短表
@@ -1111,6 +1172,55 @@ function HC.serialize_minimal(obj)
 		error("can not serialize a "..t.." type.")
 	end
 	return table.concat(buffer)
+end
+hookreg=hookreg or {}
+--- 给函数添加钩子
+function HC.hooks(fn)
+	local info=hookreg[fn]
+	if info then
+		return info.fn,info.hooks
+	end
+	hooked_fn=function(...)
+		local ok,ret=HC.packpcall(fn,...)
+		for _,h in pairs(info.hooks) do
+			h(...)
+		end
+		if not ok then
+			error(ret[1],2)
+		end
+		return HC.unpacklen(ret)
+	end
+	info={fn=hooked_fn,hooks={}}
+	hookreg[fn]=info
+	hookreg[hooked_fn]=info
+	return info.fn,info.hooks
+end
+--- minimal async
+---
+--- pass in a function to open a async block
+---@param func function
+function Async(func)
+	coroutine.resume(coroutine.create(func))
+end
+--- minimal await
+---
+--- pass in a function to wait for the result
+function Await(func)
+	local co=coroutine.running()
+	func(function(result)
+		coroutine.resume(co,result)
+	end)
+	return coroutine.yield()
+end
+--- check if not in main thread
+---@return boolean
+function is_async()
+	local co,main=coroutine.running()
+	if main==nil then
+		return co==nil
+	else
+		return main==false
+	end
 end
 --- ---
 --- 执行延迟调用

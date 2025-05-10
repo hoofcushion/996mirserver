@@ -4,33 +4,35 @@ local M={}
 M.cfg=nil
 M.page=1
 function M.main(npcid)
-	M.window=Window(Reg.Rage,npcid)
-	M.tree=GUI:ui_delegate(M.window)
-	GUI:LoadExport(M.window,"A/Rage")
-	GUI:Win_SetDrag(M.window,   M.tree.Background)
-	local w,h=SL:GetMetaValue("SCREEN_WIDTH"),SL:GetMetaValue("SCREEN_HEIGHT")
-	GUI:setPosition(M.tree.Node,w/2,              h/2)
-	CloseButton(M.tree.Background)
-	GUI:addOnClickEvent(M.tree.Button_Close,function()
-		GUI:Win_Close(M.window)
-	end)
-	for i,button in GetAllByPrefix(M.tree.Node_Page_Buttons,"Button") do
-		GUI:addOnClickEvent(button,function()
-			M.page=i
+	return Window({
+		id=Reg.Rage,
+		npcid=npcid,
+		init=function(window)
+			M.window=window
+			M.tree=GUI:ui_delegate(M.window)
+			GUI:LoadExport(M.window,"A/Rage")
+			GUI:Win_SetDrag(M.window,M.tree.Background)
+			local w,h=SL:GetMetaValue("SCREEN_WIDTH"),SL:GetMetaValue("SCREEN_HEIGHT")
+			GUI:setPosition(M.tree.Node,w/2,h/2)
+			CloseButton(M.tree.Background)
+			GUI:addOnClickEvent(M.tree.Button_Close,function()
+				GUI:Win_Close(M.window)
+			end)
+			for i,button in GetAllByPrefix(M.tree.Node_Page_Buttons,"Button") do
+				GUI:addOnClickEvent(button,function()
+					M.page=i
+					M.update()
+				end)
+			end
 			M.update()
-		end)
-	end
-	M.update()
+		end,
+	})
 end
 function M.update()
 	if GUI:Win_IsNull(M.window) then
 		return
 	end
 	local cfg=M.cfg[M.page]
-	if not cfg then
-		Server.sync()
-		return
-	end
 	for i,node in GetAllByPrefix(M.tree.Node_Pages,"Node") do
 		GUI:setVisible(node,i==M.page)
 		local tree=GUI:ui_delegate(node)

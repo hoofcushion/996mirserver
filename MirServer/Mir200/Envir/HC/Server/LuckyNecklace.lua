@@ -69,10 +69,10 @@ function LuckNecklace._reset(actor)
 		Common.tips("您的项链幸运还未满级！",actor,ColorTab.warning)
 		return
 	end
-	setitemaddvalue(actor,itemobj,1,5,  2)
-	setnewitemvalue(actor,3,      0,"=",0,itemobj)
-	Common.tips("重置成功！",actor,  ColorTab.success)
-	refreshitem(actor,  itemobj)
+	setitemaddvalue(actor,itemobj,1,5,2)
+	setnewitemvalue(actor,3,0,"=",0,itemobj)
+	Common.tips("重置成功！",actor,ColorTab.success)
+	refreshitem(actor,itemobj)
 	Clients[actor].LuckyNecklace.update()
 end
 LuckNecklace.reset=check_npc_warp(LuckNecklace._reset,validnpc)

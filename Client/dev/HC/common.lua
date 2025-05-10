@@ -19,10 +19,12 @@ function Common.tips(str,actor,color)
 	end
 end
 function Common.log(msg,actor)
+	local info=debug.getinfo(2)
+	local pos=info.short_src..":"..info.currentline
 	if Common.is_server then
-		print(("Player: %s, ID: %s, %s"):format(getbaseinfo(actor,1),getbaseinfo(actor,2),msg))
+		print(pos,("Player: %s, ID: %s, %s"):format(getbaseinfo(actor,1),getbaseinfo(actor,2),msg))
 	elseif Common.is_client then
-		print(("Player: %s, ID: %s, %s"):format(Meta["USER_NAME"],Meta["USER_ID"],msg))
+		print(pos,("Player: %s, ID: %s, %s"):format(Meta["USER_NAME"],Meta["USER_ID"],msg))
 	end
 end
 function Common.sendmsg(id,int1,int2,int3,str,actor)
@@ -545,4 +547,91 @@ if Common.is_client then
 	AttrTab=require("scripts/game_config/cfg_att_score",true)
 else
 	AttrTab=require("game_config/cfg_att_score",true)
+end
+local attr_lookup=HC.reduce(AttrTab,{},function(ret,v)
+	ret[v.Idx]=v
+	ret[v.name]=v
+	return ret
+end)
+function get_attr_info(x)
+	return attr_lookup[x]
+end
+Event={}
+Event.events={}
+function Event.add(event,opts)
+	opts=opts or {}
+	assert_type("opts",opts,"table",false,1)
+	assert_type("opts.fn",opts.fn,"function",false,1)
+	assert_type("opts.priority",opts.priority,"number",true,1)
+	Event.events[event]=Event.events[event] or {}
+	local listeners=Event.events[event]
+	if next(listeners)==nil then
+		print("注册事件",event)
+	end
+	local pos=#listeners+1
+	for _,v in ipairs(listeners) do
+		if (opts.priority or 0)>=v.priority then
+			pos=pos-1
+			break
+		end
+	end
+	table.insert(Event.events[event],pos,{fn=opts.fn,priority=opts.priority or 0})
+end
+function Event.push(event,...)
+	local listeners=Event.events[event]
+	if not listeners then
+		return
+	end
+	local ret
+	for _,v in pairs(listeners) do
+		local r=HC.packlen(v.fn(...))
+		if r[1]==true then
+			ret=r
+			break
+		end
+	end
+	if ret then
+		return unpack(ret,2,ret.n)
+	end
+end
+local patch={}
+local handlers={}
+local index={}
+setmetatable(_G,{
+	__index=function(t,k)
+		return index[k] or rawget(t,k)
+	end,
+	__newindex=function(t,k,v)
+		if patch[k] then
+			handlers[k]=handlers[k] or {}
+			table.insert(handlers[k],v)
+			index[k]=function(...)
+				for _,_v in ipairs(handlers[k]) do
+					xpcall(_v,print,...)
+				end
+			end
+			return
+		end
+		rawset(t,k,v)
+	end,
+})
+local registered={}
+function Event.register(event,opts)
+	assert_type("event",event,"string",nil,1)
+	if not registered[event] then
+		registered[event]=true
+		if Common.is_server then
+			patch[event]=true
+			_G[event]=function(...)
+				return Event.push(event,...)
+			end
+		elseif Common.is_client then
+			SL:RegisterLUAEvent(event,event,function(...)
+				return Event.push(event,...)
+			end)
+		end
+	end
+	if opts then
+		Event.add(event,opts)
+	end
 end
