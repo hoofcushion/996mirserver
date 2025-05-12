@@ -65,11 +65,12 @@ function Callback.trigger(uid,sig,...)
 		return
 	end
 	Callback.lookup[uid]=nil
-	return handler.callback(...)
+	return handler.callback(true,...)
 end
 function Callback.gc()
 	for _,v in Callback.expire:iter() do
 		if os.time()-v.time>Callback.timeout then
+			v.callback(false,"timeout")
 			Callback.lookup[v.uid]=nil
 			Callback.expire:cuthead()
 		else

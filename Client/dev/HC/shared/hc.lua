@@ -1205,19 +1205,36 @@ end
 --- minimal async
 ---
 --- pass in a function to open a async block
----@param func function
-function Async(func)
-	coroutine.resume(coroutine.create(func))
+local function default_error_handler(err)
+	print("ASYNC ERROR:",err)
 end
---- minimal await
----
---- pass in a function to wait for the result
+---@param func function
+---@param error_handler? function
+function Async(func,error_handler)
+	local handler=error_handler or default_error_handler
+	local co=coroutine.create(function()
+		xpcall(func,handler)
+	end)
+	coroutine.resume(co)
+end
 function Await(func)
 	local co=coroutine.running()
-	func(function(result)
-		coroutine.resume(co,result)
-	end)
-	return coroutine.yield()
+	local callback=function(ok,...)
+		if ok then
+			coroutine.resume(co,ok,...)
+		else
+			error(ret[1])
+		end
+	end
+	local ok,ret=HC.packpcall(func,callback)
+	if not ok then
+		error(ret[1])
+	end
+	ok,ret=HC.packpcall(coroutine.yield)
+	if not ok then
+		error(ret[1])
+	end
+	return HC.unpacklen(ret)
 end
 --- check if not in main thread
 ---@return boolean
