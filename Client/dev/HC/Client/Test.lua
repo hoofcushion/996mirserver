@@ -1,6 +1,6 @@
-Event.register(Reg.HCLoadPost,{
-	fn=function()
-		if TEST then
+if TEST then
+	Event.register(Reg.HCLoadPost,{
+		fn=function()
 			Event.register(LUA_EVENT_LEAVE_WORLD,{
 				fn=function()
 					for k,_ in pairs(package.loaded) do
@@ -12,6 +12,7 @@ Event.register(Reg.HCLoadPost,{
 				end,
 			})
 			GUI:addKeyboardEvent({"KEY_CTRL","KEY_TAB"},function()
+				GUI:Win_CloseAll()
 				hcload(true)
 			end)
 			local function format_system_tips(...)
@@ -28,6 +29,6 @@ Event.register(Reg.HCLoadPost,{
 					Common.tips(format_system_tips(...))
 				end,
 			})
-		end
-	end,
-})
+		end,
+	})
+end

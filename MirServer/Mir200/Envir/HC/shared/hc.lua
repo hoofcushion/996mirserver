@@ -371,6 +371,13 @@ function HC.map(tbl,fn)
 	end
 	return ret
 end
+function HC.fill(tbl,s,e)
+	local ret={}
+	for i=s,e do
+		table.insert(ret,tbl[i]==nil and "nil" or tbl[i])
+	end
+	return ret
+end
 ---@generic T
 ---@param tbl table<any,T>
 ---@param fn fun(v:T):boolean
@@ -1217,7 +1224,7 @@ end
 function is_async()
 	local co,main=coroutine.running()
 	if main==nil then
-		return co==nil
+		return co~=nil
 	else
 		return main==false
 	end

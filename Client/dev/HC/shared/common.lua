@@ -544,11 +544,15 @@ function Common.get_color(id)
 end
 AttrTab={}
 if Common.is_client then
-	AttrTab=require("scripts/game_config/cfg_att_score",true)
+	AttrTab=HC.nilpcall(function()
+		return require("scripts/game_config/cfg_att_score",true)
+	end)
 else
-	AttrTab=require("game_config/cfg_att_score",true)
+	AttrTab=HC.nilpcall(function()
+		return require("game_config/cfg_att_score",true)
+	end)
 end
-local attr_lookup=HC.reduce(AttrTab,{},function(ret,v)
+local attr_lookup=HC.reduce(AttrTab or {},{},function(ret,v)
 	ret[v.Idx]=v
 	ret[v.name]=v
 	return ret

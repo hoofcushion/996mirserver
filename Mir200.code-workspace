@@ -17,20 +17,20 @@
 		"emeraldwalk.runonsave": {
 			"commands": [
 				{
-					"match": "dev[\\\\/]HC[\\\\/](init|common|hc).lua$",
-					"cmd": "ls ./../../MirServer/Mir200/Envir/HC/${fileBasename}"
+					"match": "dev[\\\\/]HC[\\\\/]shared[\\\\/].*\\.lua$",
+					"cmd": "ls ./../../MirServer/Mir200/Envir/HC/shared/${fileBasename}"
 				},
 				{
-					"match": "MirServer[\\\\/]Mir200[\\\\/]Envir[\\\\/]HC[\\\\/](init|common|hc).lua$",
-					"cmd": "ls ./../../../Client/dev/HC/${fileBasename}"
+					"match": "MirServer[\\\\/]Mir200[\\\\/]Envir[\\\\/]HC[\\\\/]shared[\\\\/].*\\.lua$",
+					"cmd": "ls ./../../../Client/dev/HC/shared/${fileBasename}"
 				},
 				{
-					"match": "dev[\\\\/]HC[\\\\/](init|common|hc).lua$",
-					"cmd": "iconv -f UTF-8 -t GB2312 HC/${fileBasename} > ./../../MirServer/Mir200/Envir/HC/${fileBasename}"
+					"match": "dev[\\\\/]HC[\\\\/]shared[\\\\/].*\\.lua$",
+					"cmd": "iconv -f UTF-8 -t GB2312 HC/shared/${fileBasename} > ./../../MirServer/Mir200/Envir/HC/shared/${fileBasename}"
 				},
 				{
-					"match": "MirServer[\\\\/]Mir200[\\\\/]Envir[\\\\/]HC[\\\\/](init|common|hc).lua$",
-					"cmd": "iconv -f GB2312 -t UTF-8 HC/${fileBasename} > ./../../../Client/dev/HC/${fileBasename}"
+					"match": "MirServer[\\\\/]Mir200[\\\\/]Envir[\\\\/]HC[\\\\/]shared[\\\\/].*\\.lua$",
+					"cmd": "iconv -f GB2312 -t UTF-8 HC/shared/${fileBasename} > ./../../../Client/dev/HC/shared/${fileBasename}"
 				}
 			]
 		},

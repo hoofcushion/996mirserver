@@ -1,26 +1,19 @@
-local patch={
-	handlerequest=true,
-}
-local handlers={}
-local index={}
-setmetatable(_G,{
-	__index=function(t,k)
-		return index[k] or rawget(t,k)
+--- Export lua function to legacy environment
+---@type table<string,string>
+Export=setmetatable({},{
+	__index=function(_,k)
+		return "@"..k
 	end,
-	__newindex=function(t,k,v)
-		if patch[k] then
-			handlers[k]=handlers[k] or {}
-			table.insert(handlers[k],v)
-			index[k]=function(...)
-				for _,v in ipairs(handlers[k]) do
-					xpcall(v,print,...)
-				end
-			end
-			return
+	__newindex=function(_,k,v)
+		if not _G[k] then
+			_G[k]=v
 		end
-		rawset(t,k,v)
 	end,
 })
+--- ---
+--- Variables
+--- ---
+
 VarType={
 	A=function(id) return ("A"..id) end, ---@return string 字符型系统变量 重启服务器保存500个 (A0 - A499) 存放在 Mir200/GlobalVal.ini 文件里面
 	G=function(id) return ("G"..id) end, ---@return number 数字型系统变量 重启服务器保存500个 (G0 - G499) 存放在 Mir200/GlobalVal.ini 文件里面
@@ -85,17 +78,10 @@ PlayVar=function(actor)
 	assert_type("actor",actor,"string",false,1)
 	return setmetatable({actor},_PlayVar)
 end
----@type table<string,string>
-Export=setmetatable({},{
-	__index=function(_,k)
-		return "@"..k
-	end,
-	__newindex=function(_,k,v)
-		if not _G[k] then
-			_G[k]=v
-		end
-	end,
-})
+--- ---
+--- Util
+--- ---
+
 --- 曼哈顿距离
 function get_distance(a,b)
 	return math.abs(b[1]-a[1])+math.abs(b[2]-a[2])
@@ -120,26 +106,28 @@ function check_range(a,b,r)
 end
 local npc_info_lookup={}
 local npc_info_list={}
-local readPath="../DATA/cfg_npclist.xls"
-local config=readexcel(readPath)
-for _,cfg in ipairs(config or {}) do
-	local id=tonumber(cfg[0])
-	if type(cfg)=="table" and id~=nil then
-		local npc=getnpcbyindex(id)
-		if npc then
-			local script=cfg[1]
-			local name=getbaseinfo(npc,1)
-			---@class npcinfo
-			local info={
-				npc=npc,
-				id=id,
-				script=script,
-				name=name,
-			}
-			npc_info_lookup[id]=info
-			npc_info_lookup[npc]=info
-			npc_info_lookup[name]=info
-			table.insert(npc_info_list,info)
+do
+	local readPath="../DATA/cfg_npclist.xls"
+	local config=readexcel(readPath)
+	for _,cfg in ipairs(config or {}) do
+		local id=tonumber(cfg[0])
+		if type(cfg)=="table" and id~=nil then
+			local npc=getnpcbyindex(id)
+			if npc then
+				local script=cfg[1]
+				local name=getbaseinfo(npc,1)
+				---@class npcinfo
+				local info={
+					npc=npc,
+					id=id,
+					script=script,
+					name=name,
+				}
+				npc_info_lookup[id]=info
+				npc_info_lookup[npc]=info
+				npc_info_lookup[name]=info
+				table.insert(npc_info_list,info)
+			end
 		end
 	end
 end
@@ -183,84 +171,6 @@ function check_npcs_in_range(actor,npc_names,range,msg)
 		Common.tips(msg,actor,249)
 	end
 	return false
-end
-local function node(keys,actor)
-	return setmetatable({},{
-		__index=function(_,k)
-			assert_type("key",k,"string")
-			local new_keys=HC.deepcopy(keys)
-			table.insert(new_keys,k)
-			return node(new_keys,actor)
-		end,
-		__newindex=function(_,k,v)
-			Common.log(
-				("Client%s.%s=%s"):format(
-					#keys>0 and "."..(table.concat(keys,".")) or "",
-					tostring(k),
-					tostring(v)
-				),
-				actor)
-			if Common.is_server then
-				Common.sendmsg(Msg.call,1,0,0,Json.encode({keys,{k,v}}),actor)
-			end
-		end,
-		__call=function(_,...)
-			Common.log(
-				("Client call: %s(%s)"):format(
-					table.concat(keys,"."),
-					table.concat(HC.map({...},tostring),", ")
-				),
-				actor)
-			Common.sendmsg(Msg.call,0,0,0,Json.encode({keys,{...}}),actor)
-		end,
-	})
-end
-
--- call client function in server
--- Clients[actor].Console.init()
----@type table<string,Client>
-Clients=setmetatable({},{
-	__index=function(_,actor)
-		return node({},actor)
-	end,
-})
--- server api register
----@class Server
-Server={}
-Event.register(Reg.handlerequest,{
-	fn=function(actor,msgid,_,_,_,data)
-		if msgid~=Msg.call then
-			return
-		end
-		data=Json.decode(data)
-		if type(data)~="table"
-		or type(data[1])~="table"
-		or type(data[2])~="table"
-		then
-			return
-		end
-		local keys,args=data[1],data[2]
-		Common.log(
-			("Server API call: %s(%s)"):format(
-				table.concat(keys,"."),
-				table.concat(HC.map(args,HC.serialize_minimal),", ")
-			),
-			actor)
-		local tmp=Server
-		for _,v in ipairs(keys) do
-			tmp=tmp[v]
-			if tmp==nil
-			or string.sub(v,1,1)=="_"
-			then
-				Common.log(("Invalid API call: %s"):format(table.concat(keys,".")),actor)
-				return
-			end
-		end
-		tmp(actor,HC.unpack(args))
-	end,
-})
-function Server.runcode(actor,code)
-	Common.sendmsg(Msg.runcode,0,0,0,code,actor)
 end
 local maps={}
 do
@@ -416,79 +326,6 @@ function take_items(actor,items,factor,log)
 	end
 	return true
 end
----@param obj string
----@param nID
----| -1 #是否玩家 (true:玩家)
----| 0 #是否死亡 (true:死亡状态)
----| 1 #对象名称 (返回值字符型)，当对象为怪物时，param3=0/nil，返回怪物显示名(即去除了尾部的数字)，param3=1时返回怪物默认名(怪物表中配置的名字)，param3=2时返回怪物实际名(游戏内实际展示的名字,新增于引擎64_23.08.30)
----| 2 #对象唯一ID ?(返回值字符型) = userid
----| 3 #对象当前地图ID (返回值字符型)
----| 4 #对象当前X坐标
----| 5 #对象当前Y坐标
----| 6 #对象当前等级
----| 7 #对象当前职业 (0-战 1-法 2-道)
----| 8 #对象当前性别
----| 9 #对象当前血量(HP)
----| 10 #对象当前血量上限(MAXHP)
----| 11 #对象当前蓝量(MP)
----| 12 #对象当前蓝量上限(MAXMP)
----| 13 #对象当前经验(Exp)
----| 14 #对象当前经验上限(MaxExp)
----| 15 #对象物防下限
----| 16 #对象物防上限
----| 17 #对象魔防下限
----| 18 #对象魔防上限
----| 19 #对象物攻下限
----| 20 #对象物攻上限
----| 21 #对象魔攻下限
----| 22 #对象魔攻上限
----| 23 #对象道攻下限
----| 24 #对象道攻上限
----| 25 #对象幸运值
----| 26 #对象HP恢复
----| 27 #对象MP恢复
----| 28 #对象中毒恢复
----| 29 #毒物躲避
----| 30 #对象魔法躲避
----| 31 #对象准确(无法设置)
----| 32 #对象敏捷
----| 33 #发型
----| 34 #背包物品数量(仅人物)
----| 35 #队伍成员数量(仅人物)
----| 36 #行会名(仅人物)
----| 37 #是否会长(仅人物)
----| 38 #宠物数量
----| 39 #转生等级(仅人物)
----| 40 #杀怪经验倍数(仅人物)
----| 41 #杀怪经验时间(仅人物)
----| 42 #显示延时TIMERECALL还剩多少秒(仅人物)
----| 43 #人物杀怪爆率倍数(仅人物)
----| 44 #复活时间
----| 45 #地图名MAPTITLE
----| 46 #PK点
----| 47 #是否新人(仅人物)
----| 48 #是否安全区
----| 49 #是否摆摊中(仅人物)
----| 50 #是否交易中(仅人物)
----| 51 #对象att属性值，需要提供 参数3:属性ID(cfg_att_score.xls设置：1~129，200~249)自定义属性在24.0807引擎拓展到200~399
----| 52 #穿人/怪方式 0=恢复/1=穿人/2=穿怪/3=穿人穿怪
----| 53 #登录状态，0：正常，1：断线重连(仅人物)
----| 54 #主人UserId
----| 55 #Idx
----| 56 #颜色(0~255)
----| 57 #最后杀死的怪物Index(仅人物)
----| 57 #爆怪次数(等同之前 MonItems 功能)
----| 58 #时装显示状态(仅人物)
----| 59 #主人对象
----| 60 #是否在攻沙/攻城区域(bool)
----| 61 #是否为离线挂机状态(bool)
----| 62 #获取怪物表自定义常量(25列)
----| 63 #人物背包大小
----| 64 #获取对象当前的身体颜色值
----| 65 #获取对象的回城地图
----| 67 #获取对象的攻击对象
----| 68 #怪物归属对象
----| 69 #获取对象当前的方向(新增于引擎64_23.08.30)
 BaseInfo={
 	isplayer=function(actor,...) return getbaseinfo(actor,0,...) end, ---@return boolean  是否玩家 (true:玩家)
 	isdead=function(actor,...) return getbaseinfo(actor,1,...) end, ---@return string   是否死亡 (true:死亡状态)
