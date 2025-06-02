@@ -3,6 +3,50 @@
 --- * Async/Await API
 --- * Pass arguments and return values between client and server with a simple proxy
 --- ---
+local function default_error_handler(err)
+	print("ASYNC ERROR:",err)
+end
+--- minimal async
+---
+--- pass in a function to open a async block
+---@param func function
+---@param error_handler? function
+function Async(func,error_handler)
+	local handler=error_handler or default_error_handler
+	local co=coroutine.create(function()
+		xpcall(func,handler)
+	end)
+	coroutine.resume(co)
+end
+function Await(func)
+	local co=coroutine.running()
+	local callback=function(ok,...)
+		if ok then
+			coroutine.resume(co,...)
+		else
+			error(ret[1])
+		end
+	end
+	local ok,ret=HC.packpcall(func,callback)
+	if not ok then
+		error(ret[1])
+	end
+	local ok,ret=HC.packpcall(coroutine.yield)
+	if not ok then
+		error(ret[1])
+	end
+	return HC.unpacklen(ret)
+end
+--- check if not in main thread
+---@return boolean
+function is_async()
+	local co,main=coroutine.running()
+	if main==nil then
+		return co~=nil
+	else
+		return main==false
+	end
+end
 
 ---@class deque<V>: { [integer]: V }
 local deque={s=1,e=0,l={}}
@@ -70,7 +114,7 @@ end
 function Callback.gc()
 	for _,v in Callback.expire:iter() do
 		if os.time()-v.time>Callback.timeout then
-			v.callback(false,"timeout")
+			pcall(v.callback,false,"timeout")
 			Callback.lookup[v.uid]=nil
 			Callback.expire:cuthead()
 		else

@@ -562,6 +562,10 @@ function get_attr_info(x)
 end
 Event={}
 Event.events={}
+---@param opts {
+--- fn:function,
+--- priority:number?,
+---}
 function Event.add(event,opts)
 	opts=opts or {}
 	assert_type("opts",opts,"table",false,1)

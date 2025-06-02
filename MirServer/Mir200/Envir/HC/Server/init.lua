@@ -14,7 +14,7 @@ Export=setmetatable({},{
 --- Variables
 --- ---
 
-VarType={
+VarName={
 	A=function(id) return ("A"..id) end, ---@return string 字符型系统变量 重启服务器保存500个 (A0 - A499) 存放在 Mir200/GlobalVal.ini 文件里面
 	G=function(id) return ("G"..id) end, ---@return number 数字型系统变量 重启服务器保存500个 (G0 - G499) 存放在 Mir200/GlobalVal.ini 文件里面
 	I=function(id) return ("I"..id) end, ---@return number 临时数字型系统变量 重启服务器不保存.100个 (I0 - I99)
@@ -30,29 +30,74 @@ VarType={
 	B=function(id) return ("B"..id) end, ---@return number 大数数字型个人变量	可保存.最高支持19位数,适用大数值操作.100个 (B0 - B99)
 	F=function(id) return (id) end, ---@return 0|1 比特位个人标记	可保存,该变量只有0和1的两种状态
 }
----@class SysVar
-SysVar={
-	open_timing=VarType.G(0), -- 开服时间戳
-	merge_count=VarType.G(1), -- 合区次数
+-- 系统变量分片范围
+local VAR_SHARDS={}
+for i=0,10 do
+	VAR_SHARDS[i]=VarName.A(i)
+end
+-- 全局数据表
+local SysVar={
+	open_timing=0,
+	merge_count=0,
 }
----@class PlayDef
-PlayDef={}
--- 个人标记 	整数型个人变量 	可保存,该变量只有0和1的两种状态
----@class PlayFlag
-PlayFlag={
-	enter_game=VarType.F(1),
-}
----@class SysVar
+local function get_shard_name(key)
+	local shard_id=math.floor(math.abs(HC.hash(key))%#VAR_SHARDS+1) -- 哈希分片
+	return VAR_SHARDS[shard_id]
+end
+-- 加载分片
+local function load_shard(var_name)
+	local data=getsysvar(var_name)
+	if type(data)=="string" then
+		local ok,ret=HC.runcode("return"..data)
+		if ok and type(ret[1])=="table" then
+			return ret[1]
+		end
+	end
+	return {}
+end
+-- 写入分片
+local function save_shard(key,value)
+	-- 只有定义过的变量才会写入分片
+	if not SysVar[key] then
+		return
+	end
+	local shard_name=get_shard_name(key)
+	local shard_data=load_shard(shard_name)
+	shard_data[key]=value
+	local data_str=HC.serialize_minimal(shard_data)
+	setsysvar(shard_name,data_str)
+end
+-- 加载分片
+local function init_shards()
+	for _,shard_name in ipairs(VAR_SHARDS) do
+		local shard_data=load_shard(shard_name)
+		for k in pairs(SysVar) do
+			-- 只加载定义过的变量
+			if shard_data[k] then
+				SysVar[k]=shard_data[k]
+			end
+		end
+	end
+end
+init_shards()
+-- 全局变量访问器
 Global=setmetatable({},{
-	__index=function(_,k)
-		k=SysVar[k]
-		return getsysvar(k)
+	__index=function(_,key)
+		return SysVar[key] -- 读取缓存
 	end,
-	__newindex=function(_,k,v)
-		k=SysVar[k]
-		return setsysvar(k,v)
+	__newindex=function(_,key,value)
+		SysVar[key]=value     -- 更新缓存
+		save_shard(key,value) -- 同步写入分片
 	end,
 })
+--- 个人变量定义
+---@class PlayDef
+PlayDef={}
+--- 个人标记定义
+---@class PlayFlag
+PlayFlag={
+	enter_game=VarName.F(1),
+}
 local _PlayVar={
 	__index=function(t,k)
 		local actor=rawget(t,1)
@@ -73,6 +118,7 @@ local _PlayVar={
 		end
 	end,
 }
+--- 个人变量
 ---@return PlayDef|PlayFlag
 PlayVar=function(actor)
 	assert_type("actor",actor,"string",false,1)
@@ -82,7 +128,12 @@ end
 --- Util
 --- ---
 
+---@alias point {[1]:number,[2]:number}
+---@alias position {x:number,y:number}
+---@alias block {width:number,height:number}
 --- 曼哈顿距离
+---@param a point
+---@param b point
 function get_distance(a,b)
 	return math.abs(b[1]-a[1])+math.abs(b[2]-a[2])
 end
@@ -398,3 +449,112 @@ BaseInfo={
 	belons=function(actor,...) return getbaseinfo(actor,68,...) end, ---@return string   怪物归属对象
 	direction=function(actor,...) return getbaseinfo(actor,69,...) end, ---@return number   获取对象当前的方向(新增于引擎64_23.08.30)
 }
+local _tokenRegistry={}
+local _lastGCTime=os.time() -- 上次垃圾回收时间
+local _counter=0            -- 令牌计数器
+-- 生成令牌标识符
+local function generateToken()
+	_counter=_counter+1
+	return string.format("%d_%d",os.time(),_counter)
+end
+
+-- 导出接口
+function export(player,opts)
+	-- 检查是否需要垃圾回收
+	if os.time()-_lastGCTime>=60 then
+		collectTokens()
+	end
+	-- 解析参数
+	local token=generateToken()
+	local options=type(opts)=="function" and {func=opts} or opts
+	_tokenRegistry[token]={
+		func=options.func or function() end, -- 函数回调
+		time=os.time(), -- 创建时间
+		player=player, -- 所有者
+		once=options.once==nil and true or options.once, -- 是否一次性
+		life=options.life or 60, -- 生命周期（秒）
+	}
+	return "@token,"..token
+end
+-- 令牌处理函数
+function token(player,token)
+	local data=_tokenRegistry[token]
+	-- 验证令牌有效性
+	if not data then return end
+	-- 检查令牌是否过期
+	if os.time()-data.time>data.life then
+		_tokenRegistry[token]=nil
+		return
+	end
+	-- 验证玩家身份
+	if data.player~=player then return end
+	-- 执行注册的函数
+	local status,err=pcall(data.func,player)
+	if not status then
+		-- 这里可以添加更详细的错误日志
+		print("Token 执行错误:",err)
+	end
+	-- 根据once参数决定是否销毁令牌
+	if data.once then
+		_tokenRegistry[token]=nil
+	end
+end
+-- 垃圾回收函数
+function collectTokens()
+	local now=os.time()
+	_lastGCTime=now
+	for token,data in pairs(_tokenRegistry) do
+		-- 清除超过生命周期的令牌
+		if now-data.time>data.life then
+			_tokenRegistry[token]=nil
+		end
+	end
+end
+-- 用 table 定义 UI 组件
+local function widget(type,opts)
+	local buf={}
+	table.insert(buf,type)
+	for k,v in pairs(opts) do
+		table.insert(buf,string.format("%s=%s",k,v))
+	end
+	return "<"..table.concat(buf,"|")..">"
+end
+
+-- 创建一个选择框
+function messageboxex(player,content,sfun,ffun,data)
+	data=data or {}
+	data.timer_s=data.timer_s or 60
+	data.yesbtn=data.yesbtn or "确 定"
+	data.nobtn=data.nobtn or "取 消"
+	data.esc=data.esc==nil or (not not data.esc)
+	data.width=data.width or 220     -- 默认宽度
+	data.height=data.height or 160   -- 默认高度
+	data.start_x=data.start_x or -1  -- 默认 start_x
+	data.start_y=data.start_y or 192 -- 默认 start_y
+	close(player)
+	local ui={
+		widget("Img",{x=data.start_x,y=data.start_y,width=data.width,height=data.height,bg=1,esc=data.esc and 1 or 0,img="public_win32/bg_npc_01.png",move=0,reset=1,scale9b=12,scale9l=12,scale9r=12,scale9t=12}),
+		widget("Text",{x=data.start_x+data.width*0.1,y=data.start_y+data.height*0.1,width=data.width-data.width*0.1*2,height=16,size=16,text=content}),
+		widget("Button",{ax=0.5,ay=0.5,x=data.start_x+data.width*0.25,y=data.start_y+data.height*0.80,size=16,nimg="public/1900000611.png",text=data.nobtn,link=ffun}),
+		widget("Button",{ax=0.5,ay=0.5,x=data.start_x+data.width*0.75,y=data.start_y+data.height*0.80,size=16,nimg="public/1900000611.png",text=data.yesbtn,link=sfun}),
+		widget("COUNTDOWN",{id=1,a=0,x=data.start_x+data.width*0.1,y=data.start_y+data.height*0.55,count=1,color=249,size=16,time=data.timer_s,link="@close"}),
+		widget("Text",{x=data.start_x+data.width*0.1+34,y=data.start_y+data.height*0.55,size=16,color=249,text="后自动关闭"}),
+	}
+	local str=table.concat(ui,"\n")
+	say(player,str)
+end
+-- 测试
+-- for _,v in ipairs(getplayerlst()) do
+-- 	messageboxex(v,
+-- 														"请选择",
+-- 														export(v,function()
+-- 															print("选择了确定")
+-- 														end),
+-- 														export(v,{
+-- 															func=function()
+-- 																print("选择了取消")
+-- 															end,
+-- 															once=false,
+-- 														})
+-- 	)
+-- end

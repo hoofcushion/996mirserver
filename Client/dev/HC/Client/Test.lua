@@ -12,6 +12,7 @@ if TEST then
 				end,
 			})
 			GUI:addKeyboardEvent({"KEY_CTRL","KEY_TAB"},function()
+				cc.Director:getInstance():getTextureCache():removeAllTextures()
 				GUI:Win_CloseAll()
 				hcload(true)
 			end)

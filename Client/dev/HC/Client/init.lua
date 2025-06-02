@@ -87,27 +87,32 @@ end
 function WindowProxy(window)
 	return WindowProxyNode({},window)
 end
+local _tmp=GUI:Win_Create("tmp",0,0,0,0)
+local root=GUI:getParent(_tmp)
+GUI:Win_Close(_tmp)
 function Window(opts)
 	assert_type("opts",opts,"table",true)
 	opts=opts or {}
-	assert_type("opts.id",opts.id,"string",true)
-	assert_type("opts.npcid",opts.npcid,"number",true)
-	assert_type("opts.init",opts.init,"function",true)
-	assert_type("opts.fini",opts.fini,"function",true)
-	assert_type("opts.mask",opts.mask,"boolean",true)
 	assert_type("opts.animate",opts.animate,"boolean",true)
+	assert_type("opts.fini",opts.fini,"function",true)
+	assert_type("opts.id",opts.id,"string",true)
+	assert_type("opts.init",opts.init,"function",true)
+	assert_type("opts.mask",opts.mask,"boolean",true)
+	assert_type("opts.npcid",opts.npcid,"number",true)
+	assert_type("opts.esc",opts.esc,"boolean",true)
 	opts.mask=opts.mask==nil and true or opts.mask
 	opts.animate=opts.animate==nil and true or opts.animate
 	opts.id=opts.id==nil and debug.getinfo(2).source..":"..debug.getinfo(2).currentline or opts.id
+	opts.esc=opts.esc==nil and true or opts.esc
 	local window=GUI:Win_Create(opts.id)
 	if opts.npcid then
 		GUI:Win_BindNPC(window,opts.npcid)
 	end
-	GUI:Win_SetESCClose(window,true)
+	if opts.esc then
+		GUI:Win_SetESCClose(window,true)
+	end
 	if opts.mask then
-		GUI:addOnClickEvent(CreateShadowMask(window),function()
-			GUI:Win_Close(window)
-		end)
+		ShadowMask()
 	end
 	if opts.init then
 		opts.init(window)
@@ -115,38 +120,47 @@ function Window(opts)
 	if opts.animate then
 		WindowAnimate(window)
 	end
-	if opts.fini then
-		GUI:addStateEvent(window,function(event)
-			if event=="exit" then
+	GUI:addStateEvent(window,function(event)
+		if event=="cleanup" then
+			if opts.fini then
 				opts.fini(window)
 			end
-		end)
-	end
+			SL:ScheduleOnce(function()
+																				local wins=GUI:getChildren(root)
+																				if #wins==1 and GUI:getName(wins[1])=="ShadowMask" then
+																					GUI:Win_Close(wins[1])
+																				end
+																			end,0)
+		end
+	end)
 	return window
 end
 --- 在给定的节点下创建一个黑色半透明 Layout 控件
 --- 返回创建的控件
-function CreateShadowMask(parent,maskon,opacity)
+function ShadowMask(opacity)
+	local window=GUI:GetWindow(nil,"ShadowMask")
+	if window then
+		return window
+	end
 	local w,h=SL:GetMetaValue("SCREEN_WIDTH"),SL:GetMetaValue("SCREEN_HEIGHT")
-	if maskon==nil then
-		w=w*3
-		h=h*3
-	else
-		local size=GUI:getContentSize(maskon)
-		w=size.width
-		h=size.height
-	end
+	window=GUI:Win_Create("ShadowMask")
+	GUI:setLocalZOrder(window,0)
 	-- Create bg_close
-	local v=GUI:Layout_Create(parent,"shadow_mask",0.00,0.00,w,h,false)
-	if (opacity~=nil and opacity~=0) or opacity==nil then
-		GUI:Layout_setBackGroundColorType(v,1)
-		GUI:Layout_setBackGroundColor(v,"#000000")
-		GUI:Layout_setBackGroundColorOpacity(v,math.floor(opacity or (255/2)))
-	end
-	GUI:setAnchorPoint(v,0.5,0.5)
-	GUI:setTouchEnabled(v,true)
-	GUI:setTag(v,-1)
-	return v
+	local layout=GUI:Layout_Create(window,"layout",w/2,h/2,w,h,false)
+	GUI:Layout_setBackGroundColor(layout,"#000000")
+	GUI:Layout_setBackGroundColorOpacity(layout,math.floor(opacity or (255/2)))
+	GUI:Layout_setBackGroundColorType(layout,1)
+	GUI:setAnchorPoint(layout,0.5,0.5)
+	GUI:setTag(layout,-1)
+	GUI:setTouchEnabled(layout,true)
+	GUI:addOnClickEvent(layout,function()
+		for _,win in ipairs(GUI:getChildren(GUI:getParent(window))) do
+			GUI:Win_Close(win)
+		end
+	end)
+	GUI:setOpacity(layout,0)
+	GUI:Timeline_FadeIn(layout,0.2)
+	return layout
 end
 -- 遍历指定节点下所有带有指定前缀的控件
 -- 例子：

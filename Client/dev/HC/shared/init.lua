@@ -24,12 +24,13 @@ function hcload(force)
 		require("HC/shared/hc")
 		require("HC/shared/common")
 		if Common.is_server then
-			require("HC/server/init")
+			require("HC/Server/init")
 			require("HC/shared/rpc")
 			for _,file in ipairs(getenvirfilelist()) do
 				file=string.gsub(file,"\\","/")
 				if string.find(file,"^HC/Server/.+%.lua$") then
 					file=string.gsub(file,"%.lua$","")
+					print(file)
 					require(file)
 				end
 			end

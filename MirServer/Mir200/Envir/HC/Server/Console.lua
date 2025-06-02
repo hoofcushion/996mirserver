@@ -9,10 +9,10 @@ function Console.runcode(actor,code)
 	-- Clients[actor].Console.update(spec)
 end
 function Console.save(actor,spec)
-	setplaydef(actor,VarType.T(254),Json.encode(spec))
+	setplaydef(actor,VarName.T(254),Json.encode(spec))
 end
 function Console._sync(actor)
-	Clients[actor].Console.last=Json.decode(getplaydef(actor,VarType.T(254)))
+	Clients[actor].Console.last=Json.decode(getplaydef(actor,VarName.T(254)))
 end
 Event.add(Reg.sync,{
 	fn=function(actor)

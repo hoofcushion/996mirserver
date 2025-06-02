@@ -1159,19 +1159,20 @@ function HC.serialize_minimal(obj)
 		table.insert(buffer,string.format("%q",obj))
 	elseif t=="table" then
 		table.insert(buffer,"{")
-		local max=0
-		for i,v in ipairs(obj) do
-			max=i
-			table.insert(buffer,HC.serialize_minimal(v))
-			table.insert(buffer,",")
-		end
-		for k,v in pairs(obj) do
-			if not (type(k)=="number" and k>=1 and k<=max and math.floor(k)==k) then
-				table.insert(buffer,"["..HC.serialize_minimal(k).."]".."="..HC.serialize_minimal(v))
+		if next(obj)~=nil then
+			local max_index=0
+			for i,v in ipairs(obj) do
+				max_index=i
+				table.insert(buffer,HC.serialize_minimal(v))
 				table.insert(buffer,",")
 			end
-		end
-		if buffer[2]~=nil then
+			for k,v in pairs(obj) do
+				if not (type(k)=="number" and math.floor(k)==k and k>=1 and k<=max_index) then
+					table.insert(buffer,"["..HC.serialize_minimal(k).."]".."="..HC.serialize_minimal(v))
+					table.insert(buffer,",")
+				end
+			end
+			-- remove last comma
 			buffer[#buffer]=nil
 		end
 		table.insert(buffer,"}")
@@ -1202,12 +1203,12 @@ function HC.hooks(fn)
 	hookreg[hooked_fn]=info
 	return info.fn,info.hooks
 end
---- minimal async
----
---- pass in a function to open a async block
 local function default_error_handler(err)
 	print("ASYNC ERROR:",err)
 end
+--- minimal async
+---
+--- pass in a function to open a async block
 ---@param func function
 ---@param error_handler? function
 function Async(func,error_handler)
@@ -1221,7 +1222,7 @@ function Await(func)
 	local co=coroutine.running()
 	local callback=function(ok,...)
 		if ok then
-			coroutine.resume(co,ok,...)
+			coroutine.resume(co,...)
 		else
 			error(ret[1])
 		end
@@ -1230,7 +1231,7 @@ function Await(func)
 	if not ok then
 		error(ret[1])
 	end
-	ok,ret=HC.packpcall(coroutine.yield)
+	local ok,ret=HC.packpcall(coroutine.yield)
 	if not ok then
 		error(ret[1])
 	end

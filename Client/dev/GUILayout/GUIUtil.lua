@@ -1,6 +1,8 @@
 if not hcskip then
-	require("HC/init", true)
-	return
+	require("HC/init",true)
+	if hcskip then
+		return
+	end
 end
 Event.register(LUA_EVENT_MAPINFOCHANGE,{
 	fn=function()
